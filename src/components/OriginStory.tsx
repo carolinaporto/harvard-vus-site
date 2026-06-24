@@ -1,0 +1,210 @@
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
+import { content } from '../data/content';
+
+export default function OriginStory() {
+  const { lang } = useLanguage();
+  const t = content[lang].originStory;
+
+  return (
+    <Section id="origin">
+      <Container>
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.65 }}
+        >
+          <Tag>{t.tag}</Tag>
+          <Headline>{t.headline}</Headline>
+        </motion.div>
+
+        <StoryBlock>
+          {t.story.map((para, i) => (
+            <motion.p
+              key={i}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.55, delay: i * 0.1 }}
+            >
+              {para}
+            </motion.p>
+          ))}
+        </StoryBlock>
+
+        <JourneySection>
+          <JourneyLabel>{t.journeyLabel}</JourneyLabel>
+          <TimelineTrack>
+            {t.cities.map((city, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.45, delay: i * 0.06 }}
+              >
+                <CityStop>
+                  <DotRow>
+                    <Dot $isNext={city.isNext} />
+                    {i < t.cities.length - 1 && <Connector />}
+                  </DotRow>
+                  <CityLocation>{city.location}</CityLocation>
+                  <CityTitle $isNext={city.isNext}>{city.title}</CityTitle>
+                  <CityDesc>{city.description}</CityDesc>
+                </CityStop>
+              </motion.div>
+            ))}
+          </TimelineTrack>
+        </JourneySection>
+      </Container>
+    </Section>
+  );
+}
+
+const Section = styled.section`
+  background: ${({ theme }) => theme.colors.warmOffWhite};
+  padding: 96px 40px;
+
+  @media (max-width: ${({ theme }) => theme.bp.tablet}) {
+    padding: 64px 20px;
+  }
+`;
+
+const Container = styled.div`
+  max-width: ${({ theme }) => theme.maxWidth};
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+`;
+
+const Tag = styled.p`
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.harvardCrimson};
+  margin-bottom: 12px;
+`;
+
+const Headline = styled.h2`
+  font-family: ${({ theme }) => theme.fonts.body};
+  font-size: clamp(28px, 4vw, 46px);
+  color: ${({ theme }) => theme.colors.darkText};
+  max-width: 680px;
+`;
+
+const StoryBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 720px;
+
+  p {
+    font-size: clamp(16px, 1.5vw, 18px);
+    line-height: 1.85;
+    color: ${({ theme }) => theme.colors.darkText};
+  }
+`;
+
+const JourneySection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const JourneyLabel = styled.p`
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.mutedText};
+`;
+
+const TimelineTrack = styled.div`
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: thin;
+  scrollbar-color: ${({ theme }) => theme.colors.border} transparent;
+
+  &::-webkit-scrollbar {
+    height: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.border};
+    border-radius: 2px;
+  }
+
+  > div {
+    flex: 1 0 210px;
+    scroll-snap-align: start;
+  }
+
+  @media (max-width: ${({ theme }) => theme.bp.tablet}) {
+    > div {
+      flex: 0 0 210px;
+    }
+  }
+`;
+
+const CityStop = styled.div`
+  padding-right: 16px;
+  padding-bottom: 8px;
+`;
+
+const DotRow = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+`;
+
+const Dot = styled.div<{ $isNext: boolean }>`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: ${({ $isNext, theme }) =>
+    $isNext ? theme.colors.harvardCrimson : theme.colors.mutedText};
+  opacity: ${({ $isNext }) => ($isNext ? 1 : 0.45)};
+`;
+
+const Connector = styled.div`
+  flex: 1;
+  height: 1px;
+  background: ${({ theme }) => theme.colors.border};
+  margin-left: 6px;
+`;
+
+const CityLocation = styled.p`
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: ${({ theme }) => theme.colors.mutedText};
+  text-transform: uppercase;
+  margin-bottom: 4px;
+`;
+
+const CityTitle = styled.p<{ $isNext: boolean }>`
+  font-size: 14px;
+  font-weight: 700;
+  color: ${({ $isNext, theme }) =>
+    $isNext ? theme.colors.harvardCrimson : theme.colors.darkText};
+  margin-bottom: 6px;
+  line-height: 1.3;
+`;
+
+const CityDesc = styled.p`
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: ${({ theme }) => theme.colors.mutedText};
+`;
