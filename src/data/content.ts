@@ -311,13 +311,14 @@ export const content = {
       title: 'A trajetória em imagens',
       subtitle: 'Cada foto é um capítulo: da sala de aula em São Paulo ao campus de Cambridge.',
       photos: [
+        { src: '/photos/infancia.jpg', caption: 'De farda, filha de militar' },
         { src: '/photos/insper.jpg', caption: 'Turma de Eng. da Computação no Insper, 6º semestre' },
         { src: '/photos/insper-ai.jpg', caption: 'Insper AI: evento presencial na QiTech' },
         { src: '/photos/estagio.jpg', caption: 'Segura.ai: parte do time no verão 2025' },
         { src: '/photos/chicago.jpg', caption: 'UChicago SISRM: primeira visita de campo' },
-        { src: '/photos/brasil-project.jpg', caption: 'Brasil Project: Harvard & MIT' },
-        { src: '/photos/harvard.jpg', caption: 'Minha irmã me abraçando com flores na comemoração' },
         { src: '/photos/premio.jpg', caption: 'Prêmio de Excelência em Eng. da Computação, comunidade bolsista Insper, 2025' },
+        { src: '/photos/brasil-project.jpg', caption: 'Brasil Project: Harvard & MIT' },
+        { src: '/photos/harvard.jpg', caption: 'Março 2026: A aprovação chegou' },
       ],
     },
 
@@ -659,13 +660,14 @@ export const content = {
       title: 'The journey in images',
       subtitle: 'Each photo is a chapter: from a classroom in São Paulo to the campus in Cambridge.',
       photos: [
+        { src: '/photos/infancia.jpg', caption: 'In uniform, military kid' },
         { src: '/photos/insper.jpg', caption: 'Computer Engineering class at Insper, 6th semester' },
         { src: '/photos/insper-ai.jpg', caption: 'Insper AI: in-person event at QiTech' },
         { src: '/photos/estagio.jpg', caption: 'Segura.ai: part of the summer 2025 team' },
         { src: '/photos/chicago.jpg', caption: 'UChicago SISRM: first field trip' },
-        { src: '/photos/brasil-project.jpg', caption: 'Brasil Project: Harvard & MIT' },
-        { src: '/photos/harvard.jpg', caption: 'My sister hugging me with flowers at my acceptance celebration' },
         { src: '/photos/premio.jpg', caption: 'Excellence Award in Computer Engineering, Insper scholarship community, 2025' },
+        { src: '/photos/brasil-project.jpg', caption: 'Brasil Project: Harvard & MIT' },
+        { src: '/photos/harvard.jpg', caption: 'March 2026: Received the Acceptance Letter' },
       ],
     },
 

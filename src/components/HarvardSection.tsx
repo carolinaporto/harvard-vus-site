@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import {
@@ -19,15 +18,6 @@ const iconMap: Record<string, ReactNode> = {
   globe: <GlobeHemisphereWest size={26} weight="duotone" />,
   rocket: <Rocket size={26} weight="duotone" />,
 };
-
-function HarvardPhoto({ src }: { src: string }) {
-  const [hidden, setHidden] = useState(false);
-  return (
-    <PhotoSlot $hidden={hidden}>
-      <img src={src} alt="" onError={() => setHidden(true)} />
-    </PhotoSlot>
-  );
-}
 
 export default function HarvardSection() {
   const { lang } = useLanguage();
@@ -65,19 +55,6 @@ export default function HarvardSection() {
             </motion.div>
           ))}
         </PillarsGrid>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.65, delay: 0.2 }}
-        >
-          <PhotoRow>
-            {[1, 2, 3].map(n => (
-              <HarvardPhoto key={n} src={`/photos/harvard-${n}.jpg`} />
-            ))}
-          </PhotoRow>
-        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -198,30 +175,6 @@ const PillarDesc = styled.p`
   font-size: 13.5px;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.72);
-`;
-
-const PhotoRow = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-
-  @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const PhotoSlot = styled.div<{ $hidden: boolean }>`
-  aspect-ratio: 4/3;
-  border-radius: 12px;
-  overflow: hidden;
-  display: ${({ $hidden }) => ($hidden ? 'none' : 'block')};
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 12px;
-  }
 `;
 
 const CTARow = styled.div`

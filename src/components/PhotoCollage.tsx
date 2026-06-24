@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { content } from '../data/content';
 
-const rotations = [-3, 1.5, -1, 2.5, -2, 1, -1.5];
-const emojis = ['🎓', '🤖', '💼', '🌆', '🌎', '🎉', '🏆'];
+const rotations = [-3, 1.5, -1, 2.5, -2, 1, -1.5, 2];
+const emojis = ['🎓', '🤖', '💼', '🌆', '🌎', '🇧🇷', '🏆', '🎉'];
 
 function PhotoImage({ src, alt, emoji }: { src: string; alt: string; emoji: string }) {
   const [errored, setErrored] = useState(false);
@@ -118,16 +118,8 @@ const Grid = styled.div`
     margin-top: 32px;
   }
 
-  /* center the 3-item second row: push 5th item to column 2 */
-  & > *:nth-child(5) {
-    grid-column: 2;
-  }
-
   @media (max-width: ${({ theme }) => theme.bp.desktop}) {
     grid-template-columns: repeat(2, 1fr);
-    & > *:nth-child(5) {
-      grid-column: auto;
-    }
     & > *:nth-child(even) {
       margin-top: 24px;
     }
