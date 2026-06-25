@@ -60,7 +60,7 @@ export const content = {
       raisedLabel: 'Arrecadado até agora',
       raisedValue: 'US$ 0',
       progressPercent: 0,
-      progressNote: 'Campanha em lançamento',
+      progressNote: 'Atualizado semanalmente · Última atualização: 25 de junho de 2026',
       categories: [
         { label: 'Mensalidade (tuition)', note: 'US$ 46.694, 3 disciplinas por semestre, os dois semestres', iconKey: 'book' },
         { label: 'Moradia', note: 'US$ 21.000, aluguel em Cambridge pelos 12 meses', iconKey: 'house' },
@@ -380,7 +380,7 @@ export const content = {
       raisedLabel: 'Raised so far',
       raisedValue: 'US$ 0',
       progressPercent: 0,
-      progressNote: 'Campaign just launched',
+      progressNote: 'Updated weekly · Last updated: June 25, 2026',
       categories: [
         { label: 'Tuition', note: '$46,694, 3 courses per semester, both semesters', iconKey: 'book' },
         { label: 'Housing', note: '$21,000, rent in Cambridge for 12 months', iconKey: 'house' },

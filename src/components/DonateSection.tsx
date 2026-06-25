@@ -181,11 +181,11 @@ export default function DonateSection() {
                     </PixBlock>
 
                     <WiseQRBlock>
-                      <WiseQRImage src="/wise-qr.png" alt="Wise QR Code" />
+                      <WiseQRImage src="/qrcode-nacional.png" alt="QR Code PIX" />
                       <WiseQRCaption>
                         {lang === 'pt'
-                          ? 'Ou abra o Wise e escaneie para enviar diretamente'
-                          : 'Or open Wise and scan to send directly'}
+                          ? 'Escaneie pelo app do seu banco — não pela câmera do celular'
+                          : 'Scan from your bank app — not directly from the camera'}
                       </WiseQRCaption>
                     </WiseQRBlock>
 
@@ -229,7 +229,7 @@ export default function DonateSection() {
                     </PanelTitle>
 
                     <WiseQRBlock>
-                      <WiseQRImage src="/wise-qr.png" alt="Wise QR Code" />
+                      <WiseQRImage src="/qrcode-internacional.png" alt="Wise QR Code" />
                       <WiseQRCaption>
                         {lang === 'pt'
                           ? 'Abra o Wise e escaneie para enviar diretamente'
@@ -622,8 +622,8 @@ const WiseQRBlock = styled.div`
 `;
 
 const WiseQRImage = styled.img`
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   border-radius: 8px;
   display: block;
 `;
