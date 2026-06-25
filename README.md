@@ -1,23 +1,23 @@
-# Harvard VUS Site
+# mcporto.com
 
-Personal website created to share my journey as an incoming Visiting Undergraduate Student at Harvard College for the 2026–2027 academic year.
+Personal fundraising site for my year as a Visiting Undergraduate Student at Harvard College (2026–2027).
 
-The site presents my background, goals, and experiences while documenting the path that led me from Brazil to Harvard.
+I built this site to share my story and ask for help in a transparent, honest way. It covers who I am, where I come from, what Harvard means to me, and the real costs involved, with multiple ways to donate or share, in Portuguese and English.
 
-## Development
+**Live at [mcporto.com](https://mcporto.com)**
 
-Built with React and TypeScript using an AI-assisted development workflow with Claude Code.
+## About the project
+
+- Bilingual (PT/EN)
+- Live fundraising progress connected to a Google Sheets backend
+- Donation flows: PIX, Wise QR code, US ACH, SWIFT
+- Fully responsive
 
 ## Tech Stack
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-
-## Status
-
-🚧 Work in Progress
+- React 19 + TypeScript + Vite
+- styled-components
+- Framer Motion
 
 ## Author
 
@@ -25,3 +25,7 @@ Built with React and TypeScript using an AI-assisted development workflow with C
 
 - LinkedIn: https://www.linkedin.com/in/mariacarolinaporto/
 - GitHub: https://github.com/carolinaporto
+
+---
+
+*Built with help from [Claude Code](https://claude.ai/code) as an AI coding assistant.*
