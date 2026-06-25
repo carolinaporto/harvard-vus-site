@@ -91,6 +91,25 @@ export default function HeroSection() {
             )}
           </PhotoPlaceholder>
           <PhotoCaption>Harvard College · 2026</PhotoCaption>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 1.0 }}
+            style={{ width: '100%' }}
+          >
+            <LetterSnippet>
+              <LetterImg
+                src="/approval-letter.png"
+                alt="Harvard College admission letter"
+              />
+              <LetterLabel>
+                {lang === 'pt'
+                  ? 'Carta de admissão · Harvard College Admissions & Financial Aid'
+                  : 'Admission letter · Harvard College Admissions & Financial Aid'}
+              </LetterLabel>
+            </LetterSnippet>
+          </motion.div>
         </PhotoCol>
       </Inner>
 
@@ -332,6 +351,31 @@ const PhotoCaption = styled.p`
   font-size: 13px;
   color: rgba(255, 255, 255, 0.5);
   letter-spacing: 0.5px;
+`;
+
+const LetterSnippet = styled.div`
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #fff;
+`;
+
+const LetterImg = styled.img`
+  width: 100%;
+  height: 148px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+`;
+
+const LetterLabel = styled.p`
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.4px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.25);
+  text-align: center;
 `;
 
 const ScrollHint = styled.a`

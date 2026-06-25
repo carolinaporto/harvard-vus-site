@@ -9,7 +9,6 @@ import {
   Copy,
   Check,
   Envelope,
-  CurrencyDollar,
   Globe,
 } from '@phosphor-icons/react';
 import { useLanguage } from '../context/LanguageContext';
@@ -96,7 +95,7 @@ export default function DonateSection() {
       : 'If you have any questions or need help completing a transfer, feel free to contact me:';
 
   const tabs: { key: Tab; label: string; icon: React.ReactNode }[] = [
-    { key: 'pix', label: t.pixTitle, icon: <CurrencyDollar size={18} /> },
+    { key: 'pix', label: t.pixTitle, icon: <RealSign>R$</RealSign> },
     { key: 'intl', label: t.intlTitle, icon: <Globe size={18} /> },
     { key: 'share', label: t.shareTitle, icon: <ShareNetwork size={18} /> },
   ];
@@ -147,7 +146,7 @@ export default function DonateSection() {
                 >
                   <TabPanel>
                     <PanelTitle>
-                      <CurrencyDollar size={22} />
+                      <RealSign $lg>R$</RealSign>
                       {t.pixSubtitle}
                     </PanelTitle>
 
@@ -184,8 +183,8 @@ export default function DonateSection() {
                       <WiseQRImage src="/qrcode-nacional.png" alt="QR Code PIX" />
                       <WiseQRCaption>
                         {lang === 'pt'
-                          ? 'Escaneie pelo app do seu banco — não pela câmera do celular'
-                          : 'Scan from your bank app — not directly from the camera'}
+                          ? 'QRCODE PIX: Escaneie pelo app do seu banco'
+                          : 'QRCODE PIX: Scan from your bank app to pay directly'}
                       </WiseQRCaption>
                     </WiseQRBlock>
 
@@ -909,4 +908,12 @@ const ConnectBtn = styled.a`
   &:hover {
     color: ${({ theme }) => theme.colors.harvardDarkCrimson};
   }
+`;
+
+const RealSign = styled.span<{ $lg?: boolean }>`
+  font-size: ${({ $lg }) => ($lg ? '17px' : '13px')};
+  font-weight: 800;
+  line-height: 1;
+  flex-shrink: 0;
+  letter-spacing: -0.5px;
 `;
