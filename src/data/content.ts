@@ -26,7 +26,7 @@ export const content = {
     whyHelp: {
       tag: 'Transparência',
       title: 'Por que estou pedindo ajuda',
-      p1: 'A aprovação é real. A carta está assinada. Mas uma aprovação não paga moradia em Cambridge, plano de saúde obrigatório, alimentação, visto ou materiais acadêmicos.',
+      p1: 'A aprovação é real. A carta está assinada. Mas o programa VUS de Harvard não oferece bolsa ou auxílio financeiro, e uma aprovação não paga moradia em Cambridge, plano de saúde obrigatório, alimentação, visto ou materiais acadêmicos.',
       p2: 'Sou bolsista no Insper e construí minha trajetória por esforço, curiosidade e comunidade. Por isso estou aqui: pedindo ajuda com transparência, sem vergonha, e com gratidão profunda por cada pessoa que lê até aqui.',
       p3: 'Se você puder contribuir, seja com qualquer valor, um compartilhamento ou uma indicação para alguém que possa ajudar, você me ajuda a transformar essa aprovação em realidade.',
       quote: '"Cada doação, indicação e compartilhamento me aproxima de Harvard."',
@@ -86,7 +86,7 @@ export const content = {
           year: '2023',
           title: 'Insper: Engenharia da Computação',
           description:
-            'Bolsa de 50% no Insper, um dos cursos mais competitivos do Brasil em tecnologia. Em 2025, recebi o Prêmio de Excelência em Eng. da Computação pela comunidade bolsista.',
+            'Bolsista no Insper, um dos cursos mais competitivos do Brasil em tecnologia. Em 2025, recebi o Prêmio de Excelência em Eng. da Computação pela comunidade bolsista.',
           phase: 'insper' as const,
         },
         {
@@ -235,7 +235,7 @@ export const content = {
     ticker: {
       items: [
         '12 escolas diferentes',
-        'Bolsa de 50% no Insper',
+        'Bolsista no Insper',
         'Monitora em 5 disciplinas',
         'Cofundadora da Insper AI',
         'Bolsa integral na University of Chicago',
@@ -314,7 +314,7 @@ export const content = {
     whyHelp: {
       tag: 'Transparency',
       title: 'Why I am asking for help',
-      p1: 'The acceptance is real. The letter is signed. But an acceptance letter does not pay for housing in Cambridge, mandatory health insurance, food, a visa, or academic materials.',
+      p1: 'The acceptance is real. The letter is signed. But Harvard’s VUS program does not offer scholarships or financial aid, and an acceptance letter does not pay for housing in Cambridge, mandatory health insurance, food, a visa, or academic materials.',
       p2: 'I am a scholarship student at Insper and I built my path through effort, curiosity, and community. So I am here: asking for help with full transparency, without shame, and with deep gratitude for everyone who reads this far.',
       p3: 'If you can contribute, whether any amount, a share, or an introduction to someone who might help, you help me turn this acceptance into reality.',
       quote: '"Every donation, connection, and share brings me closer to Harvard."',
@@ -373,7 +373,7 @@ export const content = {
           year: '2023',
           title: 'Insper: Computer Engineering',
           description:
-            '50% scholarship at Insper, one of Brazil\'s most competitive tech programs. In 2025, received the Excellence Award in Computer Engineering from the scholarship community.',
+            'Scholarship student at Insper, one of Brazil\'s most competitive tech programs. In 2025, received the Excellence Award in Computer Engineering from the scholarship community.',
           phase: 'insper' as const,
         },
         {
@@ -522,7 +522,7 @@ export const content = {
     ticker: {
       items: [
         '12 different schools',
-        '50% scholarship at Insper',
+        'Scholarship student at Insper',
         'Teaching assistant: 5 subjects',
         'Co-founder of Insper AI',
         'Full scholarship at University of Chicago',
