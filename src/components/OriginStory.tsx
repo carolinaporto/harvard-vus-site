@@ -75,30 +75,6 @@ export default function OriginStory() {
           </PhotoColumn>
         </ContentGrid>
 
-        <JourneySection>
-          <JourneyLabel>{t.journeyLabel}</JourneyLabel>
-          <TimelineTrack>
-            {t.cities.map((city, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.45, delay: i * 0.06 }}
-              >
-                <CityStop>
-                  <DotRow>
-                    <Dot $isNext={city.isNext} />
-                    {i < t.cities.length - 1 && <Connector />}
-                  </DotRow>
-                  <CityLocation>{city.location}</CityLocation>
-                  <CityTitle $isNext={city.isNext}>{city.title}</CityTitle>
-                  <CityDesc>{city.description}</CityDesc>
-                </CityStop>
-              </motion.div>
-            ))}
-          </TimelineTrack>
-        </JourneySection>
       </Container>
     </Section>
   );

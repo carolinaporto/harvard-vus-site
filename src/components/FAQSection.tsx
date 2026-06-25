@@ -77,7 +77,7 @@ export default function FAQSection() {
                 ? 'Ainda tem dúvidas? Fale comigo diretamente.'
                 : 'Still have questions? Reach out directly.'}
             </BottomCTAText>
-            <BottomCTABtn href="#contact">
+            <BottomCTABtn href="mailto:carolporto04@gmail.com">
               {lang === 'pt' ? 'Entrar em contato →' : 'Get in touch →'}
             </BottomCTABtn>
           </BottomCTA>

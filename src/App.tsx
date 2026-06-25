@@ -17,7 +17,6 @@ import HarvardSection from './components/HarvardSection';
 import ImpactSection from './components/ImpactSection';
 import DonateSection from './components/DonateSection';
 import FAQSection from './components/FAQSection';
-import ContactSection from './components/ContactSection';
 import StickyDonate from './components/StickyDonate';
 import Footer from './components/Footer';
 import { useLanguage } from './context/LanguageContext';
@@ -44,7 +43,6 @@ function SiteContent() {
         <ImpactSection />
         <DonateSection />
         <FAQSection />
-        <ContactSection />
       </main>
       <Footer />
       <StickyDonate />

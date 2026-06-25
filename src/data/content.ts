@@ -188,10 +188,6 @@ export const content = {
       shareSubtitle: 'Compartilhamento também é doação',
       shareText:
         'Compartilhar essa página com alguém que possa ajudar, ou simplesmente continuar essa história, já faz uma diferença enorme.',
-      connectTitle: 'Me conecte',
-      connectText:
-        'Conhece uma fundação, alumni da Insper ou Harvard, uma empresa ou organização que apoie talentos brasileiros? Me envie um e-mail.',
-      emailBtn: 'carolporto04@gmail.com',
       shareWhatsApp: 'WhatsApp',
       shareLinkedIn: 'LinkedIn',
       shareInstagram: 'Instagram',
@@ -226,7 +222,7 @@ export const content = {
         {
           question: 'E se a meta não for atingida?',
           answer:
-            'Ainda pretendo ir para Harvard. Também estou buscando bolsas, apoio institucional e outras formas de financiamento. Cada contribuição reduz a distância entre a aprovação e a possibilidade real de estudar lá.',
+            'Ainda pretendo ir para Harvard. O caminho agora depende de apoio externo, cada contribuição reduz a distância entre a aprovação e a possibilidade real de estudar lá.',
         },
         {
           question: 'Posso ver documentos de comprovação?',
@@ -234,24 +230,6 @@ export const content = {
             'Sim. Para doadores institucionais, fundações ou apoiadores que precisem verificar a documentação antes de contribuir, posso compartilhar de forma privada meu aceite em Harvard. Preferi não publicar documentos completos no site por privacidade.',
         },
       ],
-    },
-
-    contact: {
-      tag: 'Fale comigo',
-      title: 'Entre em contato',
-      subtitle:
-        'Para doações maiores, parcerias institucionais, mentoria ou simplesmente para conversar. Estou disponível.',
-      emailLabel: 'E-mail',
-      emailValue: 'carolporto04@gmail.com',
-      linkedinLabel: 'LinkedIn',
-      linkedinValue: 'https://www.linkedin.com/in/mariacarolinaporto/',
-      formName: 'Seu nome',
-      formEmail: 'Seu e-mail',
-      formMessage: 'Mensagem',
-      formMessagePlaceholder:
-        'Gostaria de ajudar com... / Tenho uma dúvida sobre... / Quero te conectar com...',
-      formSubmit: 'Enviar mensagem',
-      formNote: 'Seu e-mail abrirá o cliente de e-mail com a mensagem pré-preenchida.',
     },
 
     ticker: {
@@ -300,16 +278,6 @@ export const content = {
       familyCaption: 'As pessoas que tornaram tudo isso possível.',
       sistersCaption: 'Minhas primeiras referências de coragem, disciplina e ambição.',
       familyQuote: 'Meus pais e minhas irmãs são a razão pela qual eu nunca enxerguei esforço, estudo ou mudança como algo assustador.',
-      journeyLabel: 'A jornada',
-      cities: [
-        { location: 'Pirassununga, SP', title: 'Onde tudo começou', description: 'Nascida na cidade que abriga a Academia da Força Aérea Brasileira.', isNext: false },
-        { location: 'São José dos Campos, SP', title: 'Primeiros anos', description: 'Infância marcada pela mobilidade da família militar.', isNext: false },
-        { location: 'Rio de Janeiro, RJ', title: 'Aprendendo a recomeçar', description: 'Nova cidade, novo começo.', isNext: false },
-        { location: 'Brasília, DF', title: 'Crescendo pela mudança', description: 'Anos que reforçaram independência e adaptabilidade.', isNext: false },
-        { location: 'São Paulo, SP', title: 'Insper', description: 'Engenharia da Computação, bolsista, liderança, monitoria, IA, consultoria e pesquisa.', isNext: false },
-        { location: 'Chicago, EUA', title: 'University of Chicago', description: 'Pesquisa e métodos quantitativos no SISRM.', isNext: false },
-        { location: 'Cambridge, MA', title: 'Harvard', description: 'O próximo capítulo.', isNext: true },
-      ],
     },
 
     footer: {
@@ -507,10 +475,6 @@ export const content = {
       shareSubtitle: 'Sharing is also donating',
       shareText:
         'Sharing this page with someone who might help, or simply continuing this story, already makes a huge difference.',
-      connectTitle: 'Connect me',
-      connectText:
-        'Do you know a foundation, Insper or Harvard alumnus, a company, or an organization that supports Brazilian talent? Send me an email.',
-      emailBtn: 'carolporto04@gmail.com',
       shareWhatsApp: 'WhatsApp',
       shareLinkedIn: 'LinkedIn',
       shareInstagram: 'Instagram',
@@ -545,7 +509,7 @@ export const content = {
         {
           question: 'What if the goal is not fully reached?',
           answer:
-            'I still intend to attend Harvard. I am also pursuing scholarships, institutional support, and other funding opportunities. Every contribution helps close the gap between acceptance and attendance.',
+            'I still intend to attend Harvard. The path forward depends on external support, every contribution helps close the gap between acceptance and attendance.',
         },
         {
           question: 'Can I see supporting documents?',
@@ -553,24 +517,6 @@ export const content = {
             'Yes. For institutional donors, foundations, or supporters who need to verify documentation before contributing, I can privately share my Harvard acceptance. I chose not to publish full documents on the website for privacy reasons.',
         },
       ],
-    },
-
-    contact: {
-      tag: 'Get in touch',
-      title: 'Contact me',
-      subtitle:
-        'For larger donations, institutional partnerships, mentorship, or simply to talk. I am available.',
-      emailLabel: 'Email',
-      emailValue: 'carolporto04@gmail.com',
-      linkedinLabel: 'LinkedIn',
-      linkedinValue: 'https://www.linkedin.com/in/mariacarolinaporto/',
-      formName: 'Your name',
-      formEmail: 'Your email',
-      formMessage: 'Message',
-      formMessagePlaceholder:
-        "I'd like to help with... / I have a question about... / I'd like to connect you with...",
-      formSubmit: 'Send message',
-      formNote: 'Your email client will open with the message pre-filled.',
     },
 
     ticker: {
@@ -619,16 +565,6 @@ export const content = {
       familyCaption: 'The people who made all of this possible.',
       sistersCaption: 'My first examples of courage, discipline, and ambition.',
       familyQuote: 'My parents and my sisters are the reason I never saw effort, study, or change as something frightening.',
-      journeyLabel: 'The journey',
-      cities: [
-        { location: 'Pirassununga, SP', title: 'Where it all began', description: 'Born in the city that hosts the Brazilian Air Force Academy.', isNext: false },
-        { location: 'São José dos Campos, SP', title: 'Early years', description: 'Childhood shaped by military-family mobility.', isNext: false },
-        { location: 'Rio de Janeiro, RJ', title: 'Learning to restart', description: 'Another new city, another new beginning.', isNext: false },
-        { location: 'Brasília, DF', title: 'Growing through change', description: 'Years that reinforced independence and adaptability.', isNext: false },
-        { location: 'São Paulo, SP', title: 'Insper', description: 'Computer Engineering, scholarship, leadership, teaching, AI, consulting, and research.', isNext: false },
-        { location: 'Chicago, USA', title: 'University of Chicago', description: 'Research and quantitative methods at SISRM.', isNext: false },
-        { location: 'Cambridge, MA', title: 'Harvard', description: 'The next chapter.', isNext: true },
-      ],
     },
 
     footer: {

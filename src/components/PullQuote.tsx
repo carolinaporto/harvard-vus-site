@@ -26,12 +26,12 @@ export default function PullQuote({ quote, variant = 'dark' }: PullQuoteProps) {
 }
 
 const Section = styled.section<{ $variant: 'light' | 'dark' }>`
-  padding: 80px 40px;
+  padding: 48px 40px;
   background: ${({ $variant, theme }) =>
     $variant === 'dark' ? theme.colors.darkText : theme.colors.warmOffWhite};
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 56px 24px;
+    padding: 36px 24px;
   }
 `;
 
@@ -43,26 +43,22 @@ const Inner = styled.div`
 
 const Mark = styled.div<{ $variant: 'light' | 'dark' }>`
   font-family: ${({ theme }) => theme.fonts.body};
-  font-size: 120px;
-  line-height: 0.6;
+  font-size: 48px;
+  line-height: 0.8;
   color: ${({ $variant, theme }) =>
     $variant === 'dark' ? theme.colors.harvardCrimson : theme.colors.border};
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   user-select: none;
-
-  @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    font-size: 80px;
-  }
 `;
 
 const Quote = styled.p<{ $variant: 'light' | 'dark' }>`
   font-family: ${({ theme }) => theme.fonts.body};
-  font-size: clamp(20px, 3vw, 34px);
-  font-style: normal;
+  font-size: clamp(16px, 1.8vw, 22px);
+  font-style: italic;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.6;
   color: ${({ $variant, theme }) =>
-    $variant === 'dark' ? theme.colors.white : theme.colors.darkText};
+    $variant === 'dark' ? theme.colors.white : theme.colors.mutedText};
   letter-spacing: 0;
 `;
 

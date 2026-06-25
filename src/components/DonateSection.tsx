@@ -391,14 +391,12 @@ export default function DonateSection() {
                       </CopyBtn>
                     </ShareGrid>
 
-                    <ConnectBox>
-                      <ConnectTitle>
-                        <Envelope size={18} />
-                        {t.connectTitle}
-                      </ConnectTitle>
-                      <ConnectText>{t.connectText}</ConnectText>
-                      <ConnectBtn href={`mailto:${t.emailBtn}`}>{t.emailBtn}</ConnectBtn>
-                    </ConnectBox>
+                    <ContactLine>
+                      {lang === 'pt' ? 'Dúvidas ou quer se conectar? ' : 'Questions or want to connect? '}
+                      <ContactLink href="mailto:carolporto04@gmail.com">
+                        carolporto04@gmail.com
+                      </ContactLink>
+                    </ContactLine>
                   </TabPanel>
                 </motion.div>
               )}
@@ -871,43 +869,10 @@ const CopyBtn = styled.button<{ $copied: boolean }>`
   }
 `;
 
-const ConnectBox = styled.div`
-  padding: 20px;
-  background: ${({ theme }) => theme.colors.warmOffWhite};
-  border-radius: 12px;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const ConnectTitle = styled.h4`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.darkText};
-`;
-
-const ConnectText = styled.p`
+const ContactLine = styled.p`
   font-size: 13.5px;
-  line-height: 1.6;
   color: ${({ theme }) => theme.colors.mutedText};
-`;
-
-const ConnectBtn = styled.a`
-  font-size: 14px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.harvardCrimson};
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-  width: fit-content;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.harvardDarkCrimson};
-  }
+  line-height: 1.6;
 `;
 
 const RealSign = styled.span<{ $lg?: boolean }>`
