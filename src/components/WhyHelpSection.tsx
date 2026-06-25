@@ -1,14 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { CheckCircle, ArrowRight } from '@phosphor-icons/react';
 import { useLanguage } from '../context/LanguageContext';
 import { content } from '../data/content';
-
-const variantStyles = {
-  confirmed: { color: '#2A7A4B', bg: 'rgba(42,122,75,0.10)' },
-  actionable: { color: '#1A6BAA', bg: 'rgba(26,107,170,0.10)' },
-  open: { color: '#A51C30', bg: 'rgba(165,28,48,0.10)' },
-} as const;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -32,66 +25,28 @@ export default function WhyHelpSection() {
           <Title>{t.title}</Title>
         </motion.div>
 
-        <Grid>
-          <TextBlock>
-            {[t.p1, t.p2, t.p3].map((para, i) => (
-              <motion.p
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.6, delay: i * 0.12 }}
-              >
-                {para}
-              </motion.p>
-            ))}
-
-            <motion.blockquote
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+        <TextBlock>
+          {[t.p1, t.p2, t.p3].map((para, i) => (
+            <motion.p
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: i * 0.12 }}
             >
-              {t.quote}
-            </motion.blockquote>
-          </TextBlock>
+              {para}
+            </motion.p>
+          ))}
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+          <motion.blockquote
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.65, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <RealityCard>
-              <ConfirmedBadge>
-                <CheckCircle size={15} weight="fill" />
-                {t.reality.confirmedLabel}
-              </ConfirmedBadge>
-              <ConfirmedText>{t.reality.confirmedText}</ConfirmedText>
-              <RealityStatement>{t.reality.statement}</RealityStatement>
-              <StatusGrid>
-                {t.reality.statusItems.map((item) => (
-                  <StatusItem key={item.label}>
-                    <StatusLabel>{item.label}</StatusLabel>
-                    <StatusBadge $color={variantStyles[item.variant].color} $bg={variantStyles[item.variant].bg}>
-                      {item.status}
-                    </StatusBadge>
-                  </StatusItem>
-                ))}
-              </StatusGrid>
-              <RealityDivider />
-              <RealityTitle>{t.reality.enablesLabel}</RealityTitle>
-              <RealityGroup>
-                {t.reality.enables.map((item) => (
-                  <RealityRow key={item}>
-                    <ArrowRight size={15} weight="bold" />
-                    <span>{item}</span>
-                  </RealityRow>
-                ))}
-              </RealityGroup>
-            </RealityCard>
-          </motion.div>
-        </Grid>
+            {t.quote}
+          </motion.blockquote>
+        </TextBlock>
       </Container>
     </Section>
   );
@@ -129,22 +84,11 @@ const Title = styled.h2`
   max-width: 640px;
 `;
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 64px;
-  align-items: start;
-
-  @media (max-width: ${({ theme }) => theme.bp.desktop}) {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
-`;
-
 const TextBlock = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  max-width: 720px;
 
   p {
     font-size: clamp(16px, 1.5vw, 18px);
@@ -163,107 +107,4 @@ const TextBlock = styled.div`
     color: ${({ theme }) => theme.colors.harvardDarkCrimson};
     line-height: 1.6;
   }
-`;
-
-const RealityCard = styled.div`
-  background: ${({ theme }) => theme.colors.white};
-  border-radius: 14px;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  padding: 24px 24px 22px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`;
-
-const ConfirmedBadge = styled.div`
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #2A7A4B;
-  background: rgba(42, 122, 75, 0.08);
-  border-radius: 100px;
-  padding: 4px 10px 4px 8px;
-  width: fit-content;
-`;
-
-const ConfirmedText = styled.p`
-  font-size: 15px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.darkText};
-  line-height: 1.3;
-`;
-
-const RealityStatement = styled.p`
-  font-size: 13px;
-  line-height: 1.65;
-  color: ${({ theme }) => theme.colors.mutedText};
-`;
-
-const RealityDivider = styled.div`
-  height: 1px;
-  background: ${({ theme }) => theme.colors.border};
-  margin: 2px 0;
-`;
-
-const RealityTitle = styled.p`
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.mutedText};
-`;
-
-const RealityGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-`;
-
-const RealityRow = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
-  font-size: 13.5px;
-  line-height: 1.4;
-  color: ${({ theme }) => theme.colors.darkText};
-
-  svg {
-    flex-shrink: 0;
-    margin-top: 2px;
-    color: ${({ theme }) => theme.colors.harvardCrimson};
-  }
-`;
-
-const StatusGrid = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-`;
-
-const StatusItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-`;
-
-const StatusLabel = styled.span`
-  font-size: 13px;
-  color: ${({ theme }) => theme.colors.darkText};
-`;
-
-const StatusBadge = styled.span<{ $color: string; $bg: string }>`
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  padding: 3px 9px;
-  border-radius: 100px;
-  white-space: nowrap;
-  color: ${({ $color }) => $color};
-  background: ${({ $bg }) => $bg};
 `;

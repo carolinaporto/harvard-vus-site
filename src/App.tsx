@@ -13,7 +13,6 @@ import FundingGoalSection from './components/FundingGoalSection';
 import StoryTimeline from './components/StoryTimeline';
 import PhotoCollage from './components/PhotoCollage';
 import OriginStory from './components/OriginStory';
-import HarvardSection from './components/HarvardSection';
 import ImpactSection from './components/ImpactSection';
 import DonateSection from './components/DonateSection';
 import FAQSection from './components/FAQSection';
@@ -39,9 +38,8 @@ function SiteContent() {
         <PullQuote quote={t.one} variant="light" />
         <StoryTimeline />
         <PhotoCollage />
-        <HarvardSection />
-        <ImpactSection />
         <DonateSection />
+        <ImpactSection />
         <FAQSection />
       </main>
       <Footer />
