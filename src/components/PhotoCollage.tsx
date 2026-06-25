@@ -25,7 +25,7 @@ export default function PhotoCollage() {
 
   return (
     <Section>
-      <Container>
+      <HeaderContainer>
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -36,7 +36,9 @@ export default function PhotoCollage() {
           <Title>{t.title}</Title>
           <Subtitle>{t.subtitle}</Subtitle>
         </motion.div>
+      </HeaderContainer>
 
+      <PhotosArea>
         <Grid>
           {t.photos.map((photo, i) => (
             <motion.div
@@ -61,27 +63,35 @@ export default function PhotoCollage() {
             </motion.div>
           ))}
         </Grid>
-      </Container>
+      </PhotosArea>
     </Section>
   );
 }
 
 const Section = styled.section`
   background: ${({ theme }) => theme.colors.softGray};
-  padding: 96px 40px;
+  padding: 96px 0 112px;
   overflow: hidden;
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 64px 20px;
+    padding: 64px 0 80px;
   }
 `;
 
-const Container = styled.div`
+const HeaderContainer = styled.div`
   max-width: ${({ theme }) => theme.maxWidth};
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
+  padding: 0 40px;
+
+  @media (max-width: ${({ theme }) => theme.bp.tablet}) {
+    padding: 0 20px;
+  }
+`;
+
+const PhotosArea = styled.div`
+  max-width: min(1400px, 94vw);
+  margin: 0 auto;
+  padding-top: 52px;
 `;
 
 const Tag = styled.p`
@@ -110,18 +120,19 @@ const Subtitle = styled.p`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  gap: 40px;
   align-items: start;
 
   /* stagger row heights */
   & > *:nth-child(even) {
-    margin-top: 32px;
+    margin-top: 40px;
   }
 
   @media (max-width: ${({ theme }) => theme.bp.desktop}) {
     grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
     & > *:nth-child(even) {
-      margin-top: 24px;
+      margin-top: 28px;
     }
   }
 

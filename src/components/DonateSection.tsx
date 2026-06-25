@@ -2,11 +2,10 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import {
-  Heart,
   ShareNetwork,
   WhatsappLogo,
   LinkedinLogo,
-  XLogo,
+  InstagramLogo,
   Copy,
   Check,
   Envelope,
@@ -18,11 +17,55 @@ import { content } from '../data/content';
 
 type Tab = 'pix' | 'intl' | 'share';
 
+const ACCOUNT_HOLDER = 'Maria Carolina Porto';
+
+const US_BANKING = {
+  routingNumber: '084009519',
+  accountNumber: '162284390353114',
+  accountType: 'Deposit',
+  bank: 'Wise US Inc, 108 W 13th St, Wilmington, DE 19801, United States',
+};
+
+const SWIFT_BANKING = {
+  swiftBic: 'TRWIUS35XXX',
+  accountNumber: '162284390353114',
+  bank: 'Wise US Inc, 108 W 13th St, Wilmington, DE 19801, United States',
+};
+
+function CopyableField({
+  label,
+  value,
+  fieldId,
+  copiedField,
+  onCopy,
+}: {
+  label: string;
+  value: string;
+  fieldId: string;
+  copiedField: string | null;
+  onCopy: (fieldId: string, value: string) => void;
+}) {
+  const isCopied = copiedField === fieldId;
+  return (
+    <FieldRow>
+      <FieldLabel>{label}</FieldLabel>
+      <FieldValueRow>
+        <FieldValue>{value}</FieldValue>
+        <SmallCopyBtn onClick={() => onCopy(fieldId, value)} $copied={isCopied}>
+          {isCopied ? <Check size={13} weight="bold" /> : <Copy size={13} />}
+        </SmallCopyBtn>
+      </FieldValueRow>
+    </FieldRow>
+  );
+}
+
 export default function DonateSection() {
   const { lang } = useLanguage();
   const t = content[lang].donate;
   const [activeTab, setActiveTab] = useState<Tab>('pix');
   const [copied, setCopied] = useState(false);
+  const [copiedInstagram, setCopiedInstagram] = useState(false);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
 
@@ -32,6 +75,25 @@ export default function DonateSection() {
       setTimeout(() => setCopied(false), 2000);
     });
   };
+
+  const handleInstagramCopy = () => {
+    navigator.clipboard.writeText(t.instagramMessage + ' ' + pageUrl).then(() => {
+      setCopiedInstagram(true);
+      setTimeout(() => setCopiedInstagram(false), 3000);
+    });
+  };
+
+  const handleFieldCopy = (fieldId: string, value: string) => {
+    navigator.clipboard.writeText(value).then(() => {
+      setCopiedField(fieldId);
+      setTimeout(() => setCopiedField(null), 2000);
+    });
+  };
+
+  const contactNote =
+    lang === 'pt'
+      ? 'Com dúvidas ou precisando de ajuda para completar a transferência, fale comigo:'
+      : 'If you have any questions or need help completing a transfer, feel free to contact me:';
 
   const tabs: { key: Tab; label: string; icon: React.ReactNode }[] = [
     { key: 'pix', label: t.pixTitle, icon: <CurrencyDollar size={18} /> },
@@ -61,7 +123,6 @@ export default function DonateSection() {
           transition={{ duration: 0.65, delay: 0.1 }}
         >
           <Card>
-            {/* Tabs */}
             <Tabs>
               {tabs.map(tab => (
                 <TabBtn
@@ -75,8 +136,8 @@ export default function DonateSection() {
               ))}
             </Tabs>
 
-            {/* Tab content */}
             <TabContent>
+              {/* ── PIX ── */}
               {activeTab === 'pix' && (
                 <motion.div
                   key="pix"
@@ -89,19 +150,71 @@ export default function DonateSection() {
                       <CurrencyDollar size={22} />
                       {t.pixSubtitle}
                     </PanelTitle>
-                    <InfoBox>
-                      <InfoLabel>{lang === 'pt' ? 'Chave PIX:' : 'PIX Key:'}</InfoLabel>
-                      <InfoValue>{t.pixKey}</InfoValue>
-                    </InfoBox>
-                    <InfoNote>{t.pixNote}</InfoNote>
-                    <PrimaryAction href={`mailto:carolporto04@gmail.com?subject=${encodeURIComponent(lang === 'pt' ? 'Doação - Carol Porto Harvard' : 'Donation - Carol Porto Harvard')}`}>
-                      <Heart size={18} weight="fill" />
-                      {t.donateAnyBtn}
-                    </PrimaryAction>
+
+                    <PixBlock>
+                      <PixFieldLabel>
+                        {lang === 'pt' ? 'Chave PIX — Chave aleatória' : 'PIX Key — Random key'}
+                      </PixFieldLabel>
+                      <PixKeyRow>
+                        <PixKeyValue>{t.pixKey}</PixKeyValue>
+                        <CopyPixBtn
+                          onClick={() => handleFieldCopy('pix', t.pixKey)}
+                          $copied={copiedField === 'pix'}
+                        >
+                          {copiedField === 'pix' ? (
+                            <>
+                              <Check size={15} weight="bold" />
+                              {lang === 'pt' ? 'Copiado!' : 'Copied!'}
+                            </>
+                          ) : (
+                            <>
+                              <Copy size={15} />
+                              {lang === 'pt' ? 'Copiar' : 'Copy'}
+                            </>
+                          )}
+                        </CopyPixBtn>
+                      </PixKeyRow>
+                      <HolderNote>
+                        {lang === 'pt' ? 'Titular' : 'Account holder'}:{' '}
+                        <strong>{ACCOUNT_HOLDER}</strong>
+                      </HolderNote>
+                    </PixBlock>
+
+                    <WiseQRBlock>
+                      <WiseQRImage src="/wise-qr.png" alt="Wise QR Code" />
+                      <WiseQRCaption>
+                        {lang === 'pt'
+                          ? 'Ou abra o Wise e escaneie para enviar diretamente'
+                          : 'Or open Wise and scan to send directly'}
+                      </WiseQRCaption>
+                    </WiseQRBlock>
+
+                    <AmountsBlock>
+                      <AmountsNote>{t.pixAmountsNote}</AmountsNote>
+                      <AmountsList>
+                        {t.pixAmounts.map(item => (
+                          <AmountsItem key={item.amount}>
+                            <AmountValue>{item.amount}</AmountValue>
+                            <AmountLabel>— {item.label}</AmountLabel>
+                          </AmountsItem>
+                        ))}
+                      </AmountsList>
+                    </AmountsBlock>
+
+                    <ContactNoteBox>
+                      <Envelope size={15} />
+                      <span>
+                        {contactNote}{' '}
+                        <ContactLink href="mailto:carolporto04@gmail.com">
+                          carolporto04@gmail.com
+                        </ContactLink>
+                      </span>
+                    </ContactNoteBox>
                   </TabPanel>
                 </motion.div>
               )}
 
+              {/* ── INTERNATIONAL ── */}
               {activeTab === 'intl' && (
                 <motion.div
                   key="intl"
@@ -114,17 +227,129 @@ export default function DonateSection() {
                       <Globe size={22} />
                       {t.intlSubtitle}
                     </PanelTitle>
-                    <InfoBox>
-                      <InfoValue>{t.intlInfo}</InfoValue>
-                    </InfoBox>
-                    <PrimaryAction href={`mailto:carolporto04@gmail.com?subject=${encodeURIComponent(lang === 'pt' ? 'Doação Internacional' : 'International Donation')}`}>
-                      <Envelope size={18} />
-                      {lang === 'pt' ? 'Me escreva para receber instruções' : 'Email me for instructions'}
-                    </PrimaryAction>
+
+                    <WiseQRBlock>
+                      <WiseQRImage src="/wise-qr.png" alt="Wise QR Code" />
+                      <WiseQRCaption>
+                        {lang === 'pt'
+                          ? 'Abra o Wise e escaneie para enviar diretamente'
+                          : 'Open Wise and scan to send directly'}
+                      </WiseQRCaption>
+                    </WiseQRBlock>
+
+                    {/* US — prominent */}
+                    <TransferCard $primary>
+                      <TransferCardHeader>
+                        <TransferFlag>🇺🇸</TransferFlag>
+                        <div>
+                          <TransferCardTitle $primary>
+                            {lang === 'pt'
+                              ? 'Enviando dos Estados Unidos'
+                              : 'Sending from the United States'}
+                          </TransferCardTitle>
+                          <TransferCardDesc>
+                            {lang === 'pt'
+                              ? 'ACH ou wire doméstico'
+                              : 'ACH or domestic wire transfer'}
+                          </TransferCardDesc>
+                        </div>
+                      </TransferCardHeader>
+                      <FieldsStack>
+                        <CopyableField
+                          label="Routing Number"
+                          value={US_BANKING.routingNumber}
+                          fieldId="routing"
+                          copiedField={copiedField}
+                          onCopy={handleFieldCopy}
+                        />
+                        <CopyableField
+                          label="Account Number"
+                          value={US_BANKING.accountNumber}
+                          fieldId="account-us"
+                          copiedField={copiedField}
+                          onCopy={handleFieldCopy}
+                        />
+                        <FieldRow>
+                          <FieldLabel>
+                            {lang === 'pt' ? 'Tipo de conta' : 'Account type'}
+                          </FieldLabel>
+                          <FieldValueRow>
+                            <FieldValue>{US_BANKING.accountType}</FieldValue>
+                          </FieldValueRow>
+                        </FieldRow>
+                        <FieldRow>
+                          <FieldLabel>
+                            {lang === 'pt' ? 'Banco / Endereço' : 'Bank / Address'}
+                          </FieldLabel>
+                          <FieldValueRow>
+                            <FieldValue>{US_BANKING.bank}</FieldValue>
+                          </FieldValueRow>
+                        </FieldRow>
+                      </FieldsStack>
+                    </TransferCard>
+
+                    {/* SWIFT */}
+                    <TransferCard>
+                      <TransferCardHeader>
+                        <TransferFlag>🌍</TransferFlag>
+                        <div>
+                          <TransferCardTitle>
+                            {lang === 'pt'
+                              ? 'Enviando de outro país'
+                              : 'Sending from outside the United States'}
+                          </TransferCardTitle>
+                          <TransferCardDesc>
+                            {lang === 'pt'
+                              ? 'Transferência SWIFT internacional'
+                              : 'International SWIFT transfer'}
+                          </TransferCardDesc>
+                        </div>
+                      </TransferCardHeader>
+                      <FieldsStack>
+                        <CopyableField
+                          label="SWIFT / BIC"
+                          value={SWIFT_BANKING.swiftBic}
+                          fieldId="swift"
+                          copiedField={copiedField}
+                          onCopy={handleFieldCopy}
+                        />
+                        <CopyableField
+                          label="Account Number"
+                          value={SWIFT_BANKING.accountNumber}
+                          fieldId="account-intl"
+                          copiedField={copiedField}
+                          onCopy={handleFieldCopy}
+                        />
+                        <FieldRow>
+                          <FieldLabel>
+                            {lang === 'pt' ? 'Banco / Endereço' : 'Bank / Address'}
+                          </FieldLabel>
+                          <FieldValueRow>
+                            <FieldValue>{SWIFT_BANKING.bank}</FieldValue>
+                          </FieldValueRow>
+                        </FieldRow>
+                      </FieldsStack>
+                    </TransferCard>
+
+                    <HolderNote>
+                      {lang === 'pt' ? 'Titular' : 'Account holder'}:{' '}
+                      <strong>{ACCOUNT_HOLDER}</strong>
+                    </HolderNote>
+
+                    <ContactNoteBox>
+                      <Envelope size={15} />
+                      <span>
+                        {contactNote}{' '}
+                        <ContactLink href="mailto:carolporto04@gmail.com">
+                          carolporto04@gmail.com
+                        </ContactLink>
+                      </span>
+                    </ContactNoteBox>
                   </TabPanel>
                 </motion.div>
               )}
 
+              {/* ── SHARE ── */}
               {activeTab === 'share' && (
                 <motion.div
                   key="share"
@@ -157,15 +382,10 @@ export default function DonateSection() {
                         <LinkedinLogo size={20} weight="fill" />
                         {t.shareLinkedIn}
                       </ShareBtn>
-                      <ShareBtn
-                        href={`https://x.com/intent/tweet?text=${encodeURIComponent(t.twitterMessage)}&url=${encodeURIComponent(pageUrl)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        $color="#1DA1F2"
-                      >
-                        <XLogo size={20} weight="fill" />
-                        {t.shareTwitter}
-                      </ShareBtn>
+                      <InstagramCopyBtn onClick={handleInstagramCopy} $copied={copiedInstagram}>
+                        {copiedInstagram ? <Check size={20} weight="bold" /> : <InstagramLogo size={20} weight="fill" />}
+                        {copiedInstagram ? t.instagramCopied : t.shareInstagram}
+                      </InstagramCopyBtn>
                       <CopyBtn onClick={handleCopy} $copied={copied}>
                         {copied ? <Check size={20} weight="bold" /> : <Copy size={20} />}
                         {copied ? t.shareCopied : t.shareCopy}
@@ -190,6 +410,8 @@ export default function DonateSection() {
     </Section>
   );
 }
+
+/* ─── Styled components ─────────────────────────────────────────────────── */
 
 const Section = styled.section`
   position: relative;
@@ -313,54 +535,272 @@ const PanelText = styled.p`
   color: ${({ theme }) => theme.colors.mutedText};
 `;
 
-const InfoBox = styled.div`
-  padding: 16px 20px;
+/* PIX */
+
+const PixBlock = styled.div`
   background: ${({ theme }) => theme.colors.softGray};
-  border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 `;
 
-const InfoLabel = styled.p`
-  font-size: 12px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.mutedText};
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
-`;
-
-const InfoValue = styled.p`
-  font-size: 15px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.darkText};
-  font-style: italic;
-`;
-
-const InfoNote = styled.p`
-  font-size: 13px;
-  color: ${({ theme }) => theme.colors.mutedText};
-  font-style: italic;
-`;
-
-const PrimaryAction = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 28px;
-  background: ${({ theme }) => theme.colors.harvardCrimson};
-  color: ${({ theme }) => theme.colors.white};
-  font-size: 15px;
+const PixFieldLabel = styled.span`
+  font-size: 11px;
   font-weight: 700;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
-  width: fit-content;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.mutedText};
+`;
 
-  &:hover {
-    background: ${({ theme }) => theme.colors.harvardDarkCrimson};
-    transform: translateY(-1px);
+const PixKeyRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  @media (max-width: ${({ theme }) => theme.bp.mobile}) {
+    flex-direction: column;
+    align-items: flex-start;
   }
 `;
+
+const PixKeyValue = styled.span`
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Courier New', Courier, monospace;
+  color: ${({ theme }) => theme.colors.darkText};
+  word-break: break-all;
+  flex: 1;
+`;
+
+const CopyPixBtn = styled.button<{ $copied: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: ${({ $copied, theme }) =>
+    $copied ? theme.colors.harvardCrimson : theme.colors.white};
+  color: ${({ $copied, theme }) =>
+    $copied ? theme.colors.white : theme.colors.harvardCrimson};
+  border: 2px solid ${({ theme }) => theme.colors.harvardCrimson};
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.harvardCrimson};
+    color: ${({ theme }) => theme.colors.white};
+  }
+`;
+
+const HolderNote = styled.p`
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.mutedText};
+
+  strong {
+    color: ${({ theme }) => theme.colors.darkText};
+  }
+`;
+
+/* Wise QR */
+
+const WiseQRBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  background: ${({ theme }) => theme.colors.softGray};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 12px;
+`;
+
+const WiseQRImage = styled.img`
+  width: 160px;
+  height: 160px;
+  border-radius: 8px;
+  display: block;
+`;
+
+const WiseQRCaption = styled.p`
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.mutedText};
+  text-align: center;
+`;
+
+/* International transfer */
+
+const TransferCard = styled.div<{ $primary?: boolean }>`
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: ${({ $primary, theme }) =>
+    $primary ? theme.colors.warmOffWhite : theme.colors.white};
+  border: ${({ $primary, theme }) =>
+    $primary
+      ? `2px solid ${theme.colors.harvardCrimson}33`
+      : `1px solid ${theme.colors.border}`};
+`;
+
+const TransferCardHeader = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+`;
+
+const TransferFlag = styled.span`
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+`;
+
+const TransferCardTitle = styled.h4<{ $primary?: boolean }>`
+  font-size: 15px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: 3px;
+`;
+
+const TransferCardDesc = styled.p`
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.mutedText};
+`;
+
+const FieldsStack = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 4px;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+const FieldRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+const FieldLabel = styled.span`
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.mutedText};
+`;
+
+const FieldValueRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const FieldValue = styled.span`
+  font-size: 14px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.darkText};
+  flex: 1;
+`;
+
+const SmallCopyBtn = styled.button<{ $copied: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: ${({ $copied, theme }) =>
+    $copied ? theme.colors.harvardCrimson : theme.colors.white};
+  color: ${({ $copied, theme }) =>
+    $copied ? theme.colors.white : theme.colors.mutedText};
+  border: 1px solid
+    ${({ $copied, theme }) =>
+      $copied ? theme.colors.harvardCrimson : theme.colors.border};
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.harvardCrimson};
+    color: ${({ theme }) => theme.colors.harvardCrimson};
+  }
+`;
+
+/* Suggested amounts */
+
+const AmountsBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const AmountsNote = styled.p`
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.mutedText};
+`;
+
+const AmountsList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-left: 4px;
+`;
+
+const AmountsItem = styled.div`
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+`;
+
+const AmountValue = styled.span`
+  font-size: 13.5px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.harvardCrimson};
+  white-space: nowrap;
+`;
+
+const AmountLabel = styled.span`
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.mutedText};
+`;
+
+/* Contact note */
+
+const ContactNoteBox = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 14px 16px;
+  background: ${({ theme }) => theme.colors.warmOffWhite};
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  font-size: 13.5px;
+  color: ${({ theme }) => theme.colors.mutedText};
+  line-height: 1.6;
+
+  svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: ${({ theme }) => theme.colors.harvardCrimson};
+  }
+`;
+
+const ContactLink = styled.a`
+  color: ${({ theme }) => theme.colors.harvardCrimson};
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+`;
+
+/* Share tab */
 
 const ShareGrid = styled.div`
   display: grid;
@@ -390,17 +830,40 @@ const ShareBtn = styled.a<{ $color: string }>`
   }
 `;
 
+const InstagramCopyBtn = styled.button<{ $copied: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 1.5px solid ${({ $copied }) => ($copied ? '#C13584aa' : '#C1358444')};
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: ${({ $copied }) => ($copied ? '#C13584' : '#C13584')};
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: ${({ $copied }) => ($copied ? 'rgba(193,53,132,0.06)' : 'transparent')};
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:hover {
+    background: rgba(193, 53, 132, 0.07);
+  }
+`;
+
 const CopyBtn = styled.button<{ $copied: boolean }>`
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 12px 16px;
   border: 1.5px solid
-    ${({ $copied, theme }) => ($copied ? theme.colors.harvardCrimson + '44' : theme.colors.border)};
+    ${({ $copied, theme }) =>
+      $copied ? theme.colors.harvardCrimson + '44' : theme.colors.border};
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
-  color: ${({ $copied, theme }) => ($copied ? theme.colors.harvardCrimson : theme.colors.mutedText)};
+  color: ${({ $copied, theme }) =>
+    $copied ? theme.colors.harvardCrimson : theme.colors.mutedText};
   cursor: pointer;
   transition: all 0.2s ease;
 

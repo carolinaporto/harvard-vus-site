@@ -87,7 +87,6 @@ export default function HeroSection() {
             {heroImgError && (
               <PlaceholderInner>
                 <PlaceholderIcon>🎓</PlaceholderIcon>
-                <PlaceholderText>{t.photoTodo}</PlaceholderText>
               </PlaceholderInner>
             )}
           </PhotoPlaceholder>
@@ -327,14 +326,6 @@ const PlaceholderInner = styled.div`
 const PlaceholderIcon = styled.div`
   font-size: 56px;
   line-height: 1;
-`;
-
-const PlaceholderText = styled.p`
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.55);
-  text-align: center;
-  line-height: 1.6;
-  font-style: italic;
 `;
 
 const PhotoCaption = styled.p`

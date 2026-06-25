@@ -14,8 +14,7 @@ import StoryTimeline from './components/StoryTimeline';
 import PhotoCollage from './components/PhotoCollage';
 import OriginStory from './components/OriginStory';
 import HarvardSection from './components/HarvardSection';
-import ExploringSection from './components/ExploringSection';
-import FutureSection from './components/FutureSection';
+import ImpactSection from './components/ImpactSection';
 import DonateSection from './components/DonateSection';
 import FAQSection from './components/FAQSection';
 import ContactSection from './components/ContactSection';
@@ -42,9 +41,7 @@ function SiteContent() {
         <StoryTimeline />
         <PhotoCollage />
         <HarvardSection />
-        <ExploringSection />
-        <PullQuote quote={t.two} variant="dark" />
-        <FutureSection />
+        <ImpactSection />
         <DonateSection />
         <FAQSection />
         <ContactSection />

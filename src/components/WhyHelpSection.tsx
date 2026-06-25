@@ -4,6 +4,12 @@ import { CheckCircle, ArrowRight } from '@phosphor-icons/react';
 import { useLanguage } from '../context/LanguageContext';
 import { content } from '../data/content';
 
+const variantStyles = {
+  confirmed: { color: '#2A7A4B', bg: 'rgba(42,122,75,0.10)' },
+  actionable: { color: '#1A6BAA', bg: 'rgba(26,107,170,0.10)' },
+  open: { color: '#A51C30', bg: 'rgba(165,28,48,0.10)' },
+} as const;
+
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.65 } },
@@ -63,6 +69,16 @@ export default function WhyHelpSection() {
               </ConfirmedBadge>
               <ConfirmedText>{t.reality.confirmedText}</ConfirmedText>
               <RealityStatement>{t.reality.statement}</RealityStatement>
+              <StatusGrid>
+                {t.reality.statusItems.map((item) => (
+                  <StatusItem key={item.label}>
+                    <StatusLabel>{item.label}</StatusLabel>
+                    <StatusBadge $color={variantStyles[item.variant].color} $bg={variantStyles[item.variant].bg}>
+                      {item.status}
+                    </StatusBadge>
+                  </StatusItem>
+                ))}
+              </StatusGrid>
               <RealityDivider />
               <RealityTitle>{t.reality.enablesLabel}</RealityTitle>
               <RealityGroup>
@@ -221,4 +237,33 @@ const RealityRow = styled.div`
     margin-top: 2px;
     color: ${({ theme }) => theme.colors.harvardCrimson};
   }
+`;
+
+const StatusGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+`;
+
+const StatusItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+`;
+
+const StatusLabel = styled.span`
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.darkText};
+`;
+
+const StatusBadge = styled.span<{ $color: string; $bg: string }>`
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 3px 9px;
+  border-radius: 100px;
+  white-space: nowrap;
+  color: ${({ $color }) => $color};
+  background: ${({ $bg }) => $bg};
 `;

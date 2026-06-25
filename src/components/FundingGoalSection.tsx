@@ -83,6 +83,7 @@ export default function FundingGoalSection() {
                 transition={{ duration: 1.4, delay: 0.3, ease: 'easeOut' }}
               />
             </BarTrack>
+            {t.progressNote ? <ProgressNote>{t.progressNote}</ProgressNote> : null}
           </ProgressCard>
         </motion.div>
 
@@ -220,6 +221,15 @@ const BarFill = styled.div`
   border-radius: 100px;
 `;
 
+
+const ProgressNote = styled.p`
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.mutedText};
+  margin-top: 4px;
+`;
 
 const CategoriesTitle = styled.h3`
   font-family: ${({ theme }) => theme.fonts.body};

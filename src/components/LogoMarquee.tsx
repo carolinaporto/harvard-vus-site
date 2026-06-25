@@ -1,17 +1,29 @@
 import styled, { keyframes } from 'styled-components';
+import { useLanguage } from '../context/LanguageContext';
 
-const institutions = [
-  { name: 'Insper', color: '#C8102E' },
-  { name: 'Harvard College', color: '#A51C30' },
-  { name: 'Universidade de Chicago', color: '#9B0000' },
-  { name: 'BTG Pactual', color: '#1B4F9E' },
-  { name: 'Segura.ai', color: '#0A7E6A' },
-  { name: 'Brasil Project', color: '#009C3B' },
-];
-
-const doubled = [...institutions, ...institutions];
+const institutionsByLang = {
+  pt: [
+    { name: 'Insper', color: '#C8102E' },
+    { name: 'Harvard College', color: '#A51C30' },
+    { name: 'Universidade de Chicago', color: '#9B0000' },
+    { name: 'BTG Pactual', color: '#1B4F9E' },
+    { name: 'Segura.ai', color: '#0A7E6A' },
+    { name: 'Brasil Project', color: '#009C3B' },
+  ],
+  en: [
+    { name: 'Insper', color: '#C8102E' },
+    { name: 'Harvard College', color: '#A51C30' },
+    { name: 'University of Chicago', color: '#9B0000' },
+    { name: 'BTG Pactual', color: '#1B4F9E' },
+    { name: 'Segura.ai', color: '#0A7E6A' },
+    { name: 'Brasil Project', color: '#009C3B' },
+  ],
+};
 
 export default function LogoMarquee() {
+  const { lang } = useLanguage();
+  const doubled = [...institutionsByLang[lang], ...institutionsByLang[lang]];
+
   return (
     <Strip>
       <FadeEdge $side="left" />

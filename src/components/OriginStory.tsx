@@ -20,19 +20,60 @@ export default function OriginStory() {
           <Headline>{t.headline}</Headline>
         </motion.div>
 
-        <StoryBlock>
-          {t.story.map((para, i) => (
-            <motion.p
-              key={i}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.55, delay: i * 0.1 }}
+        <ContentGrid>
+          <StoryBlock>
+            {t.story.flatMap((para, i) => {
+              const paragraph = (
+                <motion.p
+                  key={i}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.55, delay: i * 0.1 }}
+                >
+                  {para}
+                </motion.p>
+              );
+              if (i === 1) {
+                return [
+                  paragraph,
+                  <motion.blockquote
+                    key="family-quote"
+                    initial={{ opacity: 0, x: -16 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.6, delay: 0.15 }}
+                  >
+                    {t.familyQuote}
+                  </motion.blockquote>,
+                ];
+              }
+              return [paragraph];
+            })}
+          </StoryBlock>
+
+          <PhotoColumn>
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.7, delay: 0.15 }}
             >
-              {para}
-            </motion.p>
-          ))}
-        </StoryBlock>
+              <StoryPhoto src="/familia.jpg" alt="Família de Maria Carolina Porto" />
+              <PhotoCaption>{t.familyCaption}</PhotoCaption>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.7, delay: 0.25 }}
+            >
+              <StoryPhoto src="/sisters.png" alt="Irmãs de Maria Carolina Porto" />
+              <PhotoCaption>{t.sistersCaption}</PhotoCaption>
+            </motion.div>
+          </PhotoColumn>
+        </ContentGrid>
 
         <JourneySection>
           <JourneyLabel>{t.journeyLabel}</JourneyLabel>
@@ -96,17 +137,81 @@ const Headline = styled.h2`
   max-width: 680px;
 `;
 
+const ContentGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+
+  @media (max-width: ${({ theme }) => theme.bp.desktop}) {
+    grid-template-columns: 55fr 45fr;
+    gap: 48px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.bp.tablet}) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+`;
+
 const StoryBlock = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 720px;
 
   p {
     font-size: clamp(16px, 1.5vw, 18px);
     line-height: 1.85;
     color: ${({ theme }) => theme.colors.darkText};
   }
+
+  blockquote {
+    margin: 4px 0;
+    padding: 18px 24px;
+    border-left: 3px solid ${({ theme }) => theme.colors.harvardCrimson};
+    background: rgba(165, 28, 48, 0.04);
+    border-radius: 0 8px 8px 0;
+    font-size: clamp(16px, 1.4vw, 18px);
+    font-style: italic;
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.harvardDarkCrimson};
+    line-height: 1.65;
+  }
+`;
+
+const PhotoColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @media (min-width: ${({ theme }) => theme.bp.tablet}) {
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  @media (max-width: ${({ theme }) => theme.bp.tablet}) {
+    order: 1;
+  }
+`;
+
+const StoryPhoto = styled.img`
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.14);
+  display: block;
+  object-fit: cover;
+`;
+
+const PhotoCaption = styled.p`
+  font-size: 13px;
+  line-height: 1.6;
+  color: ${({ theme }) => theme.colors.mutedText};
+  text-align: center;
+  font-style: italic;
 `;
 
 const JourneySection = styled.div`

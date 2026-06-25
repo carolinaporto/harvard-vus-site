@@ -130,7 +130,7 @@ const Subtitle = styled.p`
 
 const PillarsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 
   @media (max-width: ${({ theme }) => theme.bp.desktop}) {
