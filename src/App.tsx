@@ -8,22 +8,15 @@ import HeroSection from './components/HeroSection';
 import AchievementTicker from './components/AchievementTicker';
 import LogoMarquee from './components/LogoMarquee';
 import WhyHelpSection from './components/WhyHelpSection';
-import PullQuote from './components/PullQuote';
 import FundingGoalSection from './components/FundingGoalSection';
 import StoryTimeline from './components/StoryTimeline';
 import PhotoCollage from './components/PhotoCollage';
-import OriginStory from './components/OriginStory';
 import ImpactSection from './components/ImpactSection';
 import DonateSection from './components/DonateSection';
 import FAQSection from './components/FAQSection';
 import StickyDonate from './components/StickyDonate';
 import Footer from './components/Footer';
-import { useLanguage } from './context/LanguageContext';
-import { content } from './data/content';
-
 function SiteContent() {
-  const { lang } = useLanguage();
-  const t = content[lang].pullQuotes;
 
   return (
     <>
@@ -34,8 +27,6 @@ function SiteContent() {
         <LogoMarquee />
         <WhyHelpSection />
         <FundingGoalSection />
-        <OriginStory />
-        <PullQuote quote={t.one} variant="light" />
         <StoryTimeline />
         <PhotoCollage />
         <DonateSection />

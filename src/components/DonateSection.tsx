@@ -236,8 +236,8 @@ export default function DonateSection() {
                       <WiseQRImage src="/qrcode-internacional.png" alt="Wise QR Code" />
                       <WiseQRCaption>
                         {lang === 'pt'
-                          ? 'Abra o Wise e escaneie para enviar diretamente'
-                          : 'Open Wise and scan to send directly'}
+                          ? 'QR Code exclusivo para o Wise. Escaneie com a câmera do celular e ele abre automaticamente. Para outros bancos, use os dados abaixo.'
+                          : 'Wise QR Code only. Scan with your phone camera and it opens Wise automatically. For other banks, use the details below.'}
                       </WiseQRCaption>
                     </WiseQRBlock>
 

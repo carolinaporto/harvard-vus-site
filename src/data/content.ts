@@ -1,5 +1,12 @@
 import type { Lang } from '../context/LanguageContext';
 
+// ─── Atualizar aqui quando o valor arrecadado mudar ───────────────────────────
+const lastUpdated = {
+  pt: '26 de junho de 2026',
+  en: 'June 26, 2026',
+};
+// ─────────────────────────────────────────────────────────────────────────────
+
 export const content = {
   pt: {
     lang: { toggle: 'EN', current: 'PT' },
@@ -37,13 +44,13 @@ export const content = {
       subtitle:
         'Tuition, moradia, alimentação e seguro saúde: os quatro maiores custos, para os dois semestres.',
       goalLabel: 'Meta: 2 semestres',
-      goalValue: 'US$ 78.533',
+      goalValue: 'US$ 83.514',
       raisedLabel: 'Arrecadado até agora',
       raisedValue: 'US$ 0',
       progressPercent: 0,
-      progressNote: 'Atualizado semanalmente · Última atualização: 25 de junho de 2026',
+      progressNote: `Última atualização: ${lastUpdated.pt}`,
       categories: [
-        { label: 'Mensalidade (tuition)', note: 'US$ 46.694, 3 disciplinas por semestre, os dois semestres', iconKey: 'book' },
+        { label: 'Tuition e Taxas', note: 'US$ 51.675, inclui tuition (3 disciplinas), taxas acadêmicas e materiais', iconKey: 'book' },
         { label: 'Moradia', note: 'US$ 21.000, aluguel em Cambridge pelos 12 meses', iconKey: 'house' },
         { label: 'Alimentação', note: 'US$ 5.885, plano de refeições da Harvard', iconKey: 'fork' },
         { label: 'Seguro saúde', note: 'US$ 4.954, obrigatório para estudantes internacionais', iconKey: 'heart' },
@@ -60,7 +67,7 @@ export const content = {
           year: 'Infância',
           title: 'Filha de militar, 12 escolas e muitos recomeços',
           description:
-            'Cresci mudando de cidade e estudando em doze escolas diferentes.',
+            'Cresci mudando de cidade e estudando em doze escolas diferentes. Aprendi a recomeçar antes de entender que isso era uma habilidade.',
           phase: 'childhood' as const,
         },
         {
@@ -143,9 +150,9 @@ export const content = {
       shareCopied: 'Link copiado!',
       instagramCopied: 'Texto copiado para compartilhar no Instagram',
       whatsappMessage:
-        'Oi! Uma amiga minha foi aceita para estudar em Harvard e está arrecadando fundos para conseguir ir. Vale muito a pena conhecer a história dela:',
+        'Uma estudante brasileira foi aceita no Harvard College VUS e está arrecadando fundos para tornar isso possível. Vale conhecer a história:',
       instagramMessage:
-        'Uma amiga minha foi aceita para estudar em Harvard e está arrecadando fundos para conseguir ir. Conheça a história dela e compartilhe se puder:',
+        'Uma estudante brasileira foi aceita no Harvard College VUS e está arrecadando fundos para tornar isso possível. Vale conhecer a história:',
     },
 
     faq: {
@@ -189,10 +196,6 @@ export const content = {
       ],
     },
 
-    pullQuotes: {
-      one: 'Aprendi a recomeçar antes de entender que isso era uma habilidade.',
-    },
-
     photoCollage: {
       tag: 'Em cenas',
       title: 'A trajetória em imagens',
@@ -207,19 +210,6 @@ export const content = {
         { src: '/photos/brasil-project.jpg', caption: 'Brasil Project: quando Harvard deixou de parecer inalcançável' },
         { src: '/photos/harvard.jpg', caption: 'Março 2026: A aprovação chegou' },
       ],
-    },
-
-    originStory: {
-      tag: 'De onde venho',
-      headline: 'Antes de Harvard, houve muitos começos.',
-      story: [
-        'Sou a caçula de quatro irmãs e cresci em uma família militar, mudando de cidade, escola e rotina desde muito cedo.',
-        'Morei em São José dos Campos, Rio de Janeiro, Brasília e São Paulo. Cada mudança significava começar de novo, novos amigos, nova escola e novos desafios. Foi durante esse caminho que descobri a computação, o que mais tarde me levou à Engenharia da Computação no Insper.',
-        'Harvard não é o começo da minha história. É o próximo capítulo de uma jornada construída ao longo de muitos anos, com uma família que sempre colocou a educação acima de qualquer outra prioridade.',
-      ],
-      familyCaption: 'As pessoas que tornaram tudo isso possível.',
-      sistersCaption: 'Minhas primeiras referências de coragem, disciplina e ambição.',
-      familyQuote: 'Meus pais e minhas irmãs são a razão pela qual eu nunca enxerguei esforço, estudo ou mudança como algo assustador.',
     },
 
     footer: {
@@ -267,13 +257,13 @@ export const content = {
       subtitle:
         'Tuition, housing, food, and health insurance: the four biggest costs, for both semesters.',
       goalLabel: 'Goal: 2 semesters',
-      goalValue: 'US$ 78,533',
+      goalValue: 'US$ 83,514',
       raisedLabel: 'Raised so far',
       raisedValue: 'US$ 0',
       progressPercent: 0,
-      progressNote: 'Updated weekly · Last updated: June 25, 2026',
+      progressNote: `Last updated: ${lastUpdated.en}`,
       categories: [
-        { label: 'Tuition', note: '$46,694, 3 courses per semester, both semesters', iconKey: 'book' },
+        { label: 'Tuition and Fees', note: '$51,675, includes tuition (3 courses), academic fees, and materials', iconKey: 'book' },
         { label: 'Housing', note: '$21,000, rent in Cambridge for 12 months', iconKey: 'house' },
         { label: 'Food', note: '$5,885, Harvard dining meal plan', iconKey: 'fork' },
         { label: 'Health insurance', note: '$4,954, mandatory for international students', iconKey: 'heart' },
@@ -289,7 +279,7 @@ export const content = {
           year: 'Childhood',
           title: 'Military kid, 12 schools, and many fresh starts',
           description:
-            'I grew up moving between cities and studying at twelve different schools.',
+            'I grew up moving between cities and studying at twelve different schools. I learned to begin again before I understood that was a skill.',
           phase: 'childhood' as const,
         },
         {
@@ -372,9 +362,9 @@ export const content = {
       shareCopied: 'Copied!',
       instagramCopied: 'Text copied to share on Instagram',
       whatsappMessage:
-        "Hi! A friend of mine was accepted to study at Harvard and is fundraising to make it possible. Her story is worth reading:",
+        'A Brazilian student was accepted to the Harvard College VUS program and is raising funds to make it possible. Her story is worth reading:',
       instagramMessage:
-        'A friend of mine was accepted to study at Harvard and is fundraising to make it possible. Read her story and share it if you can:',
+        'A Brazilian student was accepted to the Harvard College VUS program and is raising funds to make it possible. Her story is worth reading:',
     },
 
     faq: {
@@ -418,10 +408,6 @@ export const content = {
       ],
     },
 
-    pullQuotes: {
-      one: 'I learned to begin again before I understood that was a skill.',
-    },
-
     photoCollage: {
       tag: 'In pictures',
       title: 'The journey in images',
@@ -436,19 +422,6 @@ export const content = {
         { src: '/photos/brasil-project.jpg', caption: 'Brasil Project: when Harvard stopped feeling unreachable' },
         { src: '/photos/harvard.jpg', caption: 'March 2026: Received the Acceptance Letter' },
       ],
-    },
-
-    originStory: {
-      tag: 'Where I come from',
-      headline: 'Before Harvard, there were many beginnings.',
-      story: [
-        'I am the youngest of four sisters and grew up in a military family, moving between cities, schools, and routines from a very young age.',
-        'I lived in São José dos Campos, Rio de Janeiro, Brasília, and São Paulo. Every move meant starting over with new friends, a new school, and new challenges. It was during this journey that I discovered my passion for computer science, which later led me to pursue Computer Engineering at Insper.',
-        'Harvard is not the beginning of my story. It is the next chapter in a journey built over many years, with a family that always placed education above everything else.',
-      ],
-      familyCaption: 'The people who made all of this possible.',
-      sistersCaption: 'My first examples of courage, discipline, and ambition.',
-      familyQuote: 'My parents and my sisters are the reason I never saw effort, study, or change as something frightening.',
     },
 
     footer: {
