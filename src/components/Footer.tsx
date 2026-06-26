@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Envelope, LinkedinLogo, Heart } from '@phosphor-icons/react';
 import { useLanguage } from '../context/LanguageContext';
+
 import { content } from '../data/content';
 
 export default function Footer() {
@@ -32,6 +33,12 @@ export default function Footer() {
         </Top>
 
         <Divider />
+
+        <WarmNote>
+          {lang === 'pt'
+            ? 'Obrigado por dedicar alguns minutos para conhecer a minha história.'
+            : 'Thank you for taking a few minutes to read my story.'}
+        </WarmNote>
 
         <Bottom>
           <Copyright>{t.copyright}</Copyright>
@@ -148,6 +155,14 @@ const Bottom = styled.div`
     flex-direction: column;
     text-align: center;
   }
+`;
+
+const WarmNote = styled.p`
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  line-height: 1.6;
+  font-style: italic;
 `;
 
 const Copyright = styled.p`
