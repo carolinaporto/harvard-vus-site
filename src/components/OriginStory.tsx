@@ -82,10 +82,10 @@ export default function OriginStory() {
 
 const Section = styled.section`
   background: ${({ theme }) => theme.colors.warmOffWhite};
-  padding: 96px 40px;
+  padding: 96px 40px 48px;
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 64px 20px;
+    padding: 64px 20px 40px;
   }
 `;
 
@@ -94,7 +94,7 @@ const Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 56px;
+  gap: 48px;
 `;
 
 const Tag = styled.p`
@@ -115,12 +115,12 @@ const Headline = styled.h2`
 
 const ContentGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 2fr;
   gap: 64px;
   align-items: start;
 
   @media (max-width: ${({ theme }) => theme.bp.desktop}) {
-    grid-template-columns: 55fr 45fr;
+    grid-template-columns: 65fr 35fr;
     gap: 48px;
   }
 

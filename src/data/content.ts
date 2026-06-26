@@ -167,6 +167,13 @@ export const content = {
           answer:
             'Sim. Para doadores institucionais, fundações ou apoiadores que precisem verificar a documentação antes de contribuir, posso compartilhar de forma privada meu aceite em Harvard. Preferi não publicar documentos completos no site por privacidade.',
         },
+        {
+          question: 'Posso ver o orçamento completo?',
+          answer:
+            'Sim. O resumo acima mostra os principais custos, mas também disponibilizei uma versão completa do orçamento previsto em PDF para quem quiser analisar os detalhes.',
+          // TODO: add /public/budget-harvard-vus.pdf before publishing
+          link: { text: 'Abrir orçamento completo (PDF)', href: '/budget-harvard-vus.pdf' },
+        },
       ],
     },
 
@@ -207,7 +214,7 @@ export const content = {
       tag: 'De onde venho',
       headline: 'Antes de Harvard, houve muitos começos.',
       story: [
-        'Sou a caçula de quatro irmãs e filha de um militar da Força Aérea. Cresci mudando de cidade, escola e rotina desde muito cedo',
+        'Sou a caçula de quatro irmãs e cresci em uma família militar, mudando de cidade, escola e rotina desde muito cedo.',
         'Morei em São José dos Campos, Rio de Janeiro, Brasília e São Paulo. Cada mudança significava começar de novo, novos amigos, nova escola e novos desafios. Foi durante esse caminho que descobri a computação, o que mais tarde me levou à Engenharia da Computação no Insper.',
         'Harvard não é o começo da minha história. É o próximo capítulo de uma jornada construída ao longo de muitos anos, com uma família que sempre colocou a educação acima de qualquer outra prioridade.',
       ],
@@ -390,6 +397,13 @@ export const content = {
           answer:
             'Yes. For institutional donors, foundations, or supporters who need to verify documentation before contributing, I can privately share my Harvard acceptance. I chose not to publish full documents on the website for privacy reasons.',
         },
+        {
+          question: 'Can I see the full budget?',
+          answer:
+            'Yes. The summary above shows the main costs, but I also made a full PDF version of the projected budget available for anyone who wants to review the details.',
+          // TODO: add /public/budget-harvard-vus.pdf before publishing
+          link: { text: 'Open full budget (PDF)', href: '/budget-harvard-vus.pdf' },
+        },
       ],
     },
 
@@ -430,7 +444,7 @@ export const content = {
       tag: 'Where I come from',
       headline: 'Before Harvard, there were many beginnings.',
       story: [
-        'I am the youngest of four sisters and a Air Force military child. I grew up moving between cities, schools, and routines from a very young age.',
+        'I am the youngest of four sisters and grew up in a military family, moving between cities, schools, and routines from a very young age.',
         'I lived in São José dos Campos, Rio de Janeiro, Brasília, and São Paulo. Every move meant starting over with new friends, a new school, and new challenges. It was during this journey that I discovered my passion for computer science, which later led me to pursue Computer Engineering at Insper.',
         'Harvard is not the beginning of my story. It is the next chapter in a journey built over many years, with a family that always placed education above everything else.',
       ],

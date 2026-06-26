@@ -57,6 +57,15 @@ export default function FAQSection() {
                       style={{ overflow: 'hidden' }}
                     >
                       <FAQAnswer>{item.answer}</FAQAnswer>
+                      {'link' in item && (
+                        <FAQPdfLink
+                          href={(item as { link: { text: string; href: string } }).link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {(item as { link: { text: string; href: string } }).link.text} ↗
+                        </FAQPdfLink>
+                      )}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -172,10 +181,29 @@ const IconWrapper = styled.div<{ $open: boolean }>`
 `;
 
 const FAQAnswer = styled.p`
-  padding: 0 24px 20px;
+  padding: 0 24px 16px;
   font-size: 15px;
   line-height: 1.75;
   color: ${({ theme }) => theme.colors.mutedText};
+`;
+
+const FAQPdfLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 24px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.harvardCrimson};
+  border: 1px solid ${({ theme }) => theme.colors.harvardCrimson}44;
+  border-radius: 6px;
+  padding: 6px 14px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.harvardCrimson}0d;
+    border-color: ${({ theme }) => theme.colors.harvardCrimson}88;
+  }
 `;
 
 const BottomCTA = styled.div`

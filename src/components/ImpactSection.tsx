@@ -112,10 +112,10 @@ export default function ImpactSection() {
 
 const Section = styled.section`
   background: ${({ theme }) => theme.colors.warmOffWhite};
-  padding: 96px 40px;
+  padding: 80px 40px 64px;
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 64px 20px;
+    padding: 56px 20px 48px;
   }
 `;
 
@@ -124,7 +124,7 @@ const Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 56px;
+  gap: 36px;
 `;
 
 const Tag = styled.p`
@@ -138,36 +138,40 @@ const Tag = styled.p`
 
 const Title = styled.h2`
   font-family: ${({ theme }) => theme.fonts.body};
-  font-size: clamp(28px, 4vw, 46px);
+  font-size: clamp(24px, 3vw, 38px);
   color: ${({ theme }) => theme.colors.darkText};
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 `;
 
 const Subtitle = styled.p`
-  font-size: clamp(15px, 1.5vw, 18px);
+  font-size: clamp(14px, 1.3vw, 16px);
   color: ${({ theme }) => theme.colors.mutedText};
-  max-width: 600px;
-  line-height: 1.75;
+  max-width: 560px;
+  line-height: 1.7;
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 
-  @media (max-width: ${({ theme }) => theme.bp.tablet}) {
+  @media (max-width: ${({ theme }) => theme.bp.desktop}) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 860px) {
     grid-template-columns: 1fr;
   }
 `;
 
 const Card = styled.div`
-  padding: 32px 28px;
+  padding: 24px 22px;
   background: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 14px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 
   &:hover {
