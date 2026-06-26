@@ -26,7 +26,7 @@ export default function WhyHelpSection() {
         </motion.div>
 
         <TextBlock>
-          {[t.p1, t.p2, t.p3].map((para, i) => (
+          {[t.p1, t.p2].map((para, i) => (
             <motion.p
               key={i}
               initial={{ opacity: 0, y: 20 }}
