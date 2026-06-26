@@ -73,6 +73,11 @@ export default function FundingGoalSection() {
               />
             </BarTrack>
             {t.progressNote ? <ProgressNote>{t.progressNote}</ProgressNote> : null}
+            <TrustNote>
+              {lang === 'pt'
+                ? 'Meta baseada no orçamento previsto pela Harvard College para um ano acadêmico.'
+                : "Goal based on Harvard College's estimated budget for one academic year."}
+            </TrustNote>
           </ProgressCard>
         </motion.div>
 
@@ -115,10 +120,10 @@ export default function FundingGoalSection() {
 
 const Section = styled.section`
   background: ${({ theme }) => theme.colors.softGray};
-  padding: 96px 40px;
+  padding: 80px 40px;
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 64px 20px;
+    padding: 56px 20px;
   }
 `;
 
@@ -127,7 +132,7 @@ const Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 56px;
+  gap: 44px;
 `;
 
 const Tag = styled.p`
@@ -210,6 +215,14 @@ const BarFill = styled.div`
   border-radius: 100px;
 `;
 
+
+const TrustNote = styled.p`
+  font-size: 11.5px;
+  color: ${({ theme }) => theme.colors.mutedText};
+  line-height: 1.5;
+  opacity: 0.7;
+  margin-top: 4px;
+`;
 
 const ProgressNote = styled.p`
   font-size: 12px;

@@ -113,6 +113,11 @@ export default function DonateSection() {
           <Tag>{t.tag}</Tag>
           <Title>{t.title}</Title>
           <Subtitle>{t.subtitle}</Subtitle>
+          <CTAHint>
+            {lang === 'pt'
+              ? 'PIX • Transferência Internacional • Compartilhamento'
+              : 'PIX • International Transfer • Share'}
+          </CTAHint>
         </motion.div>
 
         <motion.div
@@ -418,11 +423,11 @@ const Section = styled.section`
     ${({ theme }) => theme.colors.harvardCrimson} 60%,
     ${({ theme }) => theme.colors.deepWine} 100%
   );
-  padding: 96px 40px;
+  padding: 80px 40px;
   overflow: hidden;
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 64px 20px;
+    padding: 56px 20px;
   }
 `;
 
@@ -439,7 +444,7 @@ const Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 36px;
 `;
 
 const Tag = styled.p`
@@ -873,6 +878,14 @@ const ContactLine = styled.p`
   font-size: 13.5px;
   color: ${({ theme }) => theme.colors.mutedText};
   line-height: 1.6;
+`;
+
+const CTAHint = styled.p`
+  font-size: 11.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  margin-top: 14px;
 `;
 
 const RealSign = styled.span<{ $lg?: boolean }>`

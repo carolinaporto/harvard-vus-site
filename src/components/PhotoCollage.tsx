@@ -50,8 +50,8 @@ export default function PhotoCollage() {
               whileHover={{ scale: 1.04, rotate: 0, zIndex: 10 }}
               style={{ zIndex: i % 2 === 0 ? 1 : 2 }}
             >
-              <Polaroid $tall={i === 0 || i === 5}>
-                <PhotoSlot $tall={i === 0 || i === 5}>
+              <Polaroid $tall={i === 0 || i === 7}>
+                <PhotoSlot $tall={i === 0 || i === 7}>
                   <PhotoImage
                     src={photo.src}
                     alt={photo.caption}
@@ -70,11 +70,11 @@ export default function PhotoCollage() {
 
 const Section = styled.section`
   background: ${({ theme }) => theme.colors.softGray};
-  padding: 96px 0 112px;
+  padding: 80px 0 88px;
   overflow: hidden;
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 64px 0 80px;
+    padding: 56px 0 64px;
   }
 `;
 
@@ -91,7 +91,7 @@ const HeaderContainer = styled.div`
 const PhotosArea = styled.div`
   max-width: min(1400px, 94vw);
   margin: 0 auto;
-  padding-top: 52px;
+  padding-top: 40px;
 `;
 
 const Tag = styled.p`

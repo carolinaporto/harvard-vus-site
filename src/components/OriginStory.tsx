@@ -82,10 +82,10 @@ export default function OriginStory() {
 
 const Section = styled.section`
   background: ${({ theme }) => theme.colors.warmOffWhite};
-  padding: 96px 40px 48px;
+  padding: 80px 40px 40px;
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 64px 20px 40px;
+    padding: 56px 20px 32px;
   }
 `;
 
@@ -94,7 +94,7 @@ const Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 40px;
 `;
 
 const Tag = styled.p`

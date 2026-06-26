@@ -98,10 +98,10 @@ export default function FAQSection() {
 
 const Section = styled.section`
   background: ${({ theme }) => theme.colors.softGray};
-  padding: 96px 40px;
+  padding: 80px 40px;
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 64px 20px;
+    padding: 56px 20px;
   }
 `;
 
@@ -110,7 +110,7 @@ const Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 36px;
 `;
 
 const Tag = styled.p`

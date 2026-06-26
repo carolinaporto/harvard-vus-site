@@ -140,11 +140,11 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 100px 40px 80px;
+  padding: 72px 40px 56px;
   overflow: hidden;
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 90px 20px 60px;
+    padding: 72px 20px 48px;
     min-height: 100svh;
   }
 `;

@@ -62,10 +62,10 @@ export default function StoryTimeline() {
 
 const Section = styled.section`
   background: ${({ theme }) => theme.colors.warmOffWhite};
-  padding: 96px 40px;
+  padding: 80px 40px;
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 64px 20px;
+    padding: 56px 20px;
   }
 `;
 
