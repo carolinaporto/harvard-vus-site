@@ -26,28 +26,9 @@ export const content = {
     whyHelp: {
       tag: 'Transparência',
       title: 'Por que estou pedindo ajuda',
-      p1: 'A aprovação é real. A carta está assinada. Mas o programa VUS de Harvard não oferece bolsa ou auxílio financeiro, e uma aprovação não paga moradia em Cambridge, plano de saúde obrigatório, alimentação, visto ou materiais acadêmicos.',
-      p2: 'Sou bolsista no Insper e construí minha trajetória por esforço, curiosidade e comunidade. Por isso estou aqui: pedindo ajuda com transparência, sem vergonha, e com gratidão profunda por cada pessoa que lê até aqui.',
-      p3: 'Se você puder contribuir, seja com qualquer valor, um compartilhamento ou uma indicação para alguém que possa ajudar, você me ajuda a transformar essa aprovação em realidade.',
-      quote: '"Cada doação, indicação e compartilhamento me aproxima de Harvard."',
-      reality: {
-        confirmedLabel: 'Confirmado',
-        confirmedText: 'Aceita: Harvard College VUS 2026/2027',
-        statement: 'A aprovação é oficial e irrevogável. O visto, a moradia e o seguro saúde não são incertezas; são etapas contratáveis assim que houver recurso. A única variável real é o dinheiro.',
-        statusItems: [
-          { label: 'Aceite em Harvard', status: 'confirmado', variant: 'confirmed' as const },
-          { label: 'Programa', status: 'confirmado', variant: 'confirmed' as const },
-          { label: 'Próximas etapas', status: 'contratáveis', variant: 'actionable' as const },
-          { label: 'Financiamento', status: 'em aberto', variant: 'open' as const },
-        ],
-        enablesLabel: 'O que sua doação torna possível',
-        enables: [
-          'Moradia em Cambridge',
-          'Seguro saúde obrigatório',
-          'Visto F-1 e logística',
-          'Alimentação e transporte',
-        ],
-      },
+      p1: 'A aprovação é real. A carta está assinada. Mas o programa VUS de Harvard não oferece bolsa ou auxílio financeiro, então todos os custos ficam por conta do estudante.',
+      p2: 'Sou bolsista no Insper e construí minha trajetória por esforço, curiosidade e comunidade. Por isso estou aqui: pedindo ajuda com transparência, profundidade, e profunda gratidão.',
+      quote: '"Cada ajuda, de qualquer tamanho, me aproxima um pouco mais desse sonho."',
     },
 
     funding: {
@@ -73,55 +54,55 @@ export const content = {
       tag: 'Minha trajetória',
       title: 'O caminho até aqui',
       subtitle:
-        'Não é um currículo. É a história de alguém que sempre encontrou um jeito de continuar.',
+        'Daquela menina que mudava de escola todos os anos até Harvard, muita coisa aconteceu.',
       milestones: [
         {
           year: 'Infância',
           title: 'Filha de militar, 12 escolas e muitos recomeços',
           description:
-            'Pirassununga, São José dos Campos, Rio de Janeiro, Brasília. Doze escolas, um recomeço constante. Primeiro contato com programação pelo CS50 de Harvard. Foi o que me fez querer ir fundo.',
+            'Cresci mudando de cidade e estudando em doze escolas diferentes.',
           phase: 'childhood' as const,
         },
         {
           year: '2023',
           title: 'Insper: Engenharia da Computação',
           description:
-            'Bolsista no Insper, um dos cursos mais competitivos do Brasil em tecnologia. Em 2025, recebi o Prêmio de Excelência em Eng. da Computação pela comunidade bolsista.',
+            'Foi no Insper que descobri que gosto de construir coisas, ensinar e criar comunidades. Ao longo da graduação, também recebi o Prêmio de Excelência Acadêmica.',
           phase: 'insper' as const,
         },
         {
-          year: '2024–hoje',
+          year: '2024–2026',
           title: 'Monitora em 5 disciplinas',
           description:
-            'Cálculo, Ciência de Dados, Web, Sistemas Hardware-Software e Grandes Desafios de Engenharia. Ensinar é parte de quem eu sou.',
+            'Fui monitora em cinco disciplinas. Ensinar se tornou uma das partes mais importantes da minha graduação.',
           phase: 'insper' as const,
         },
         {
           year: '2025',
           title: 'Cofundadora da Insper AI',
           description:
-            'Depois de passar pela Insper Jr., percebi que faltava um espaço dedicado a IA de verdade dentro do Insper. Cofundei a Insper AI para aproximar alunos de ML, pesquisa, hackathons e do ecossistema de tecnologia.',
+            'Depois da Insper Jr., percebi que faltava um espaço dedicado à IA no Insper. Assim nasceu a Insper AI.',
           phase: 'insper' as const,
         },
         {
           year: '2025–2026',
-          title: 'Estágios de Férias: Segura.ai & BTG Pactual',
+          title: 'Estágios de férias: Segura.ai & BTG Pactual',
           description:
-            'Passei por experiências em duas organizações muito diferentes: a Segura.ai, uma startup de tecnologia focada em seguros, e o BTG Pactual, onde trabalhei com aplicações de IA para trading. Foram oportunidades para aplicar engenharia, dados e IA em problemas reais.',
+            'Passei pela Segura.ai, uma startup de tecnologia em seguros, e pelo BTG Pactual, aplicando IA em problemas reais do mercado financeiro.',
           phase: 'transition' as const,
         },
         {
           year: '2026',
           title: 'Brasil Project @ Harvard & MIT',
           description:
-            'Participei presencialmente em Harvard e no MIT. Foi a primeira vez que esse ecossistema deixou de parecer distante e começou a parecer possível.',
+            'Fui selecionada pelo Insper para participar presencialmente do Brasil Project em Boston, com atividades em Harvard e MIT. Foi a primeira vez que esse ecossistema deixou de parecer distante e começou a parecer possível.',
           phase: 'harvard' as const,
         },
         {
           year: 'Verão 2026',
           title: 'UChicago SISRM: Bolsa Integral',
           description:
-            'Selecionada com bolsa integral para o Summer Institute in Social Research Methods da University of Chicago. Durante o programa, atuo como assistente de pesquisa da professora Jean Clipperton, combinando métodos quantitativos, tecnologia e ciências sociais.',
+            'Fui selecionada pelo Insper para passar 10 semanas na University of Chicago, no SISRM. Durante o programa, atuo como assistente de pesquisa da professora Jean Clipperton.',
           phase: 'harvard' as const,
         },
         {
@@ -131,39 +112,6 @@ export const content = {
             'Fui aceita para o Visiting Undergraduate Students Program do Harvard College para 2026/2027. Agora preciso de ajuda para tornar isso real.',
           phase: 'harvard' as const,
           isHighlight: true,
-        },
-      ],
-    },
-
-    harvard: {
-      tag: 'O que ainda estou descobrindo',
-      title: 'A pergunta que me trouxe até aqui',
-      subtitle:
-        'Eu não quero escolher meu futuro antes de estar pronta. Harvard é uma chance de continuar procurando com mais repertório, mais pessoas e mais coragem.',
-      pillars: [
-        {
-          title: 'Ainda estou escolhendo minha pergunta',
-          description:
-            'Não sei exatamente qual problema quero dedicar minha vida para resolver. Harvard não é onde espero encontrar respostas prontas. É onde espero encontrar perguntas melhores.',
-          iconKey: 'book',
-        },
-        {
-          title: 'Quando algo faz falta, eu tento criar',
-          description:
-            'Foi assim com a Insper AI. Sempre que sinto falta de alguma coisa, meu impulso costuma ser construir.',
-          iconKey: 'brain',
-        },
-        {
-          title: 'Quero conviver com gente que me desafia',
-          description:
-            'As melhores decisões da minha vida vieram de conversas com pessoas que enxergavam o mundo diferente de mim.',
-          iconKey: 'network',
-        },
-        {
-          title: 'Quero continuar procurando melhor',
-          description:
-            'Harvard não é um destino final. É o melhor lugar que encontrei até agora para continuar explorando.',
-          iconKey: 'globe',
         },
       ],
     },
@@ -205,24 +153,14 @@ export const content = {
       title: 'Perguntas frequentes',
       items: [
         {
-          question: 'Você já foi aceita em Harvard?',
+          question: 'O que é o programa VUS?',
           answer:
-            'Sim. Fui oficialmente aceita para o programa Visiting Undergraduate Students (VUS) do Harvard College para o ano acadêmico 2026/2027.',
-        },
-        {
-          question: 'Para onde vai o dinheiro, exatamente?',
-          answer:
-            'Diretamente para custos reais e documentáveis: moradia em Cambridge, alimentação, seguro saúde obrigatório, visto, materiais acadêmicos, transporte e despesas do dia a dia. Não há intermediários, e posso prestar contas a doadores que solicitarem.',
-        },
-        {
-          question: 'Como posso ajudar?',
-          answer:
-            'De várias formas: fazendo uma doação (qualquer valor ajuda), compartilhando essa página, ou me conectando com fundações, alumni do Insper ou de Harvard, empresas ou qualquer pessoa que possa apoiar. Para conversar, tirar dúvidas ou receber o comprovante de aceitação antes de qualquer decisão, me envie um e-mail em carolporto04@gmail.com.',
+            'O Visiting Undergraduate Students Program (VUS) é um programa do Harvard College para estudantes de outras universidades cursarem um ano acadêmico em Harvard como alunos visitantes. No meu caso, fui aceita para o ano de 2026/2027.',
         },
         {
           question: 'E se a meta não for atingida?',
           answer:
-            'Ainda pretendo ir para Harvard. O caminho agora depende de apoio externo, cada contribuição reduz a distância entre a aprovação e a possibilidade real de estudar lá.',
+            'Ainda pretendo ir para Harvard. O caminho agora depende de apoio externo — cada contribuição reduz a distância entre a aprovação e a possibilidade real de estudar lá.',
         },
         {
           question: 'Posso ver documentos de comprovação?',
@@ -269,11 +207,9 @@ export const content = {
       tag: 'De onde venho',
       headline: 'Antes de Harvard, houve muitos começos.',
       story: [
-        'Nasci em Pirassununga, interior de São Paulo, onde fica a Academia da Força Aérea Brasileira. Como meu pai é militar, mudar de cidade se tornou parte normal da vida desde muito cedo.',
-        'Sou a caçula de quatro irmãs. Crescer rodeada delas foi, e continua sendo, uma das coisas mais formativas da minha vida. Elas são as minhas maiores inspirações, as pessoas que eu mais admiro. Cada conquista que construí tem um pedaço delas.',
-        'Ao longo dos anos, morei em São José dos Campos, Rio de Janeiro, Brasília e São Paulo. Cada mudança significava recomeçar: nova escola, novos amigos, nova rotina.',
-        'No ensino médio, estudei no Colégio Objetivo com bolsa e tive meu primeiro contato real com computação. Essa experiência plantou uma semente que, anos depois, me trouxe para Engenharia da Computação no Insper.',
-        'Harvard não é o começo da minha história. É o próximo capítulo de uma jornada construída ao longo de muitos anos, em cidades, escolas e países diferentes, com quatro irmãs ao meu lado e pais que sempre colocaram a educação dos filhos acima de qualquer outra prioridade.',
+        'Sou a caçula de quatro irmãs e filha de um militar da Força Aérea. Cresci mudando de cidade, escola e rotina desde muito cedo',
+        'Morei em São José dos Campos, Rio de Janeiro, Brasília e São Paulo. Cada mudança significava começar de novo, novos amigos, nova escola e novos desafios. Foi durante esse caminho que descobri a computação, o que mais tarde me levou à Engenharia da Computação no Insper.',
+        'Harvard não é o começo da minha história. É o próximo capítulo de uma jornada construída ao longo de muitos anos, com uma família que sempre colocou a educação acima de qualquer outra prioridade.',
       ],
       familyCaption: 'As pessoas que tornaram tudo isso possível.',
       sistersCaption: 'Minhas primeiras referências de coragem, disciplina e ambição.',
@@ -314,28 +250,9 @@ export const content = {
     whyHelp: {
       tag: 'Transparency',
       title: 'Why I am asking for help',
-      p1: 'The acceptance is real. The letter is signed. But Harvard’s VUS program does not offer scholarships or financial aid, and an acceptance letter does not pay for housing in Cambridge, mandatory health insurance, food, a visa, or academic materials.',
-      p2: 'I am a scholarship student at Insper and I built my path through effort, curiosity, and community. So I am here: asking for help with full transparency, without shame, and with deep gratitude for everyone who reads this far.',
-      p3: 'If you can contribute, whether any amount, a share, or an introduction to someone who might help, you help me turn this acceptance into reality.',
+      p1: 'The acceptance is real. The letter is signed. But Harvard’s VUS program does not offer scholarships or financial aid, so all costs are the student’s responsibility.',
+      p2: 'I am a scholarship student at Insper, and I built my path through effort, curiosity, and community. That is why I am here: asking for help with transparency and with deep gratitude.',
       quote: '"Every donation, connection, and share brings me closer to Harvard."',
-      reality: {
-        confirmedLabel: 'Confirmed',
-        confirmedText: 'Accepted: Harvard College VUS 2026/2027',
-        statement: 'The acceptance is official and irrevocable. The visa, housing, and health insurance are not uncertainties; they are steps that can be arranged once funding is secured. The only real variable is the money.',
-        statusItems: [
-          { label: 'Harvard acceptance', status: 'confirmed', variant: 'confirmed' as const },
-          { label: 'Program', status: 'confirmed', variant: 'confirmed' as const },
-          { label: 'Next steps', status: 'actionable', variant: 'actionable' as const },
-          { label: 'Funding', status: 'open', variant: 'open' as const },
-        ],
-        enablesLabel: 'What your donation makes possible',
-        enables: [
-          'Housing in Cambridge',
-          'Mandatory health insurance',
-          'F-1 visa and logistics',
-          'Food and transportation',
-        ],
-      },
     },
 
     funding: {
@@ -360,55 +277,55 @@ export const content = {
     timeline: {
       tag: 'My journey',
       title: 'The road to here',
-      subtitle: 'Not a résumé. The story of someone who always found a way to keep going.',
+      subtitle: 'From that girl who changed schools every year to Harvard, a lot has happened.',
       milestones: [
         {
           year: 'Childhood',
           title: 'Military kid, 12 schools, and many fresh starts',
           description:
-            'Pirassununga, São José dos Campos, Rio de Janeiro, Brasília. Twelve schools, a constant fresh start. First contact with programming through Harvard\'s CS50. That is what made me go all in.',
+            'I grew up moving between cities and studying at twelve different schools.',
           phase: 'childhood' as const,
         },
         {
           year: '2023',
           title: 'Insper: Computer Engineering',
           description:
-            'Scholarship student at Insper, one of Brazil\'s most competitive tech programs. In 2025, received the Excellence Award in Computer Engineering from the scholarship community.',
+            'At Insper, I discovered that I love building things, teaching, and creating communities. During my undergraduate studies, I also received the Academic Excellence Award.',
           phase: 'insper' as const,
         },
         {
-          year: '2024–present',
+          year: '2024–2026',
           title: 'Teaching Assistant: 5 Subjects',
           description:
-            'Calculus, Data Science, Web Dev, Hardware-Software Systems, and Grand Challenges of Engineering. Teaching is part of who I am.',
+            'I served as a teaching assistant in five courses. Teaching became one of the most important parts of my undergraduate experience.',
           phase: 'insper' as const,
         },
         {
           year: '2025',
           title: 'Co-founder of Insper AI',
           description:
-            'After going through Insper Jr., I realized there was no dedicated space for real AI work at Insper. I co-founded Insper AI to bring students closer to ML, research, hackathons, and the broader tech ecosystem.',
+            'After going through Insper Jr., I realized there was no dedicated space for AI work at Insper. That is how Insper AI was born.',
           phase: 'insper' as const,
         },
         {
           year: '2025–2026',
-          title: 'Summer Internships: Segura.ai & BTG Pactual',
+          title: 'Summer internships: Segura.ai & BTG Pactual',
           description:
-            'Two very different organizations: Segura.ai, a technology startup focused on insurance, and BTG Pactual, where I worked with AI applications for trading. Both were opportunities to apply engineering, data, and AI to real problems.',
+            'I worked at Segura.ai, a tech startup in insurance, and at BTG Pactual, building AI applications for financial markets.',
           phase: 'transition' as const,
         },
         {
           year: '2026',
           title: 'Brasil Project @ Harvard & MIT',
           description:
-            'I attended in person at Harvard and MIT. It was the first time that ecosystem stopped feeling distant and started feeling possible.',
+            'Selected by Insper to attend the Brasil Project in Boston, with sessions at Harvard and MIT. It was the first time that ecosystem stopped feeling distant and started feeling possible.',
           phase: 'harvard' as const,
         },
         {
           year: 'Summer 2026',
           title: 'UChicago SISRM: Full Scholarship',
           description:
-            'Selected with a full scholarship to the Summer Institute in Social Research Methods at the University of Chicago. During the program, I serve as a research assistant to Professor Jean Clipperton, combining quantitative methods, technology, and social sciences.',
+            'Selected by Insper to spend 10 weeks at the University of Chicago in the SISRM program. I serve as a research assistant to Professor Jean Clipperton.',
           phase: 'harvard' as const,
         },
         {
@@ -418,39 +335,6 @@ export const content = {
             'Accepted to the Visiting Undergraduate Students Program at Harvard College for 2026/2027. Now I need help making it real.',
           phase: 'harvard' as const,
           isHighlight: true,
-        },
-      ],
-    },
-
-    harvard: {
-      tag: 'What I am still figuring out',
-      title: 'The question that brought me here',
-      subtitle:
-        'I do not want to choose my future before I am ready. Harvard is a chance to keep searching with more perspective, more people, and more courage.',
-      pillars: [
-        {
-          title: 'I am still choosing my question',
-          description:
-            'I do not know exactly what problem I want to dedicate my life to solving. Harvard is not where I expect to find ready-made answers. It is where I hope to find better questions.',
-          iconKey: 'book',
-        },
-        {
-          title: 'When something is missing, I try to build it',
-          description:
-            'That is how Insper AI happened. Whenever I feel something is missing, my instinct is usually to build.',
-          iconKey: 'brain',
-        },
-        {
-          title: 'I want to be around people who challenge me',
-          description:
-            'Some of the best decisions in my life came from conversations with people who saw the world differently than I did.',
-          iconKey: 'network',
-        },
-        {
-          title: 'I want to keep searching better',
-          description:
-            'Harvard is not a final destination. It is the best place I have found so far to keep exploring.',
-          iconKey: 'globe',
         },
       ],
     },
@@ -492,24 +376,14 @@ export const content = {
       title: 'FAQ',
       items: [
         {
-          question: 'Were you really accepted to Harvard?',
+          question: 'What is the VUS program?',
           answer:
-            'Yes. I was officially accepted to the Visiting Undergraduate Students (VUS) program at Harvard College for the 2026/2027 academic year.',
-        },
-        {
-          question: 'Where exactly does the money go?',
-          answer:
-            'Directly to real, documented costs: housing in Cambridge, food, mandatory health insurance, visa logistics, academic materials, transportation, and daily living expenses. There are no intermediaries, and I can report back to donors who request it.',
-        },
-        {
-          question: 'How can I help?',
-          answer:
-            "In several ways: making a donation (any amount helps), sharing this page, or connecting me with foundations, Insper or Harvard alumni, companies, or anyone who might support. To chat, ask questions, or receive my acceptance letter before deciding, email me at carolporto04@gmail.com.",
+            'The Visiting Undergraduate Students Program (VUS) is a Harvard College program that allows students from other universities to spend an academic year at Harvard as visiting students. I was accepted for the 2026/2027 academic year.',
         },
         {
           question: 'What if the goal is not fully reached?',
           answer:
-            'I still intend to attend Harvard. The path forward depends on external support, every contribution helps close the gap between acceptance and attendance.',
+            'I still intend to attend Harvard. The path forward depends on external support — every contribution helps close the gap between acceptance and attendance.',
         },
         {
           question: 'Can I see supporting documents?',
@@ -556,11 +430,9 @@ export const content = {
       tag: 'Where I come from',
       headline: 'Before Harvard, there were many beginnings.',
       story: [
-        'I was born in Pirassununga, São Paulo, where the Brazilian Air Force Academy is located. Because my father is a military officer, moving became a normal part of my life from a very young age.',
-        'I am the youngest of four sisters. Growing up surrounded by them was, and still is, one of the most formative things in my life. They are my greatest inspiration, the people I admire most. Every achievement I have built has a piece of them in it.',
-        'Over the years, I lived in São José dos Campos, Rio de Janeiro, Brasília, and São Paulo. Every move meant starting over: a new school, new friends, a new routine.',
-        'In high school, I studied at Colégio Objetivo on a scholarship and had my first real contact with computing, a seed that years later became Computer Engineering at Insper.',
-        'Harvard is not the beginning of my story. It is the next chapter in a journey built over many years, across cities, schools, and countries, with four sisters by my side and parents who always placed their children\'s education above everything else.',
+        'I am the youngest of four sisters and a Air Force military child. I grew up moving between cities, schools, and routines from a very young age.',
+        'I lived in São José dos Campos, Rio de Janeiro, Brasília, and São Paulo. Every move meant starting over with new friends, a new school, and new challenges. It was during this journey that I discovered my passion for computer science, which later led me to pursue Computer Engineering at Insper.',
+        'Harvard is not the beginning of my story. It is the next chapter in a journey built over many years, with a family that always placed education above everything else.',
       ],
       familyCaption: 'The people who made all of this possible.',
       sistersCaption: 'My first examples of courage, discipline, and ambition.',
