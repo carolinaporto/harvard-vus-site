@@ -34,7 +34,7 @@ export default function NavBar() {
         <Links>
           {([
             ['#my-story', t.story],
-            ['#harvard', t.harvard],
+            ['#funding', t.harvard],
             ['#donate', t.donate],
           ] as [string, string][]).map(([href, label]) => (
             <NavLink key={href} href={href} $scrolled={scrolled}>
@@ -71,7 +71,7 @@ export default function NavBar() {
         >
           {([
             ['#my-story', t.story],
-            ['#harvard', t.harvard],
+            ['#funding', t.harvard],
             ['#donate', t.donate],
           ] as [string, string][]).map(([href, label]) => (
             <MobileLink key={href} href={href} onClick={() => setMenuOpen(false)}>

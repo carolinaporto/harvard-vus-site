@@ -171,7 +171,6 @@ export const content = {
           question: 'Posso ver o orçamento completo?',
           answer:
             'Sim. O resumo acima mostra os principais custos, mas também disponibilizei uma versão completa do orçamento previsto em PDF para quem quiser analisar os detalhes.',
-          // TODO: add /public/budget-harvard-vus.pdf before publishing
           link: { text: 'Abrir orçamento completo (PDF)', href: '/budget-harvard-vus.pdf' },
         },
       ],
@@ -258,7 +257,7 @@ export const content = {
       tag: 'Transparency',
       title: 'Why I am asking for help',
       p1: 'The acceptance is real. The letter is signed. But Harvard’s VUS program does not offer scholarships or financial aid, so all costs are the student’s responsibility.',
-      p2: 'I am a scholarship student at Insper, and I built my path through effort, curiosity, and community. That is why I am here: asking for help with transparency and with deep gratitude.',
+      p2: 'I am a scholarship student at Insper, and I built my path through effort, curiosity, and community. That is why I am here: asking for help with transparency, depth, and deep gratitude.',
       quote: '"Every donation, connection, and share brings me closer to Harvard."',
     },
 
@@ -401,7 +400,6 @@ export const content = {
           question: 'Can I see the full budget?',
           answer:
             'Yes. The summary above shows the main costs, but I also made a full PDF version of the projected budget available for anyone who wants to review the details.',
-          // TODO: add /public/budget-harvard-vus.pdf before publishing
           link: { text: 'Open full budget (PDF)', href: '/budget-harvard-vus.pdf' },
         },
       ],

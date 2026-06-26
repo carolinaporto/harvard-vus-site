@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Envelope, LinkedinLogo, Heart } from '@phosphor-icons/react';
+import { Envelope, Heart } from '@phosphor-icons/react';
 import { useLanguage } from '../context/LanguageContext';
 import { content } from '../data/content';
 
@@ -19,10 +19,6 @@ export default function Footer() {
             <FooterLink href={`mailto:${t.email}`}>
               <Envelope size={18} />
               {t.email}
-            </FooterLink>
-            <FooterLink href="#contact">
-              <LinkedinLogo size={18} />
-              LinkedIn
             </FooterLink>
           </Links>
           <DonateBtn href="#donate">

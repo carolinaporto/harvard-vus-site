@@ -1,14 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import {
-  House,
-  ForkKnife,
-  Heart,
-  Airplane,
-  BookOpen,
-  Bus,
-  Coins,
-} from '@phosphor-icons/react';
+import { House, ForkKnife, Heart, BookOpen } from '@phosphor-icons/react';
 import { useLanguage } from '../context/LanguageContext';
 import { content } from '../data/content';
 import { useProgress } from '../hooks/useProgress';
@@ -18,10 +10,7 @@ const iconMap: Record<string, ReactNode> = {
   house: <House size={22} weight="duotone" />,
   fork: <ForkKnife size={22} weight="duotone" />,
   heart: <Heart size={22} weight="duotone" />,
-  airplane: <Airplane size={22} weight="duotone" />,
   book: <BookOpen size={22} weight="duotone" />,
-  bus: <Bus size={22} weight="duotone" />,
-  coins: <Coins size={22} weight="duotone" />,
 };
 
 const fadeUp = {
