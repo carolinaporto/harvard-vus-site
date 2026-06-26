@@ -302,7 +302,6 @@ const PhotoCol = styled.div`
   gap: 12px;
 
   @media (max-width: ${({ theme }) => theme.bp.desktop}) {
-    order: -1;
     max-width: 400px;
     margin: 0 auto;
     width: 100%;

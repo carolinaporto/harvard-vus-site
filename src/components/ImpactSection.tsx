@@ -1,29 +1,24 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { UsersThree, BookOpen, GlobeHemisphereWest, Star } from '@phosphor-icons/react';
+import { BookOpen, UsersThree, Star } from '@phosphor-icons/react';
 import type { ReactNode } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 const icons: ReactNode[] = [
-  <UsersThree size={26} weight="duotone" />,
   <BookOpen size={26} weight="duotone" />,
-  <GlobeHemisphereWest size={26} weight="duotone" />,
+  <UsersThree size={26} weight="duotone" />,
   <Star size={26} weight="duotone" />,
 ];
 
 const cards = {
   pt: [
     {
-      title: 'Comunidades que abrem portas',
-      body: 'Ajudar a fundar a Insper AI me ensinou que oportunidades raramente aparecem prontas. Muitas vezes, alguém precisa construir o espaço primeiro.',
-    },
-    {
       title: 'Conhecimento que volta',
-      body: 'Quero trazer de volta para o Insper e para o ecossistema brasileiro o que eu aprender em Harvard: ideias, contatos, referências e caminhos que possam servir para mais gente.',
+      body: 'Quero trazer de volta para o Insper e para o Brasil ideias, referências e caminhos que possam servir para mais gente.',
     },
     {
-      title: 'Brasil Project 2027',
-      body: 'Já declarei interesse em ajudar a organizar o Brasil Project 2027, conectando estudantes brasileiros a discussões, lideranças e oportunidades em Harvard e MIT.',
+      title: 'Comunidades que abrem portas',
+      body: 'A Insper AI me mostrou que, quando uma oportunidade não existe, alguém pode começar a construí-la.',
     },
     {
       title: 'Uma referência possível',
@@ -32,16 +27,12 @@ const cards = {
   ],
   en: [
     {
-      title: 'Communities that open doors',
-      body: 'Helping co-found Insper AI taught me that opportunities rarely appear fully formed. Often, someone has to build the space first.',
-    },
-    {
       title: 'Knowledge that comes back',
-      body: 'I want to bring back to Insper and to the Brazilian ecosystem what I learn at Harvard: ideas, connections, references, and paths that can serve more people.',
+      body: 'I want to bring back to Insper and to Brazil ideas, references, and paths that can serve more people.',
     },
     {
-      title: 'Brasil Project 2027',
-      body: 'I have already expressed interest in helping organize Brasil Project 2027, connecting Brazilian students with discussions, leaders, and opportunities at Harvard and MIT.',
+      title: 'Communities that open doors',
+      body: 'Insper AI showed me that when an opportunity does not exist, someone can start building it.',
     },
     {
       title: 'A possible reference',
@@ -57,7 +48,7 @@ const copy = {
     subtitle:
       'Harvard não é só um lugar onde eu vou aprender. É um lugar de onde eu quero voltar com mais repertório, mais coragem e mais capacidade de construir para outras pessoas.',
     closing:
-      'Apoiar essa campanha não é financiar um ano isolado. É investir no que esse ano pode virar depois.',
+      'Apoiar essa campanha não é financiar um ano isolado. É ajudar a transformar o que esse ano pode virar depois.',
   },
   en: {
     tag: 'Why support',
@@ -65,7 +56,7 @@ const copy = {
     subtitle:
       'Harvard is not only a place where I will learn. It is a place I want to return from with more perspective, more courage, and more ability to build for others.',
     closing:
-      'Supporting this campaign is not funding one isolated year. It is investing in what this year can become afterward.',
+      'Supporting this campaign is not funding one isolated year. It is helping transform what this year can become afterward.',
   },
 };
 
