@@ -2,8 +2,8 @@ import type { Lang } from '../context/LanguageContext';
 
 // ─── Atualizar aqui quando o valor arrecadado mudar ───────────────────────────
 const lastUpdated = {
-  pt: '26 de junho de 2026',
-  en: 'June 26, 2026',
+  pt: '30 de junho de 2026',
+  en: 'June 30, 2026',
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
