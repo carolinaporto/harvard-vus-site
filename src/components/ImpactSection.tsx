@@ -14,7 +14,7 @@ const cards = {
   pt: [
     {
       title: 'Conhecimento que volta',
-      body: 'Quero trazer de volta para o Insper e para o Brasil ideias, referências e caminhos que possam servir para mais gente.',
+      body: 'Quero voltar com repertório para construir IA que funcione para o Brasil de verdade — um país continental que os sistemas feitos lá fora não enxergam direito.',
     },
     {
       title: 'Comunidades que abrem portas',
@@ -28,7 +28,7 @@ const cards = {
   en: [
     {
       title: 'Knowledge that comes back',
-      body: 'I want to bring back to Insper and to Brazil ideas, references, and paths that can serve more people.',
+      body: 'I want to come back with the repertoire to build AI that actually works for Brazil — a continental country that systems built elsewhere rarely see clearly.',
     },
     {
       title: 'Communities that open doors',

@@ -23,7 +23,7 @@ export const content = {
       headline1: 'Harvard não é o começo da minha história.',
       headline2: 'É o próximo capítulo.',
       subtitle:
-        'Cresci mudando de cidade, recomeçando amizades e aprendendo a me adaptar. Hoje sou bolsista no Insper, fui aceita em Harvard e estou arrecadando recursos para transformar essa oportunidade em realidade.',
+        'Cresci mudando de cidade e recomeçando do zero tantas vezes que aprendi a ler qualquer ambiente novo rápido — e a enxergar o que falta nele. Hoje sou bolsista no Insper, fui aceita em Harvard e estou arrecadando recursos para tornar essa oportunidade real.',
       cta1: 'Doe Agora',
       cta2: 'Minha Trajetória',
       cta3: 'Compartilhar',
@@ -34,7 +34,7 @@ export const content = {
       tag: 'Transparência',
       title: 'Por que estou pedindo ajuda',
       p1: 'A aprovação é real. A carta está assinada. Mas o programa VUS de Harvard não oferece bolsa ou auxílio financeiro, então todos os custos ficam por conta do estudante.',
-      p2: 'Sou bolsista no Insper e construí minha trajetória por esforço, curiosidade e comunidade. Por isso estou aqui: pedindo ajuda com transparência, profundidade, e profunda gratidão.',
+      p2: 'Sou bolsista no Insper e cheguei até aqui construindo coisas — projetos, comunidades, oportunidades que não existiam antes. Por isso estou aqui: pedindo ajuda com transparência, humildade e profunda gratidão.',
       quote: '"Cada ajuda, de qualquer tamanho, me aproxima um pouco mais desse sonho."',
     },
 
@@ -65,9 +65,9 @@ export const content = {
       milestones: [
         {
           year: 'Infância',
-          title: 'Filha de militar, 12 escolas e muitos recomeços',
+          title: '10 escolas, 6 cidades, muitos recomeços',
           description:
-            'Cresci mudando de cidade e estudando em doze escolas diferentes. Aprendi a recomeçar antes de entender que isso era uma habilidade.',
+            'Cresci mudando de cidade e estudando em dez escolas diferentes. Aprendi a recomeçar antes de entender que isso era uma habilidade.',
           phase: 'childhood' as const,
         },
         {
@@ -185,14 +185,13 @@ export const content = {
 
     ticker: {
       items: [
-        '12 escolas diferentes',
+        '10 escolas diferentes',
         'Bolsista no Insper',
         'Monitora em 5 disciplinas',
         'Cofundadora da Insper AI',
         'Bolsa integral na University of Chicago',
         'Brasil Project @ Harvard & MIT',
         'Aceita em Harvard College',
-        'Filha de militar',
       ],
     },
 
@@ -201,13 +200,13 @@ export const content = {
       title: 'A trajetória em imagens',
       subtitle: 'Cada foto é um capítulo: da sala de aula em São Paulo ao campus de Cambridge.',
       photos: [
-        { src: '/photos/infancia.jpg', caption: 'De farda, filha de militar' },
         { src: '/photos/insper.jpg', caption: 'Turma de Eng. da Computação no Insper, 6º semestre' },
         { src: '/photos/insper-ai.jpg', caption: 'Insper AI: evento presencial na QiTech' },
         { src: '/photos/estagio.jpg', caption: 'Segura.ai: parte do time no verão 2025' },
         { src: '/photos/chicago.jpg', caption: 'UChicago SISRM: primeira visita de campo' },
         { src: '/photos/premio.jpg', caption: 'Prêmio de Excelência em Eng. da Computação, comunidade bolsista Insper, 2025' },
         { src: '/photos/brasil-project.jpg', caption: 'Brasil Project: quando Harvard deixou de parecer inalcançável' },
+        { src: '/photos/infancia.jpg', caption: 'De farda, filha de militar' },
         { src: '/photos/harvard.jpg', caption: 'Março 2026: A aprovação chegou' },
       ],
     },
@@ -236,7 +235,7 @@ export const content = {
       headline1: 'Harvard is not the beginning of my story.',
       headline2: 'It is the next chapter.',
       subtitle:
-        'I grew up moving from city to city, starting over more times than I can count, and learning how to adapt along the way. Today, I am a scholarship student at Insper, accepted to Harvard, and raising funds to make this opportunity possible.',
+        'I grew up moving between cities and starting over so many times that I learned to read any new environment quickly — and to see what is missing in it. Today I am a scholarship student at Insper, accepted to Harvard, and raising funds to make this opportunity real.',
       cta1: 'Donate Now',
       cta2: 'My Journey',
       cta3: 'Share',
@@ -247,7 +246,7 @@ export const content = {
       tag: 'Transparency',
       title: 'Why I am asking for help',
       p1: 'The acceptance is real. The letter is signed. But Harvard’s VUS program does not offer scholarships or financial aid, so all costs are the student’s responsibility.',
-      p2: 'I am a scholarship student at Insper, and I built my path through effort, curiosity, and community. That is why I am here: asking for help with transparency, depth, and deep gratitude.',
+      p2: 'I am a scholarship student at Insper, and I got here by building things — projects, communities, opportunities that did not exist before. That is why I am here: asking for help with transparency, humility, and deep gratitude.',
       quote: '"Every donation, connection, and share brings me closer to Harvard."',
     },
 
@@ -277,9 +276,9 @@ export const content = {
       milestones: [
         {
           year: 'Childhood',
-          title: 'Military kid, 12 schools, and many fresh starts',
+          title: '10 schools, 6 cities, many fresh starts',
           description:
-            'I grew up moving between cities and studying at twelve different schools. I learned to begin again before I understood that was a skill.',
+            'I grew up moving between cities and studying at ten different schools. I learned to begin again before I understood that was a skill.',
           phase: 'childhood' as const,
         },
         {
@@ -397,14 +396,13 @@ export const content = {
 
     ticker: {
       items: [
-        '12 different schools',
+        '10 different schools',
         'Scholarship student at Insper',
         'Teaching assistant: 5 subjects',
         'Co-founder of Insper AI',
         'Full scholarship at University of Chicago',
         'Brasil Project @ Harvard & MIT',
         'Accepted to Harvard College',
-        'Military kid',
       ],
     },
 
@@ -413,13 +411,13 @@ export const content = {
       title: 'The journey in images',
       subtitle: 'Each photo is a chapter: from a classroom in São Paulo to the campus in Cambridge.',
       photos: [
-        { src: '/photos/infancia.jpg', caption: 'In uniform, military kid' },
         { src: '/photos/insper.jpg', caption: 'Computer Engineering class at Insper, 6th semester' },
         { src: '/photos/insper-ai.jpg', caption: 'Insper AI: in-person event at QiTech' },
         { src: '/photos/estagio.jpg', caption: 'Segura.ai: part of the summer 2025 team' },
         { src: '/photos/chicago.jpg', caption: 'UChicago SISRM: first field trip' },
         { src: '/photos/premio.jpg', caption: 'Excellence Award in Computer Engineering, Insper scholarship community, 2025' },
         { src: '/photos/brasil-project.jpg', caption: 'Brasil Project: when Harvard stopped feeling unreachable' },
+        { src: '/photos/infancia.jpg', caption: 'In uniform, military kid' },
         { src: '/photos/harvard.jpg', caption: 'March 2026: Received the Acceptance Letter' },
       ],
     },
