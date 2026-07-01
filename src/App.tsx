@@ -14,6 +14,7 @@ import PhotoCollage from './components/PhotoCollage';
 import ImpactSection from './components/ImpactSection';
 import DonateSection from './components/DonateSection';
 import FAQSection from './components/FAQSection';
+import UpdatesSection from './components/UpdatesSection';
 import StickyDonate from './components/StickyDonate';
 import Footer from './components/Footer';
 function SiteContent() {
@@ -33,6 +34,7 @@ function SiteContent() {
         <ImpactSection />
         <FAQSection />
       </main>
+      <UpdatesSection />
       <Footer />
       <StickyDonate />
     </>

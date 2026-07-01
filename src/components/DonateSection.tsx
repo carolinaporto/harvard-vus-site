@@ -407,6 +407,21 @@ export default function DonateSection() {
               )}
             </TabContent>
           </Card>
+
+          <DirectPaymentNote>
+            <strong>
+              {lang === 'pt'
+                ? 'Quer pagar a tuition diretamente para Harvard?'
+                : 'Prefer to pay tuition directly to Harvard?'}
+            </strong>{' '}
+            {lang === 'pt'
+              ? 'Essa opção é viável e pode ter benefícios fiscais para você. Entre em contato e acertamos os detalhes.'
+              : "That's possible and may offer tax benefits for you. Reach out and we'll work out the details."}
+            {' '}
+            <DirectPaymentLink href="mailto:carolporto04@gmail.com">
+              carolporto04@gmail.com
+            </DirectPaymentLink>
+          </DirectPaymentNote>
         </motion.div>
       </Container>
     </Section>
@@ -894,4 +909,29 @@ const RealSign = styled.span<{ $lg?: boolean }>`
   line-height: 1;
   flex-shrink: 0;
   letter-spacing: -0.5px;
+`;
+
+const DirectPaymentLink = styled.a`
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.white};
+  }
+`;
+
+const DirectPaymentNote = styled.p`
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+
+  strong {
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 600;
+  }
 `;
