@@ -32,9 +32,9 @@ function SiteContent() {
         <PhotoCollage />
         <DonateSection />
         <ImpactSection />
+        <UpdatesSection />
         <FAQSection />
       </main>
-      <UpdatesSection />
       <Footer />
       <StickyDonate />
     </>
