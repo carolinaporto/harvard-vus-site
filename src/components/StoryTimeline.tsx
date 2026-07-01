@@ -50,6 +50,16 @@ export default function StoryTimeline() {
                   </YearBadge>
                   <CardTitle>{item.title}</CardTitle>
                   <CardDesc>{item.description}</CardDesc>
+                  {'link' in item && (
+                    <CardLink
+                      href={(item as { link: { text: string; href: string } }).link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      $highlight={isHighlight}
+                    >
+                      {(item as { link: { text: string; href: string } }).link.text} ↗
+                    </CardLink>
+                  )}
                 </MilestoneCard>
               </motion.div>
             );
@@ -187,4 +197,21 @@ const CardDesc = styled.p`
   line-height: 1.65;
   color: inherit;
   opacity: 0.82;
+`;
+
+const CardLink = styled.a<{ $highlight: boolean }>`
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: ${({ $highlight, theme }) =>
+    $highlight ? 'rgba(255,255,255,0.85)' : theme.colors.harvardCrimson};
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.75;
+  }
 `;

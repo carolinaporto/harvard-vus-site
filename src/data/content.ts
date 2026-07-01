@@ -23,7 +23,7 @@ export const content = {
       headline1: 'Harvard não é o começo da minha história.',
       headline2: 'É o próximo capítulo.',
       subtitle:
-        'Cresci mudando de cidade e recomeçando do zero tantas vezes que aprendi a ler qualquer ambiente novo rápido — e a enxergar o que falta nele. Hoje sou bolsista no Insper, fui aceita em Harvard e estou arrecadando recursos para tornar essa oportunidade real.',
+        'Cresci mudando de cidade e recomeçando do zero tantas vezes que aprendi a ler qualquer ambiente novo rápido, e a enxergar o que falta nele. Hoje sou bolsista no Insper com média 9,48/10, fui aceita em Harvard e estou arrecadando recursos para tornar essa oportunidade real.',
       cta1: 'Doe Agora',
       cta2: 'Minha Trajetória',
       cta3: 'Compartilhar',
@@ -74,7 +74,8 @@ export const content = {
           year: '2023',
           title: 'Insper: Engenharia da Computação',
           description:
-            'Foi no Insper que descobri que gosto de construir coisas, ensinar e criar comunidades. Ao longo da graduação, também recebi o Prêmio de Excelência Acadêmica.',
+            'Foi no Insper que descobri que gosto de construir coisas, ensinar e criar comunidades. Tenho média 9,48/10 e recebi o Prêmio de Excelência Acadêmica na Engenharia da Computação.',
+          link: { text: 'Ver histórico acadêmico (PDF)', href: '/EN-Transcript_MAR26_InsperSigned.pdf' },
           phase: 'insper' as const,
         },
         {
@@ -131,11 +132,12 @@ export const content = {
       pixTitle: 'PIX',
       pixSubtitle: 'Doação via PIX (Brasil)',
       pixKey: 'a3988327-e1a8-49a2-bafe-461bc3bfb345',
-      pixAmountsNote: 'Não existe valor pequeno demais. Para dar uma referência:',
+      pixAmountsNote: 'Para ter uma ideia do impacto em Cambridge:',
       pixAmounts: [
-        { amount: 'R$ 100', label: 'ajuda com alimentação e despesas do dia a dia' },
-        { amount: 'R$ 500', label: 'ajuda a cobrir uma semana de custos básicos' },
-        { amount: 'R$ 1.000', label: 'ajuda a reduzir uma parte importante das despesas mensais' },
+        { amount: 'R$ 3.000', label: 'cobre 1 mês de seguro saúde obrigatório para estudantes internacionais' },
+        { amount: 'R$ 5.000', label: 'cobre 1 mês de alimentação e seguro saúde' },
+        { amount: 'R$ 10.000', label: 'cobre 1 mês inteiro de moradia' },
+        { amount: 'R$ 20.000', label: 'cobre 1 mês completo de vida: moradia, alimentação e saúde' },
       ],
       intlTitle: 'Transferência Internacional',
       intlSubtitle: 'Para doadores fora do Brasil',
@@ -179,6 +181,12 @@ export const content = {
           answer:
             'Sim. O resumo acima mostra os principais custos, mas também disponibilizei uma versão completa do orçamento previsto em PDF para quem quiser analisar os detalhes.',
           link: { text: 'Abrir orçamento completo (PDF)', href: '/budget-harvard-vus.pdf' },
+        },
+        {
+          question: 'Posso ver seu histórico acadêmico?',
+          answer:
+            'Sim. O histórico oficial emitido pelo Insper, com todas as disciplinas e notas, está disponível abaixo. Minha média geral é 9,48/10.',
+          link: { text: 'Abrir histórico acadêmico (PDF)', href: '/EN-Transcript_MAR26_InsperSigned.pdf' },
         },
       ],
     },
@@ -235,7 +243,7 @@ export const content = {
       headline1: 'Harvard is not the beginning of my story.',
       headline2: 'It is the next chapter.',
       subtitle:
-        'I grew up moving between cities and starting over so many times that I learned to read any new environment quickly — and to see what is missing in it. Today I am a scholarship student at Insper, accepted to Harvard, and raising funds to make this opportunity real.',
+        'I grew up moving between cities and starting over so many times that I learned to read any new environment quickly, and to see what is missing in it. Today I am a scholarship student at Insper with a 9.48/10 GPA, accepted to Harvard, and raising funds to make this opportunity real.',
       cta1: 'Donate Now',
       cta2: 'My Journey',
       cta3: 'Share',
@@ -285,7 +293,8 @@ export const content = {
           year: '2023',
           title: 'Insper: Computer Engineering',
           description:
-            'At Insper, I discovered that I love building things, teaching, and creating communities. During my undergraduate studies, I also received the Academic Excellence Award.',
+            'At Insper, I discovered that I love building things, teaching, and creating communities. I hold a 9.48/10 GPA and received the Academic Excellence Award in Computer Engineering.',
+          link: { text: 'View academic transcript (PDF)', href: '/EN-Transcript_MAR26_InsperSigned.pdf' },
           phase: 'insper' as const,
         },
         {
@@ -342,11 +351,12 @@ export const content = {
       pixTitle: 'PIX',
       pixSubtitle: 'Donation via PIX (Brazil)',
       pixKey: 'a3988327-e1a8-49a2-bafe-461bc3bfb345',
-      pixAmountsNote: 'No amount is too small. As a reference:',
+      pixAmountsNote: 'Here\'s what each amount covers in Cambridge:',
       pixAmounts: [
-        { amount: 'R$ 100', label: 'helps with food and daily expenses' },
-        { amount: 'R$ 500', label: 'helps cover one week of basic costs' },
-        { amount: 'R$ 1,000', label: 'helps reduce a meaningful part of monthly expenses' },
+        { amount: 'R$ 3,000', label: 'covers 1 month of mandatory health insurance for international students' },
+        { amount: 'R$ 5,000', label: 'covers 1 month of food and health insurance' },
+        { amount: 'R$ 10,000', label: 'covers a full month of housing' },
+        { amount: 'R$ 20,000', label: 'covers a full month of living costs: housing, food, and health' },
       ],
       intlTitle: 'International Transfer',
       intlSubtitle: 'For donors outside Brazil',
@@ -390,6 +400,12 @@ export const content = {
           answer:
             'Yes. The summary above shows the main costs, but I also made a full PDF version of the projected budget available for anyone who wants to review the details.',
           link: { text: 'Open full budget (PDF)', href: '/budget-harvard-vus.pdf' },
+        },
+        {
+          question: 'Can I see your academic transcript?',
+          answer:
+            'Yes. My official transcript issued by Insper, with all courses and grades, is available below. My overall GPA is 9.48/10.',
+          link: { text: 'Open academic transcript (PDF)', href: '/EN-Transcript_MAR26_InsperSigned.pdf' },
         },
       ],
     },
