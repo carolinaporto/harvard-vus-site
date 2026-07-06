@@ -2,8 +2,8 @@ import type { Lang } from '../context/LanguageContext';
 
 // ─── Atualizar aqui quando o valor arrecadado mudar ───────────────────────────
 const lastUpdated = {
-  pt: '30 de junho de 2026',
-  en: 'June 30, 2026',
+  pt: '6 de Julho de 2026',
+  en: 'July 6, 2026',
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -134,10 +134,11 @@ export const content = {
       pixKey: 'a3988327-e1a8-49a2-bafe-461bc3bfb345',
       pixAmountsNote: 'Para ter uma ideia do impacto em Cambridge:',
       pixAmounts: [
+        { amount: 'R$ 100', label: 'cobre 1 dia de alimentação em Cambridge' },
+        { amount: 'R$ 500', label: 'cobre quase 1 semana de alimentação em Cambridge' },
         { amount: 'R$ 3.000', label: 'cobre 1 mês de seguro saúde obrigatório para estudantes internacionais' },
         { amount: 'R$ 5.000', label: 'cobre 1 mês de alimentação e seguro saúde' },
         { amount: 'R$ 10.000', label: 'cobre 1 mês inteiro de moradia' },
-        { amount: 'R$ 20.000', label: 'cobre 1 mês completo de vida: moradia, alimentação e saúde' },
       ],
       intlTitle: 'Transferência Internacional',
       intlSubtitle: 'Para doadores fora do Brasil',
@@ -353,10 +354,11 @@ export const content = {
       pixKey: 'a3988327-e1a8-49a2-bafe-461bc3bfb345',
       pixAmountsNote: 'Here\'s what each amount covers in Cambridge:',
       pixAmounts: [
+        { amount: 'R$ 100', label: 'covers 1 day of food in Cambridge' },
+        { amount: 'R$ 500', label: 'covers almost 1 week of food in Cambridge' },
         { amount: 'R$ 3,000', label: 'covers 1 month of mandatory health insurance for international students' },
         { amount: 'R$ 5,000', label: 'covers 1 month of food and health insurance' },
         { amount: 'R$ 10,000', label: 'covers a full month of housing' },
-        { amount: 'R$ 20,000', label: 'covers a full month of living costs: housing, food, and health' },
       ],
       intlTitle: 'International Transfer',
       intlSubtitle: 'For donors outside Brazil',
