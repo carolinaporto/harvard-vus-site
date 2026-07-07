@@ -1,5 +1,10 @@
 import type { Lang } from '../context/LanguageContext';
 
+
+// ─── Atualizar contagem total de doações ──────────────────────────────────────
+export const donationCount = 36;
+// ─────────────────────────────────────────────────────────────────────────────
+
 // ─── Atualizar aqui quando o valor arrecadado mudar ───────────────────────────
 const lastUpdated = {
   pt: '6 de Julho de 2026',
@@ -190,6 +195,12 @@ export const content = {
           link: { text: 'Abrir histórico acadêmico (PDF)', href: '/EN-Transcript_MAR26_InsperSigned.pdf' },
         },
       ],
+    },
+
+    donors: {
+      tag: 'Apoiadores',
+      title: 'Quem está tornando isso real',
+      subtitle: 'Em ordem de contribuição. Obrigada de coração.',
     },
 
     ticker: {
@@ -410,6 +421,12 @@ export const content = {
           link: { text: 'Open academic transcript (PDF)', href: '/EN-Transcript_MAR26_InsperSigned.pdf' },
         },
       ],
+    },
+
+    donors: {
+      tag: 'Supporters',
+      title: 'The people making this real',
+      subtitle: 'In order of contribution. Thank you from the bottom of my heart.',
     },
 
     ticker: {

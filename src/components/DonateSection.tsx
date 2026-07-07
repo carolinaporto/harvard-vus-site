@@ -13,6 +13,7 @@ import {
 } from '@phosphor-icons/react';
 import { useLanguage } from '../context/LanguageContext';
 import { content } from '../data/content';
+import { supabase } from '../lib/supabase';
 
 type Tab = 'pix' | 'intl' | 'share';
 
@@ -65,6 +66,28 @@ export default function DonateSection() {
   const [copied, setCopied] = useState(false);
   const [copiedInstagram, setCopiedInstagram] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  const [rankingName, setRankingName] = useState('');
+  const [rankingAmount, setRankingAmount] = useState('');
+  const [rankingCurrency, setRankingCurrency] = useState<'R$' | 'US$'>('R$');
+  const [rankingMessage, setRankingMessage] = useState('');
+  const [rankingStatus, setRankingStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleRankingSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!supabase) return;
+    setRankingStatus('loading');
+    const { error } = await supabase.from('donors').insert({
+      name: rankingName.trim(),
+      amount: parseFloat(rankingAmount.replace(',', '.')),
+      currency: rankingCurrency,
+      message: rankingMessage.trim() || null,
+    });
+    if (error) { setRankingStatus('error'); return; }
+    setRankingStatus('success');
+    setRankingName('');
+    setRankingAmount('');
+    setRankingMessage('');
+  };
 
   const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
 
@@ -126,6 +149,72 @@ export default function DonateSection() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.65, delay: 0.1 }}
         >
+          <RankingCallout>
+            <RankingCalloutText>
+              <RankingCalloutTitle>
+                {lang === 'pt' ? '🏆 Quer aparecer no ranking de apoiadores?' : '🏆 Want to appear on the supporters ranking?'}
+              </RankingCalloutTitle>
+              <RankingCalloutSub>
+                {lang === 'pt'
+                  ? 'Após sua doação, preencha abaixo. Seu nome aparece no ranking automaticamente.'
+                  : 'After donating, fill in below. Your name will appear on the ranking automatically.'}
+              </RankingCalloutSub>
+            </RankingCalloutText>
+            {rankingStatus === 'success' ? (
+              <RankingSuccess>
+                {lang === 'pt'
+                  ? '🎉 Pronto! Seu nome vai aparecer no ranking em instantes.'
+                  : '🎉 Done! Your name will appear on the ranking shortly.'}
+              </RankingSuccess>
+            ) : (
+              <RankingForm onSubmit={handleRankingSubmit}>
+                <RankingRow>
+                  <RankingInput
+                    type="text"
+                    placeholder={lang === 'pt' ? 'Apelido ou nome' : 'Nickname or name'}
+                    value={rankingName}
+                    onChange={e => setRankingName(e.target.value)}
+                    required
+                  />
+                  <RankingInput
+                    type="text"
+                    inputMode="numeric"
+                    placeholder={lang === 'pt' ? 'Valor doado' : 'Amount donated'}
+                    value={rankingAmount}
+                    onChange={e => setRankingAmount(e.target.value)}
+                    required
+                    style={{ maxWidth: '120px' }}
+                  />
+                  <RankingSelect
+                    value={rankingCurrency}
+                    onChange={e => setRankingCurrency(e.target.value as 'R$' | 'US$')}
+                  >
+                    <option value="R$">R$</option>
+                    <option value="US$">US$</option>
+                  </RankingSelect>
+                </RankingRow>
+                <RankingRow>
+                  <RankingInput
+                    type="text"
+                    placeholder={lang === 'pt' ? 'Mensagem opcional' : 'Optional message'}
+                    value={rankingMessage}
+                    onChange={e => setRankingMessage(e.target.value)}
+                  />
+                  <RankingSubmit type="submit" disabled={rankingStatus === 'loading'}>
+                    {rankingStatus === 'loading'
+                      ? '...'
+                      : lang === 'pt' ? 'Cadastrar' : 'Register'}
+                  </RankingSubmit>
+                </RankingRow>
+                {rankingStatus === 'error' && (
+                  <RankingError>
+                    {lang === 'pt' ? 'Algo deu errado. Tente novamente.' : 'Something went wrong. Please try again.'}
+                  </RankingError>
+                )}
+              </RankingForm>
+            )}
+          </RankingCallout>
+
           <Card>
             <Tabs>
               {tabs.map(tab => (
@@ -919,6 +1008,124 @@ const DirectPaymentLink = styled.a`
 
   &:hover {
     color: ${({ theme }) => theme.colors.white};
+  }
+`;
+
+const RankingCallout = styled.div`
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  padding: 24px 28px;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @media (max-width: ${({ theme }) => theme.bp.tablet}) {
+    padding: 20px;
+  }
+`;
+
+const RankingCalloutText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+const RankingCalloutTitle = styled.p`
+  font-size: 15px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+const RankingCalloutSub = styled.p`
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.5;
+`;
+
+const RankingForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const RankingRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+`;
+
+const RankingSuccess = styled.p`
+  font-size: 14px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.white};
+  padding: 10px 0;
+`;
+
+const RankingError = styled.p`
+  font-size: 13px;
+  color: rgba(255, 200, 200, 0.9);
+`;
+
+
+const RankingInput = styled.input`
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.white};
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  &:focus {
+    border-color: rgba(255, 255, 255, 0.55);
+  }
+`;
+
+const RankingSelect = styled.select`
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.white};
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+
+  option {
+    background: ${({ theme }) => theme.colors.harvardCrimson};
+    color: ${({ theme }) => theme.colors.white};
+  }
+`;
+
+const RankingSubmit = styled.button`
+  padding: 10px 20px;
+  background: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.harvardCrimson};
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
   }
 `;
 
