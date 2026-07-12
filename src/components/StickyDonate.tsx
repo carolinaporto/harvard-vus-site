@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, ShareNetwork } from '@phosphor-icons/react';
 import { useLanguage } from '../context/LanguageContext';
+import { useModal } from '../context/ModalContext';
 import { content } from '../data/content';
 
 export default function StickyDonate() {
   const { lang } = useLanguage();
+  const { openModal } = useModal();
   const t = content[lang];
   const [visible, setVisible] = useState(false);
 
@@ -33,7 +35,7 @@ export default function StickyDonate() {
           exit={{ y: 80, opacity: 0 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
         >
-          <DonateBtn href="#donate">
+          <DonateBtn onClick={openModal}>
             <Heart size={18} weight="fill" />
             {lang === 'pt' ? 'Doe Agora' : 'Donate Now'}
           </DonateBtn>
@@ -72,7 +74,7 @@ const Bar = styled.div`
   }
 `;
 
-const DonateBtn = styled.a`
+const DonateBtn = styled.button`
   flex: 2;
   display: flex;
   align-items: center;

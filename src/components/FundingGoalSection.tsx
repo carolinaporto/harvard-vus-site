@@ -5,6 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { content, donationCount } from '../data/content';
 import { useProgress } from '../hooks/useProgress';
 import { useDonors } from '../hooks/useDonors';
+import { useModal } from '../context/ModalContext';
 import { useRef } from 'react';
 import type { ReactNode } from 'react';
 
@@ -33,6 +34,7 @@ export default function FundingGoalSection() {
   const progress = useProgress();
 
   const { donors, top3, chips, overflow } = useDonors();
+  const { openModal } = useModal();
   const withMessages = donors.filter(d => d.message);
   const showRanking = donors.length > 0;
   const trackRef = useRef<HTMLDivElement>(null);
@@ -194,7 +196,7 @@ export default function FundingGoalSection() {
                   ? 'Quer fazer parte do ranking?'
                   : 'Want to appear on this list?'}
                 {' '}
-                <CtaLink href="#donate">
+                <CtaLink as="button" onClick={openModal}>
                   {lang === 'pt' ? 'Doe agora →' : 'Donate now →'}
                 </CtaLink>
               </RankingCta>
