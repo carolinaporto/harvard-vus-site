@@ -244,7 +244,7 @@ export default function DonationModal() {
                       <AmountInput
                         type="text"
                         inputMode="decimal"
-                        placeholder="0"
+                        placeholder="200"
                         value={amount}
                         onChange={e => setAmount(e.target.value)}
                       />
@@ -297,7 +297,7 @@ export default function DonationModal() {
                       <AmountInput
                         type="text"
                         inputMode="decimal"
-                        placeholder="0"
+                        placeholder="200"
                         value={amount}
                         onChange={e => setAmount(e.target.value)}
                       />
@@ -373,7 +373,7 @@ export default function DonationModal() {
                       <AmountInput
                         type="text"
                         inputMode="decimal"
-                        placeholder="0"
+                        placeholder="200"
                         value={amount}
                         onChange={e => setAmount(e.target.value)}
                       />
