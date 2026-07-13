@@ -12,6 +12,7 @@ export function useDonors() {
     const { data } = await supabase
       .from('donors')
       .select('*')
+      .neq('show_in_ranking', false)
       .order('amount', { ascending: false });
     setDonors(data ?? []);
     setLoading(false);

@@ -61,17 +61,27 @@ export default function DonationModal() {
   const [method, setMethod] = useState<Method>('pix');
   const [intlSub, setIntlSub] = useState<IntlSub>('wise');
   const [name, setName] = useState('');
+  const [anonymous, setAnonymous] = useState(false);
   const [amount, setAmount] = useState('');
   const [currency, setCurrency] = useState<'R$' | 'US$'>('R$');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [copiedPix, setCopiedPix] = useState(false);
 
+  const anonLabel = lang === 'pt' ? 'Anônimo' : 'Anonymous';
+
+  const handleAnonymous = (checked: boolean) => {
+    setAnonymous(checked);
+    if (checked) setName(anonLabel);
+    else setName('');
+  };
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       setStatus('idle');
       setName('');
+      setAnonymous(false);
       setAmount('');
       setMessage('');
       setMethod('pix');
@@ -156,7 +166,9 @@ export default function DonationModal() {
             <SuccessBox>
               <SuccessIcon>🎉</SuccessIcon>
               <SuccessTitle>
-                {lang === 'pt' ? 'Obrigada, ' : 'Thank you, '}{name}!
+                {anonymous
+                  ? (lang === 'pt' ? 'Obrigada!' : 'Thank you!')
+                  : (lang === 'pt' ? `Obrigada, ${name}!` : `Thank you, ${name}!`)}
               </SuccessTitle>
               <SuccessText>
                 {lang === 'pt'
@@ -171,14 +183,29 @@ export default function DonationModal() {
             <>
               {/* Nome */}
               <FieldGroup>
-                <InputLabel>
-                  {lang === 'pt' ? 'Seu nome ou apelido' : 'Your name or nickname'}
-                </InputLabel>
+                <NameLabelRow>
+                  <InputLabel>
+                    {lang === 'pt' ? 'Como você quer se identificar?' : 'How do you want to be identified?'}
+                  </InputLabel>
+                  <AnonCheck>
+                    <input
+                      type="checkbox"
+                      id="anon-check"
+                      checked={anonymous}
+                      onChange={e => handleAnonymous(e.target.checked)}
+                    />
+                    <label htmlFor="anon-check">
+                      {lang === 'pt' ? 'Anônimo' : 'Anonymous'}
+                    </label>
+                  </AnonCheck>
+                </NameLabelRow>
                 <ModalInput
                   type="text"
-                  placeholder={lang === 'pt' ? 'Como quer aparecer no ranking' : 'How you want to appear in the ranking'}
+                  placeholder={lang === 'pt' ? 'Seu nome ou apelido' : 'Your name or nickname'}
                   value={name}
+                  disabled={anonymous}
                   onChange={e => setName(e.target.value)}
+                  $dimmed={anonymous}
                 />
               </FieldGroup>
 
@@ -463,19 +490,50 @@ const InputLabel = styled.label`
   color: ${({ theme }) => theme.colors.darkText};
 `;
 
-const ModalInput = styled.input`
+const ModalInput = styled.input<{ $dimmed?: boolean }>`
   width: 100%;
   padding: 10px 14px;
   border: 1.5px solid ${({ theme }) => theme.colors.border};
   border-radius: 10px;
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.darkText};
+  color: ${({ $dimmed, theme }) => $dimmed ? theme.colors.mutedText : theme.colors.darkText};
+  background: ${({ $dimmed, theme }) => $dimmed ? theme.colors.softGray : 'transparent'};
   outline: none;
   transition: border-color 0.2s ease;
   box-sizing: border-box;
+  cursor: ${({ $dimmed }) => $dimmed ? 'not-allowed' : 'text'};
 
   &::placeholder { color: ${({ theme }) => theme.colors.mutedText}; }
-  &:focus { border-color: ${({ theme }) => theme.colors.harvardCrimson}; }
+  &:focus:not(:disabled) { border-color: ${({ theme }) => theme.colors.harvardCrimson}; }
+`;
+
+const NameLabelRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+`;
+
+const AnonCheck = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+
+  input[type='checkbox'] {
+    width: 15px;
+    height: 15px;
+    accent-color: ${({ theme }) => theme.colors.harvardCrimson};
+    cursor: pointer;
+  }
+
+  label {
+    font-size: 12px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.mutedText};
+    cursor: pointer;
+    white-space: nowrap;
+  }
 `;
 
 const MethodToggle = styled.div`
