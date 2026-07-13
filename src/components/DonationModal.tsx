@@ -1,25 +1,24 @@
 import { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { Copy, Check, X } from '@phosphor-icons/react';
+import { Copy, Check, X, ArrowRight } from '@phosphor-icons/react';
 import { useLanguage } from '../context/LanguageContext';
 import { useModal } from '../context/ModalContext';
 import { content } from '../data/content';
 import { supabase } from '../lib/supabase';
 
-type Method = 'pix' | 'intl' | 'card';
-type IntlSub = 'wise' | 'ach' | 'swift';
+type CurrencyMode = 'brl' | 'intl';
+type BrlMethod = 'pix' | 'card';
+type IntlMethod = 'ach' | 'wise' | 'card';
 type Status = 'idle' | 'loading' | 'success' | 'error';
+
+const STRIPE_BRL_URL = 'https://donate.stripe.com/fZu9AN3jc6Iv7rSacJcs800';
+const GOFUNDME_URL = 'https://www.gofundme.com/f/carol-porto-harvard/donate?source=btn_donate';
 
 const ACCOUNT_HOLDER = 'Maria Carolina Porto';
 const US_BANKING = {
   routingNumber: '084009519',
   accountNumber: '162284390353114',
   accountType: 'Deposit',
-  bank: 'Wise US Inc, 108 W 13th St, Wilmington, DE 19801, United States',
-};
-const SWIFT_BANKING = {
-  swiftBic: 'TRWIUS35XXX',
-  accountNumber: '162284390353114',
   bank: 'Wise US Inc, 108 W 13th St, Wilmington, DE 19801, United States',
 };
 
@@ -58,35 +57,37 @@ export default function DonationModal() {
   const { lang } = useLanguage();
   const t = content[lang].donate;
 
-  const [method, setMethod] = useState<Method>('pix');
-  const [intlSub, setIntlSub] = useState<IntlSub>('wise');
+  const [currencyMode, setCurrencyMode] = useState<CurrencyMode>('brl');
+  const [brlMethod, setBrlMethod] = useState<BrlMethod>('pix');
+  const [intlMethod, setIntlMethod] = useState<IntlMethod>('card');
   const [name, setName] = useState('');
   const [anonymous, setAnonymous] = useState(false);
   const [amount, setAmount] = useState('');
-  const [currency, setCurrency] = useState<'R$' | 'US$'>('R$');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [copiedPix, setCopiedPix] = useState(false);
+  const [showQR, setShowQR] = useState(false);
 
   const anonLabel = lang === 'pt' ? 'Anônimo' : 'Anonymous';
 
   const handleAnonymous = (checked: boolean) => {
     setAnonymous(checked);
-    if (checked) setName(anonLabel);
-    else setName('');
+    setName(checked ? anonLabel : '');
   };
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      setStatus('idle');
+      setCurrencyMode('brl');
+      setBrlMethod('pix');
+      setIntlMethod('card');
       setName('');
       setAnonymous(false);
       setAmount('');
       setMessage('');
-      setMethod('pix');
-      setCurrency('R$');
-      setIntlSub('wise');
+      setStatus('idle');
+      setCopiedPix(false);
+      setShowQR(false);
     } else {
       document.body.style.overflow = '';
     }
@@ -105,49 +106,19 @@ export default function DonationModal() {
     });
   };
 
-  const handleConfirm = async () => {
+  const handleConfirm = async (donorCurrency: 'R$' | 'USD') => {
     if (!canSubmit || !supabase) return;
     setStatus('loading');
     const { error } = await supabase.from('donors').insert({
       name: name.trim(),
       amount: parsedAmount,
-      currency: method === 'pix' ? 'R$' : currency,
+      currency: donorCurrency,
       message: message.trim() || null,
     });
     if (error) { setStatus('error'); return; }
     setStatus('success');
   };
 
-  const handleCard = async () => {
-    if (!canSubmit) return;
-    setStatus('loading');
-    try {
-      const res = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: name.trim(),
-          amount: parsedAmount,
-          currency,
-          message: message.trim() || undefined,
-        }),
-      });
-      const data = await res.json() as { url?: string; error?: string };
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        setStatus('error');
-      }
-    } catch {
-      setStatus('error');
-    }
-  };
-
-  const methodLabels: Record<Method, string> = {
-    pix: 'PIX',
-    intl: lang === 'pt' ? 'Internacional' : 'International',
-    card: lang === 'pt' ? 'Cartão' : 'Card',
-  };
 
   return (
     <Backdrop onClick={closeModal}>
@@ -181,7 +152,7 @@ export default function DonationModal() {
             </SuccessBox>
           ) : (
             <>
-              {/* Nome */}
+              {/* ── Nome e mensagem ── */}
               <FieldGroup>
                 <NameLabelRow>
                   <InputLabel>
@@ -209,7 +180,6 @@ export default function DonationModal() {
                 />
               </FieldGroup>
 
-              {/* Mensagem — antes de escolher o método */}
               <FieldGroup>
                 <InputLabel>{lang === 'pt' ? 'Mensagem (opcional)' : 'Message (optional)'}</InputLabel>
                 <ModalInput
@@ -220,177 +190,203 @@ export default function DonationModal() {
                 />
               </FieldGroup>
 
-              {/* Método de pagamento */}
+              {/* ── Seletor de moeda ── */}
               <FieldGroup>
                 <InputLabel>
-                  {lang === 'pt' ? 'Como você quer pagar?' : 'How do you want to pay?'}
+                  {lang === 'pt' ? 'Moeda' : 'Currency'}
                 </InputLabel>
                 <MethodToggle>
-                  {(['pix', 'intl', 'card'] as Method[]).map(m => (
-                    <MethodBtn key={m} $active={method === m} onClick={() => setMethod(m)}>
-                      {methodLabels[m]}
-                    </MethodBtn>
-                  ))}
+                  <MethodBtn $active={currencyMode === 'brl'} onClick={() => setCurrencyMode('brl')}>
+                    🇧🇷 Reais (R$)
+                  </MethodBtn>
+                  <MethodBtn $active={currencyMode === 'intl'} onClick={() => setCurrencyMode('intl')}>
+                    🇺🇸 Dólar (USD)
+                  </MethodBtn>
                 </MethodToggle>
               </FieldGroup>
 
-              {/* ── PIX ── */}
-              {method === 'pix' && (
+              {/* ── BRL ── */}
+              {currencyMode === 'brl' && (
                 <>
-                  <FieldGroup>
-                    <InputLabel>{lang === 'pt' ? 'Valor' : 'Amount'}</InputLabel>
-                    <AmountRow>
-                      <CurrencyTag>R$</CurrencyTag>
-                      <AmountInput
-                        type="text"
-                        inputMode="decimal"
-                        placeholder="200"
-                        value={amount}
-                        onChange={e => setAmount(e.target.value)}
-                      />
-                    </AmountRow>
-                  </FieldGroup>
+                  <SubToggle>
+                    <SubBtn $active={brlMethod === 'pix'} onClick={() => setBrlMethod('pix')}>PIX</SubBtn>
+                    <SubBtn $active={brlMethod === 'card'} onClick={() => setBrlMethod('card')}>
+                      {lang === 'pt' ? 'Cartão' : 'Card'}
+                    </SubBtn>
+                  </SubToggle>
 
-                  <PixBox>
-                    <PixLabel>
-                      {lang === 'pt' ? 'Chave PIX — Chave aleatória' : 'PIX Key — Random key'}
-                    </PixLabel>
-                    <PixKeyRow>
-                      <PixKeyValue>{t.pixKey}</PixKeyValue>
-                      <CopyPixBtn onClick={copyPix} $copied={copiedPix}>
-                        {copiedPix
-                          ? <><Check size={14} weight="bold" /> {lang === 'pt' ? 'Copiado!' : 'Copied!'}</>
-                          : <><Copy size={14} /> {lang === 'pt' ? 'Copiar' : 'Copy'}</>}
-                      </CopyPixBtn>
-                    </PixKeyRow>
-                    <HolderNote>
-                      {lang === 'pt' ? 'Titular' : 'Account holder'}: <strong>{ACCOUNT_HOLDER}</strong>
-                    </HolderNote>
-                  </PixBox>
+                  {brlMethod === 'pix' && (
+                    <>
+                      <FieldGroup>
+                        <InputLabel>{lang === 'pt' ? 'Valor' : 'Amount'}</InputLabel>
+                        <AmountRow>
+                          <CurrencyTag>R$</CurrencyTag>
+                          <AmountInput
+                            type="text"
+                            inputMode="decimal"
+                            placeholder="200"
+                            value={amount}
+                            onChange={e => setAmount(e.target.value)}
+                          />
+                        </AmountRow>
+                      </FieldGroup>
 
-                  <QRBox>
-                    <QRImage src="/qrcode-nacional.png" alt="QR Code PIX" />
-                    <QRCaption>
-                      {lang === 'pt' ? 'Escaneie pelo app do seu banco' : 'Scan with your bank app'}
-                    </QRCaption>
-                  </QRBox>
+                      <PixBox>
+                        <PixLabel>
+                          {lang === 'pt' ? 'Chave PIX — Chave aleatória' : 'PIX Key — Random key'}
+                        </PixLabel>
+                        <PixKeyRow>
+                          <PixKeyValue>{t.pixKey}</PixKeyValue>
+                          <PixIconCopyBtn onClick={copyPix} $copied={copiedPix} title={lang === 'pt' ? 'Copiar chave' : 'Copy key'}>
+                            {copiedPix ? <Check size={13} weight="bold" /> : <Copy size={13} />}
+                          </PixIconCopyBtn>
+                          <QRToggleBtn onClick={() => setShowQR(v => !v)}>
+                            {showQR
+                              ? (lang === 'pt' ? 'Esconder QR' : 'Hide QR')
+                              : (lang === 'pt' ? 'Ver QR Code' : 'Show QR')}
+                          </QRToggleBtn>
+                        </PixKeyRow>
+                        <HolderNote>
+                          {lang === 'pt' ? 'Titular' : 'Account holder'}: <strong>{ACCOUNT_HOLDER}</strong>
+                        </HolderNote>
+                      </PixBox>
 
-                  {status === 'error' && <ErrorText>{lang === 'pt' ? 'Algo deu errado. Tente novamente.' : 'Something went wrong. Try again.'}</ErrorText>}
+                      {showQR && (
+                        <QRBox>
+                          <QRImage src="/qrcode-nacional.png" alt="QR Code PIX" />
+                          <QRCaption>
+                            {lang === 'pt' ? 'Escaneie pelo app do seu banco' : 'Scan with your bank app'}
+                          </QRCaption>
+                        </QRBox>
+                      )}
 
-                  <ActionBtn onClick={handleConfirm} disabled={!canSubmit || status === 'loading'}>
-                    {status === 'loading' ? '...' : lang === 'pt' ? 'Enviei o PIX ✓' : 'I sent the PIX ✓'}
-                  </ActionBtn>
+                      {status === 'error' && <ErrorText>{lang === 'pt' ? 'Algo deu errado. Tente novamente.' : 'Something went wrong. Try again.'}</ErrorText>}
+
+                      <ActionBtn onClick={() => handleConfirm('R$')} disabled={!canSubmit || status === 'loading'}>
+                        {status === 'loading' ? '...' : lang === 'pt' ? 'Enviei o PIX ✓' : 'I sent the PIX ✓'}
+                      </ActionBtn>
+                    </>
+                  )}
+
+                  {brlMethod === 'card' && (
+                    <>
+                      <CardNote>
+                        {lang === 'pt'
+                          ? 'Você será redirecionado para a página segura do Stripe. Aceita cartão de crédito e débito.'
+                          : "You'll be redirected to Stripe's secure page. Accepts credit and debit cards."}
+                      </CardNote>
+                      <RedirectBtn href={STRIPE_BRL_URL} target="_blank" rel="noopener noreferrer">
+                        {lang === 'pt' ? 'Pagar via Stripe' : 'Pay via Stripe'}
+                        <ArrowRight size={16} weight="bold" />
+                      </RedirectBtn>
+                    </>
+                  )}
                 </>
               )}
 
               {/* ── INTERNACIONAL ── */}
-              {method === 'intl' && (
+              {currencyMode === 'intl' && (
                 <>
-                  <FieldGroup>
-                    <InputLabel>{lang === 'pt' ? 'Valor' : 'Amount'}</InputLabel>
-                    <AmountRow>
-                      <CurrencyToggle>
-                        {(['R$', 'US$'] as const).map(c => (
-                          <CurrencyBtn key={c} $active={currency === c} onClick={() => setCurrency(c)}>{c}</CurrencyBtn>
-                        ))}
-                      </CurrencyToggle>
-                      <AmountInput
-                        type="text"
-                        inputMode="decimal"
-                        placeholder="200"
-                        value={amount}
-                        onChange={e => setAmount(e.target.value)}
-                      />
-                    </AmountRow>
-                  </FieldGroup>
+                  <SubToggle>
+                    <SubBtn $active={intlMethod === 'card'} onClick={() => setIntlMethod('card')}>Card</SubBtn>
+                    <SubBtn $active={intlMethod === 'ach'} onClick={() => setIntlMethod('ach')}>
+                      ACH <span>{lang === 'pt' ? '(EUA)' : '(US)'}</span>
+                    </SubBtn>
+                    <SubBtn $active={intlMethod === 'wise'} onClick={() => setIntlMethod('wise')}>Wise</SubBtn>
+                  </SubToggle>
 
-                  {/* Sub-método */}
-                  <IntlSubToggle>
-                    <IntlSubBtn $active={intlSub === 'wise'} onClick={() => setIntlSub('wise')}>
-                      Wise
-                    </IntlSubBtn>
-                    <IntlSubBtn $active={intlSub === 'ach'} onClick={() => setIntlSub('ach')}>
-                      ACH {lang === 'pt' ? '(EUA)' : '(US)'}
-                    </IntlSubBtn>
-                    <IntlSubBtn $active={intlSub === 'swift'} onClick={() => setIntlSub('swift')}>
-                      SWIFT
-                    </IntlSubBtn>
-                  </IntlSubToggle>
+                  {intlMethod === 'ach' && (
+                    <>
+                      <FieldGroup>
+                        <InputLabel>{lang === 'pt' ? 'Valor' : 'Amount'}</InputLabel>
+                        <AmountRow>
+                          <CurrencyTag>USD</CurrencyTag>
+                          <AmountInput
+                            type="text"
+                            inputMode="decimal"
+                            placeholder="200"
+                            value={amount}
+                            onChange={e => setAmount(e.target.value)}
+                          />
+                        </AmountRow>
+                      </FieldGroup>
 
-                  {intlSub === 'wise' && (
-                    <QRBox>
-                      <QRImage src="/qrcode-internacional.png" alt="Wise QR Code" />
-                      <QRCaption>
+                      <TransferCard>
+                        <TransferCardTitle>🇺🇸 ACH / Wire {lang === 'pt' ? 'doméstico' : 'domestic'}</TransferCardTitle>
+                        <CopyField label="Routing Number" value={US_BANKING.routingNumber} />
+                        <CopyField label="Account Number" value={US_BANKING.accountNumber} />
+                        <StaticField label={lang === 'pt' ? 'Tipo de conta' : 'Account type'} value={US_BANKING.accountType} />
+                        <StaticField label={lang === 'pt' ? 'Banco' : 'Bank'} value={US_BANKING.bank} />
+                      </TransferCard>
+
+                      <HolderNote>
+                        {lang === 'pt' ? 'Titular' : 'Account holder'}: <strong>{ACCOUNT_HOLDER}</strong>
+                      </HolderNote>
+
+                      {status === 'error' && <ErrorText>{lang === 'pt' ? 'Algo deu errado. Tente novamente.' : 'Something went wrong. Try again.'}</ErrorText>}
+
+                      <ActionBtn onClick={() => handleConfirm('USD')} disabled={!canSubmit || status === 'loading'}>
+                        {status === 'loading' ? '...' : lang === 'pt' ? 'Já enviei a transferência ✓' : 'I already sent the transfer ✓'}
+                      </ActionBtn>
+                    </>
+                  )}
+
+                  {intlMethod === 'wise' && (
+                    <>
+                      <QRBox>
+                        <QRImage src="/qrcode-internacional.png" alt="Wise QR Code" />
+                        <QRCaption>
+                          {lang === 'pt'
+                            ? 'Escaneie com a câmera do celular — abre o Wise automaticamente'
+                            : 'Scan with your phone camera — opens Wise automatically'}
+                        </QRCaption>
+                      </QRBox>
+
+                      <FieldGroup>
+                        <InputLabel>{lang === 'pt' ? 'Valor enviado' : 'Amount sent'}</InputLabel>
+                        <AmountRow>
+                          <CurrencyTag>USD</CurrencyTag>
+                          <AmountInput
+                            type="text"
+                            inputMode="decimal"
+                            placeholder="200"
+                            value={amount}
+                            onChange={e => setAmount(e.target.value)}
+                          />
+                        </AmountRow>
+                      </FieldGroup>
+
+                      <HolderNote>
+                        {lang === 'pt' ? 'Titular' : 'Account holder'}: <strong>{ACCOUNT_HOLDER}</strong>
+                      </HolderNote>
+
+                      {status === 'error' && <ErrorText>{lang === 'pt' ? 'Algo deu errado. Tente novamente.' : 'Something went wrong. Try again.'}</ErrorText>}
+
+                      <ActionBtn onClick={() => handleConfirm('USD')} disabled={!canSubmit || status === 'loading'}>
+                        {status === 'loading' ? '...' : lang === 'pt' ? 'Já enviei ✓' : 'I already sent ✓'}
+                      </ActionBtn>
+                    </>
+                  )}
+
+                  {intlMethod === 'card' && (
+                    <>
+                      <CardNote>
                         {lang === 'pt'
-                          ? 'Escaneie com a câmera do celular — abre o Wise automaticamente'
-                          : 'Scan with your phone camera — opens Wise automatically'}
-                      </QRCaption>
-                    </QRBox>
+                          ? 'Você será redirecionado para a campanha no GoFundMe. Aceita cartão de crédito e débito.'
+                          : "You'll be redirected to the GoFundMe campaign. Accepts credit and debit cards."}
+                      </CardNote>
+                      <TipNote>
+                        💡{' '}
+                        {lang === 'pt'
+                          ? 'A "gorjeta" que o GoFundMe sugere no checkout é opcional — você pode deixar em $0.'
+                          : 'The "tip" GoFundMe suggests at checkout is optional — you can set it to $0.'}
+                      </TipNote>
+                      <RedirectBtn href={GOFUNDME_URL} target="_blank" rel="noopener noreferrer">
+                        Donate via GoFundMe
+                        <ArrowRight size={16} weight="bold" />
+                      </RedirectBtn>
+                    </>
                   )}
-
-                  {intlSub === 'ach' && (
-                    <TransferCard>
-                      <TransferCardTitle>🇺🇸 ACH / Wire {lang === 'pt' ? 'doméstico' : 'domestic'}</TransferCardTitle>
-                      <CopyField label="Routing Number" value={US_BANKING.routingNumber} />
-                      <CopyField label="Account Number" value={US_BANKING.accountNumber} />
-                      <StaticField label={lang === 'pt' ? 'Tipo de conta' : 'Account type'} value={US_BANKING.accountType} />
-                      <StaticField label={lang === 'pt' ? 'Banco' : 'Bank'} value={US_BANKING.bank} />
-                    </TransferCard>
-                  )}
-
-                  {intlSub === 'swift' && (
-                    <TransferCard>
-                      <TransferCardTitle>🌍 SWIFT / Wire {lang === 'pt' ? 'internacional' : 'international'}</TransferCardTitle>
-                      <CopyField label="SWIFT / BIC" value={SWIFT_BANKING.swiftBic} />
-                      <CopyField label="Account Number" value={SWIFT_BANKING.accountNumber} />
-                      <StaticField label={lang === 'pt' ? 'Banco' : 'Bank'} value={SWIFT_BANKING.bank} />
-                    </TransferCard>
-                  )}
-
-                  <HolderNote>
-                    {lang === 'pt' ? 'Titular' : 'Account holder'}: <strong>{ACCOUNT_HOLDER}</strong>
-                  </HolderNote>
-
-                  {status === 'error' && <ErrorText>{lang === 'pt' ? 'Algo deu errado. Tente novamente.' : 'Something went wrong. Try again.'}</ErrorText>}
-
-                  <ActionBtn onClick={handleConfirm} disabled={!canSubmit || status === 'loading'}>
-                    {status === 'loading' ? '...' : lang === 'pt' ? 'Já enviei a transferência ✓' : 'I already sent the transfer ✓'}
-                  </ActionBtn>
-                </>
-              )}
-
-              {/* ── CARTÃO ── */}
-              {method === 'card' && (
-                <>
-                  <FieldGroup>
-                    <InputLabel>{lang === 'pt' ? 'Valor' : 'Amount'}</InputLabel>
-                    <AmountRow>
-                      <CurrencyToggle>
-                        {(['R$', 'US$'] as const).map(c => (
-                          <CurrencyBtn key={c} $active={currency === c} onClick={() => setCurrency(c)}>{c}</CurrencyBtn>
-                        ))}
-                      </CurrencyToggle>
-                      <AmountInput
-                        type="text"
-                        inputMode="decimal"
-                        placeholder="200"
-                        value={amount}
-                        onChange={e => setAmount(e.target.value)}
-                      />
-                    </AmountRow>
-                  </FieldGroup>
-
-                  <CardNote>
-                    {lang === 'pt'
-                      ? 'Você será redirecionado para a página segura da Stripe. Aceita cartão de crédito, débito e Apple Pay.'
-                      : "You'll be redirected to Stripe's secure page. Accepts credit, debit, and Apple Pay."}
-                  </CardNote>
-
-                  {status === 'error' && <ErrorText>{lang === 'pt' ? 'Algo deu errado. Tente novamente.' : 'Something went wrong. Try again.'}</ErrorText>}
-
-                  <ActionBtn onClick={handleCard} disabled={!canSubmit || status === 'loading'}>
-                    {status === 'loading' ? '...' : lang === 'pt' ? 'Pagar com Cartão →' : 'Pay with Card →'}
-                  </ActionBtn>
                 </>
               )}
             </>
@@ -401,12 +397,12 @@ export default function DonationModal() {
   );
 }
 
-/* ─── Animations ──────────────────────────────────────────────────────────── */
+/* ─── Animations ─────────────────────────────────────────────────────────── */
 
 const fadeIn = keyframes`from { opacity: 0 } to { opacity: 1 }`;
 const slideUp = keyframes`from { opacity: 0; transform: translateY(24px) } to { opacity: 1; transform: translateY(0) }`;
 
-/* ─── Styled components ───────────────────────────────────────────────────── */
+/* ─── Layout ─────────────────────────────────────────────────────────────── */
 
 const Backdrop = styled.div`
   position: fixed;
@@ -478,6 +474,8 @@ const ModalBody = styled.div`
   scrollbar-width: thin;
 `;
 
+/* ─── Form fields ────────────────────────────────────────────────────────── */
+
 const FieldGroup = styled.div`
   display: flex;
   flex-direction: column;
@@ -488,23 +486,6 @@ const InputLabel = styled.label`
   font-size: 13px;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.darkText};
-`;
-
-const ModalInput = styled.input<{ $dimmed?: boolean }>`
-  width: 100%;
-  padding: 10px 14px;
-  border: 1.5px solid ${({ theme }) => theme.colors.border};
-  border-radius: 10px;
-  font-size: 14px;
-  color: ${({ $dimmed, theme }) => $dimmed ? theme.colors.mutedText : theme.colors.darkText};
-  background: ${({ $dimmed, theme }) => $dimmed ? theme.colors.softGray : 'transparent'};
-  outline: none;
-  transition: border-color 0.2s ease;
-  box-sizing: border-box;
-  cursor: ${({ $dimmed }) => $dimmed ? 'not-allowed' : 'text'};
-
-  &::placeholder { color: ${({ theme }) => theme.colors.mutedText}; }
-  &:focus:not(:disabled) { border-color: ${({ theme }) => theme.colors.harvardCrimson}; }
 `;
 
 const NameLabelRow = styled.div`
@@ -536,6 +517,57 @@ const AnonCheck = styled.div`
   }
 `;
 
+const ModalInput = styled.input<{ $dimmed?: boolean }>`
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid ${({ theme }) => theme.colors.border};
+  border-radius: 10px;
+  font-size: 14px;
+  color: ${({ $dimmed, theme }) => $dimmed ? theme.colors.mutedText : theme.colors.darkText};
+  background: ${({ $dimmed, theme }) => $dimmed ? theme.colors.softGray : 'transparent'};
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  cursor: ${({ $dimmed }) => $dimmed ? 'not-allowed' : 'text'};
+
+  &::placeholder { color: ${({ theme }) => theme.colors.mutedText}; }
+  &:focus:not(:disabled) { border-color: ${({ theme }) => theme.colors.harvardCrimson}; }
+`;
+
+const AmountRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const CurrencyTag = styled.span`
+  font-size: 14px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.mutedText};
+  background: ${({ theme }) => theme.colors.softGray};
+  border: 1.5px solid ${({ theme }) => theme.colors.border};
+  border-radius: 10px;
+  padding: 10px 14px;
+  flex-shrink: 0;
+`;
+
+const AmountInput = styled.input`
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid ${({ theme }) => theme.colors.border};
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.darkText};
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &::placeholder { color: ${({ theme }) => theme.colors.border}; font-weight: 400; font-size: 16px; }
+  &:focus { border-color: ${({ theme }) => theme.colors.harvardCrimson}; }
+`;
+
+/* ─── Toggles ────────────────────────────────────────────────────────────── */
+
 const MethodToggle = styled.div`
   display: flex;
   gap: 8px;
@@ -559,17 +591,12 @@ const MethodBtn = styled.button<{ $active: boolean }>`
   }
 `;
 
-const IntlSubToggle = styled.div`
+const SubToggle = styled.div`
   display: flex;
   gap: 8px;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background: ${({ theme }) => theme.colors.white};
-  padding-bottom: 2px;
 `;
 
-const IntlSubBtn = styled.button<{ $active: boolean }>`
+const SubBtn = styled.button<{ $active: boolean }>`
   flex: 1;
   padding: 9px 8px;
   font-size: 12px;
@@ -581,66 +608,15 @@ const IntlSubBtn = styled.button<{ $active: boolean }>`
   background: ${({ $active, theme }) => $active ? theme.colors.harvardCrimson : 'transparent'};
   color: ${({ $active, theme }) => $active ? theme.colors.white : theme.colors.mutedText};
 
+  span { font-weight: 400; }
+
   &:hover {
     border-color: ${({ theme }) => theme.colors.harvardCrimson};
     color: ${({ $active, theme }) => $active ? theme.colors.white : theme.colors.harvardCrimson};
   }
 `;
 
-const AmountRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-const CurrencyTag = styled.span`
-  font-size: 14px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.mutedText};
-  background: ${({ theme }) => theme.colors.softGray};
-  border: 1.5px solid ${({ theme }) => theme.colors.border};
-  border-radius: 10px;
-  padding: 10px 14px;
-  flex-shrink: 0;
-`;
-
-const CurrencyToggle = styled.div`
-  display: flex;
-  border: 1.5px solid ${({ theme }) => theme.colors.border};
-  border-radius: 10px;
-  overflow: hidden;
-  flex-shrink: 0;
-`;
-
-const CurrencyBtn = styled.button<{ $active: boolean }>`
-  padding: 10px 12px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  background: ${({ $active, theme }) => $active ? theme.colors.harvardCrimson : 'transparent'};
-  color: ${({ $active, theme }) => $active ? theme.colors.white : theme.colors.mutedText};
-  border: none;
-
-  &:hover {
-    background: ${({ $active, theme }) => $active ? theme.colors.harvardCrimson : theme.colors.softGray};
-  }
-`;
-
-const AmountInput = styled.input`
-  flex: 1;
-  padding: 10px 14px;
-  border: 1.5px solid ${({ theme }) => theme.colors.border};
-  border-radius: 10px;
-  font-size: 22px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.darkText};
-  outline: none;
-  transition: border-color 0.2s ease;
-
-  &::placeholder { color: ${({ theme }) => theme.colors.border}; font-weight: 400; font-size: 16px; }
-  &:focus { border-color: ${({ theme }) => theme.colors.harvardCrimson}; }
-`;
+/* ─── PIX ────────────────────────────────────────────────────────────────── */
 
 const PixBox = styled.div`
   background: ${({ theme }) => theme.colors.softGray};
@@ -676,27 +652,44 @@ const PixKeyValue = styled.span`
   flex: 1;
 `;
 
-const CopyPixBtn = styled.button<{ $copied: boolean }>`
-  display: inline-flex;
+const PixIconCopyBtn = styled.button<{ $copied: boolean }>`
+  display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 7px 14px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 700;
-  white-space: nowrap;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
   flex-shrink: 0;
   cursor: pointer;
   transition: all 0.2s ease;
   background: ${({ $copied, theme }) => $copied ? theme.colors.harvardCrimson : theme.colors.white};
   color: ${({ $copied, theme }) => $copied ? theme.colors.white : theme.colors.harvardCrimson};
-  border: 2px solid ${({ theme }) => theme.colors.harvardCrimson};
+  border: 1.5px solid ${({ theme }) => theme.colors.harvardCrimson};
 
   &:hover {
     background: ${({ theme }) => theme.colors.harvardCrimson};
     color: ${({ theme }) => theme.colors.white};
   }
 `;
+
+const QRToggleBtn = styled.button`
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: ${({ theme }) => theme.colors.mutedText};
+  border: 1.5px solid ${({ theme }) => theme.colors.border};
+  background: transparent;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.harvardCrimson};
+    color: ${({ theme }) => theme.colors.harvardCrimson};
+  }
+`;
+
 
 const HolderNote = styled.p`
   font-size: 13px;
@@ -726,6 +719,8 @@ const QRCaption = styled.p`
   color: ${({ theme }) => theme.colors.mutedText};
   text-align: center;
 `;
+
+/* ─── Transfer ───────────────────────────────────────────────────────────── */
 
 const TransferCard = styled.div`
   border-radius: 12px;
@@ -792,6 +787,8 @@ const SmallCopyBtn = styled.button<{ $copied: boolean }>`
   }
 `;
 
+/* ─── Card / Redirect ────────────────────────────────────────────────────── */
+
 const CardNote = styled.p`
   font-size: 13px;
   color: ${({ theme }) => theme.colors.mutedText};
@@ -801,6 +798,38 @@ const CardNote = styled.p`
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.border};
 `;
+
+const TipNote = styled.p`
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.mutedText};
+  line-height: 1.6;
+  padding: 10px 14px;
+  background: ${({ theme }) => theme.colors.softGray};
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+const RedirectBtn = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  background: ${({ theme }) => theme.colors.harvardCrimson};
+  color: ${({ theme }) => theme.colors.white};
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin-top: 4px;
+  box-sizing: border-box;
+
+  &:hover { opacity: 0.88; }
+`;
+
+/* ─── Actions ────────────────────────────────────────────────────────────── */
 
 const ActionBtn = styled.button`
   width: 100%;
@@ -822,6 +851,8 @@ const ErrorText = styled.p`
   font-size: 13px;
   color: ${({ theme }) => theme.colors.harvardCrimson};
 `;
+
+/* ─── Success ────────────────────────────────────────────────────────────── */
 
 const SuccessBox = styled.div`
   display: flex;

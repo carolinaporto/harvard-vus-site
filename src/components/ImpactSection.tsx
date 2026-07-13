@@ -155,10 +155,6 @@ const Grid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 
-  @media (max-width: ${({ theme }) => theme.bp.desktop}) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
   @media (max-width: 860px) {
     grid-template-columns: 1fr;
   }

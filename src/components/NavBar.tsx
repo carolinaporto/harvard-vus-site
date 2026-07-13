@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { useModal } from '../context/ModalContext';
 import { content } from '../data/content';
 
 export default function NavBar() {
   const { lang, toggle } = useLanguage();
+  const { openModal } = useModal();
   const t = content[lang].nav;
   const tLang = content[lang].lang;
 
@@ -47,7 +49,7 @@ export default function NavBar() {
           <LangToggle onClick={toggle} $scrolled={scrolled} aria-label="Toggle language">
             {tLang.toggle}
           </LangToggle>
-          <DonateBtn href="#donate" $scrolled={scrolled}>
+          <DonateBtn as="button" onClick={openModal} $scrolled={scrolled}>
             {t.donateBtn}
           </DonateBtn>
           <Hamburger
@@ -78,7 +80,7 @@ export default function NavBar() {
               {label}
             </MobileLink>
           ))}
-          <MobileDonateBtn href="#donate" onClick={() => setMenuOpen(false)}>
+          <MobileDonateBtn as="button" onClick={() => { setMenuOpen(false); openModal(); }}>
             {t.donateBtn}
           </MobileDonateBtn>
         </MobileMenu>

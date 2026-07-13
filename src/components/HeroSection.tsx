@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { ArrowDown, Heart, ArrowRight, ShareNetwork } from '@phosphor-icons/react';
 import { useLanguage } from '../context/LanguageContext';
+import { useModal } from '../context/ModalContext';
 import { content } from '../data/content';
 
 export default function HeroSection() {
   const { lang } = useLanguage();
+  const { openModal } = useModal();
   const t = content[lang].hero;
   const [heroImgError, setHeroImgError] = useState(false);
 
@@ -48,7 +50,7 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.7 }}
           >
             <CTAs>
-              <PrimaryBtn href="#donate">
+              <PrimaryBtn as="button" onClick={openModal}>
                 <Heart size={17} weight="fill" />
                 {t.cta1}
               </PrimaryBtn>

@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { Envelope, LinkedinLogo, Heart } from '@phosphor-icons/react';
 import { useLanguage } from '../context/LanguageContext';
-
+import { useModal } from '../context/ModalContext';
 import { content } from '../data/content';
 
 export default function Footer() {
   const { lang } = useLanguage();
+  const { openModal } = useModal();
   const t = content[lang].footer;
 
   return (
@@ -26,7 +27,7 @@ export default function Footer() {
               LinkedIn
             </FooterLink>
           </Links>
-          <DonateBtn href="#donate">
+          <DonateBtn as="button" onClick={openModal}>
             <Heart size={16} weight="fill" />
             {lang === 'pt' ? 'Doe Agora' : 'Donate Now'}
           </DonateBtn>
