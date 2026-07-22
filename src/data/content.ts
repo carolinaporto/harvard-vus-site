@@ -7,8 +7,8 @@ export const donationCount = 36;
 
 // ─── Atualizar aqui quando o valor arrecadado mudar ───────────────────────────
 const lastUpdated = {
-  pt: '12 de Julho de 2026',
-  en: 'July 12, 2026',
+  pt: '22 de Julho de 2026',
+  en: 'July 22, 2026',
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
