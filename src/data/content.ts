@@ -2,7 +2,7 @@ import type { Lang } from '../context/LanguageContext';
 
 
 // ─── Atualizar contagem total de doações ──────────────────────────────────────
-export const donationCount = 36;
+export const donationCount = 56;
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ─── Atualizar aqui quando o valor arrecadado mudar ───────────────────────────
@@ -25,10 +25,10 @@ export const content = {
 
     hero: {
       tag: 'Aceita: Harvard College VUS 2026/2027',
-      headline1: 'Harvard não é o começo da minha história.',
-      headline2: 'É o próximo capítulo.',
+      headline1: 'Fui aceita em Harvard.',
+      headline2: 'Agora falta a parte mais difícil: chegar lá.',
       subtitle:
-        'Cresci mudando de cidade e recomeçando do zero tantas vezes que aprendi a ler qualquer ambiente novo rápido, e a enxergar o que falta nele. Hoje sou bolsista no Insper com média 9,48/10, fui aceita em Harvard e estou arrecadando recursos para tornar essa oportunidade real.',
+        'O programa de visiting students não oferece bolsa nem auxílio financeiro: todos os custos ficam por conta do aluno. Sou bolsista de Engenharia da Computação no Insper, com média 9,48. Cheguei até aqui com apoio, e é assim que pretendo seguir. Cada doação e cada compartilhamento me aproximam disso.',
       cta1: 'Doe Agora',
       cta2: 'Minha Trajetória',
       cta3: 'Compartilhar',
@@ -48,6 +48,8 @@ export const content = {
       title: 'Para onde vai o dinheiro',
       subtitle:
         'Tuition, moradia, alimentação e seguro saúde: os quatro maiores custos, para os dois semestres.',
+      whyNote:
+        'O programa VUS de Harvard não oferece bolsa ou auxílio financeiro, então todos os custos ficam por conta do estudante. Como bolsista no Insper, esses custos estão além do que minha família consegue cobrir sozinha.',
       goalLabel: 'Meta: 2 semestres',
       goalValue: 'US$ 83.514',
       raisedLabel: 'Arrecadado até agora',
@@ -94,7 +96,7 @@ export const content = {
           year: '2025',
           title: 'Cofundadora da Insper AI',
           description:
-            'Depois da Insper Jr., percebi que faltava um espaço dedicado à IA no Insper. Assim nasceu a Insper AI.',
+            'Cofundadora da Insper AI, a primeira entidade estudantil de inteligência artificial do Brasil. Depois da Insper Jr., percebi que faltava um espaço dedicado à IA no Insper, e essa foi a resposta.',
           phase: 'insper' as const,
         },
         {
@@ -134,6 +136,12 @@ export const content = {
       title: 'Junte-se a essa história',
       subtitle:
         'Existem várias formas de me aproximar de Harvard. Escolha a que faz mais sentido para você.',
+      impactEquivalences: [
+        { amount: 'R$ 90', label: '1 dia de alimentação' },
+        { amount: 'R$ 650', label: '1 semana de alimentação' },
+        { amount: 'R$ 10.000', label: '1 mês de moradia' },
+      ],
+      impactNote: 'Valores aproximados com câmbio estimado, para ilustrar o impacto de cada contribuição.',
       pixTitle: 'PIX',
       pixSubtitle: 'Doação via PIX (Brasil)',
       pixKey: 'a3988327-e1a8-49a2-bafe-461bc3bfb345',
@@ -194,6 +202,12 @@ export const content = {
             'Sim. O histórico oficial emitido pelo Insper, com todas as disciplinas e notas, está disponível abaixo. Minha média geral é 9,48/10.',
           link: { text: 'Abrir histórico acadêmico (PDF)', href: '/EN-Transcript_MAR26_InsperSigned.pdf' },
         },
+        {
+          question: 'Doações são dedutíveis nos impostos?',
+          answer:
+            'Contribuições diretas para uma pessoa física geralmente não são dedutíveis nos Estados Unidos. Mas pagar a tuition diretamente para a universidade pode ter vantagens dependendo da sua situação. Me escreva e explico.',
+          link: { text: 'carolporto04@gmail.com', href: 'mailto:carolporto04@gmail.com' },
+        },
       ],
     },
 
@@ -252,10 +266,10 @@ export const content = {
 
     hero: {
       tag: 'Accepted: Harvard College VUS 2026/2027',
-      headline1: 'Harvard is not the beginning of my story.',
-      headline2: 'It is the next chapter.',
+      headline1: 'I got into Harvard.',
+      headline2: 'Now comes the hardest part: getting there.',
       subtitle:
-        'I grew up moving between cities and starting over so many times that I learned to read any new environment quickly, and to see what is missing in it. Today I am a scholarship student at Insper with a 9.48/10 GPA, accepted to Harvard, and raising funds to make this opportunity real.',
+        'The visiting student program offers no scholarships or financial aid: all costs fall on the student. I am a Computer Engineering scholarship student at Insper with a 9.48 GPA. I got here with support, and that is how I plan to keep going. Every donation and every share brings me closer.',
       cta1: 'Donate Now',
       cta2: 'My Journey',
       cta3: 'Share',
@@ -265,7 +279,7 @@ export const content = {
     whyHelp: {
       tag: 'Transparency',
       title: 'Why I am asking for help',
-      p1: 'The acceptance is real. The letter is signed. But Harvard’s VUS program does not offer scholarships or financial aid, so all costs are the student’s responsibility.',
+      p1: 'The acceptance is real. The letter is signed. But Harvard\'s VUS program does not offer scholarships or financial aid, so all costs are the student\'s responsibility.',
       p2: 'I am a scholarship student at Insper, and I got here by building things — projects, communities, opportunities that did not exist before. That is why I am here: asking for help with transparency, humility, and deep gratitude.',
       quote: '"Every donation, connection, and share brings me closer to Harvard."',
     },
@@ -275,6 +289,8 @@ export const content = {
       title: 'Where the money goes',
       subtitle:
         'Tuition, housing, food, and health insurance: the four biggest costs, for both semesters.',
+      whyNote:
+        'Harvard\'s VUS program does not offer scholarships or financial aid, so all costs are the student\'s responsibility. As a scholarship student at Insper, these costs are beyond what my family can cover alone.',
       goalLabel: 'Goal: 2 semesters',
       goalValue: 'US$ 83,514',
       raisedLabel: 'Raised so far',
@@ -320,7 +336,7 @@ export const content = {
           year: '2025',
           title: 'Co-founder of Insper AI',
           description:
-            'After going through Insper Jr., I realized there was no dedicated space for AI work at Insper. That is how Insper AI was born.',
+            'Co-founder of Insper AI, Brazil\'s first student-led artificial intelligence organization. After going through Insper Jr., I realized there was no dedicated space for AI work at Insper, so we built one.',
           phase: 'insper' as const,
         },
         {
@@ -360,6 +376,12 @@ export const content = {
       title: 'Join this story',
       subtitle:
         'There are several ways to bring me closer to Harvard. Choose what makes the most sense for you.',
+      impactEquivalences: [
+        { amount: 'R$ 90', label: '1 day of food' },
+        { amount: 'R$ 650', label: '1 week of food' },
+        { amount: 'R$ 10,000', label: '1 month of housing' },
+      ],
+      impactNote: 'Approximate values in BRL at estimated exchange rate, to illustrate the impact of each contribution.',
       pixTitle: 'PIX',
       pixSubtitle: 'Donation via PIX (Brazil)',
       pixKey: 'a3988327-e1a8-49a2-bafe-461bc3bfb345',
@@ -419,6 +441,12 @@ export const content = {
           answer:
             'Yes. My official transcript issued by Insper, with all courses and grades, is available below. My overall GPA is 9.48/10.',
           link: { text: 'Open academic transcript (PDF)', href: '/EN-Transcript_MAR26_InsperSigned.pdf' },
+        },
+        {
+          question: 'Are donations tax-deductible?',
+          answer:
+            'Direct contributions to an individual are generally not tax-deductible in the US. That said, paying tuition directly to the university may have advantages depending on your situation. Reach out and I\'ll explain.',
+          link: { text: 'carolporto04@gmail.com', href: 'mailto:carolporto04@gmail.com' },
         },
       ],
     },

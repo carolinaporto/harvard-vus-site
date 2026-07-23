@@ -6,16 +6,15 @@ import { ModalProvider } from './context/ModalContext';
 
 import NavBar from './components/NavBar';
 import HeroSection from './components/HeroSection';
+import StoryTimeline from './components/StoryTimeline';
 import AchievementTicker from './components/AchievementTicker';
 import LogoMarquee from './components/LogoMarquee';
-import WhyHelpSection from './components/WhyHelpSection';
 import FundingGoalSection from './components/FundingGoalSection';
-import StoryTimeline from './components/StoryTimeline';
+import DonateSection from './components/DonateSection';
+import UpdatesSection from './components/UpdatesSection';
 import PhotoCollage from './components/PhotoCollage';
 import ImpactSection from './components/ImpactSection';
-import DonateSection from './components/DonateSection';
 import FAQSection from './components/FAQSection';
-import UpdatesSection from './components/UpdatesSection';
 import StickyDonate from './components/StickyDonate';
 import Footer from './components/Footer';
 import DonationModal from './components/DonationModal';
@@ -27,14 +26,13 @@ function SiteContent() {
       <NavBar />
       <main>
         <HeroSection />
+        <StoryTimeline />
         <AchievementTicker />
         <LogoMarquee />
-        <WhyHelpSection />
         <FundingGoalSection />
-        <StoryTimeline />
-        <PhotoCollage />
         <DonateSection />
         <UpdatesSection />
+        <PhotoCollage />
         <ImpactSection />
         <FAQSection />
       </main>

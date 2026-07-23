@@ -94,24 +94,13 @@ export default function HeroSection() {
           </PhotoPlaceholder>
           <PhotoCaption>Harvard College · 2026</PhotoCaption>
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.0 }}
-            style={{ width: '100%' }}
-          >
-            <LetterSnippet>
-              <LetterImg
-                src="/approval-letter.png"
-                alt="Harvard College admission letter"
-              />
-              <LetterLabel>
-                {lang === 'pt'
-                  ? 'Carta de admissão · Harvard College Admissions & Financial Aid'
-                  : 'Admission letter · Harvard College Admissions & Financial Aid'}
-              </LetterLabel>
-            </LetterSnippet>
-          </motion.div>
+          <LetterSnippet>
+            <LetterImg src="/approval-letter.png" alt="Carta de aprovação Harvard" />
+            <LetterLabel>
+              {lang === 'pt' ? 'Carta de aprovação · Harvard College' : 'Acceptance letter · Harvard College'}
+            </LetterLabel>
+          </LetterSnippet>
+
         </PhotoCol>
       </Inner>
 
@@ -163,13 +152,13 @@ const Inner = styled.div`
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  grid-template-columns: 3fr 2fr;
+  gap: 56px;
   align-items: center;
 
   @media (max-width: ${({ theme }) => theme.bp.desktop}) {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
   }
 `;
 
@@ -313,7 +302,7 @@ const PhotoCol = styled.div`
 const PhotoPlaceholder = styled.div`
   width: 100%;
   aspect-ratio: 4/5;
-  max-height: 520px;
+  max-height: 360px;
   border-radius: 16px;
   overflow: hidden;
   background: linear-gradient(
@@ -355,28 +344,27 @@ const PhotoCaption = styled.p`
 `;
 
 const LetterSnippet = styled.div`
-  border-radius: 10px;
+  width: 100%;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 `;
 
 const LetterImg = styled.img`
   width: 100%;
-  height: 148px;
-  object-fit: cover;
-  object-position: top;
   display: block;
+  object-fit: cover;
 `;
 
 const LetterLabel = styled.p`
+  padding: 10px 14px;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.45);
-  letter-spacing: 0.4px;
-  padding: 8px 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
   background: rgba(0, 0, 0, 0.25);
-  text-align: center;
 `;
 
 const ScrollHint = styled.a`
