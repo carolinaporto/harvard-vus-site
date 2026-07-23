@@ -148,9 +148,3 @@ const CtaBtn = styled.a`
     transform: translateY(-1px);
   }
 `;
-
-const CtaNote = styled.p`
-  font-size: 11.5px;
-  color: ${({ theme }) => theme.colors.mutedText};
-  opacity: 0.7;
-`;
