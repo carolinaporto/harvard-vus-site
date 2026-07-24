@@ -5,6 +5,12 @@ import type { Lang } from '../context/LanguageContext';
 export const donationCount = 56;
 // ─────────────────────────────────────────────────────────────────────────────
 
+// ─── Chave PIX ───────────────────────────────────────────────────────────────
+const PIX_KEY = 'f5109849-8c38-42b3-8328-6e86fa7a10aa'; //nubank
+// wise pix key: a3988327-e1a8-49a2-bafe-461bc3bfb345
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 // ─── Atualizar aqui quando o valor arrecadado mudar ───────────────────────────
 const lastUpdated = {
   pt: '22 de Julho de 2026',
@@ -144,7 +150,7 @@ export const content = {
       impactNote: 'Valores aproximados com câmbio estimado, para ilustrar o impacto de cada contribuição.',
       pixTitle: 'PIX',
       pixSubtitle: 'Doação via PIX (Brasil)',
-      pixKey: 'a3988327-e1a8-49a2-bafe-461bc3bfb345',
+      pixKey: PIX_KEY,
       pixAmountsNote: 'Para ter uma ideia do impacto em Cambridge:',
       pixAmounts: [
         { amount: 'R$ 100', label: 'cobre 1 dia de alimentação em Cambridge' },
@@ -384,7 +390,7 @@ export const content = {
       impactNote: 'Approximate values in BRL at estimated exchange rate, to illustrate the impact of each contribution.',
       pixTitle: 'PIX',
       pixSubtitle: 'Donation via PIX (Brazil)',
-      pixKey: 'a3988327-e1a8-49a2-bafe-461bc3bfb345',
+      pixKey: PIX_KEY,
       pixAmountsNote: 'Here\'s what each amount covers in Cambridge:',
       pixAmounts: [
         { amount: 'R$ 100', label: 'covers 1 day of food in Cambridge' },
