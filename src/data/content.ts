@@ -2,7 +2,7 @@ import type { Lang } from '../context/LanguageContext';
 
 
 // ─── Atualizar contagem total de doações ──────────────────────────────────────
-export const donationCount = 56;
+export const donationCount = 69;
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ─── Chave PIX ───────────────────────────────────────────────────────────────
@@ -13,8 +13,8 @@ const PIX_KEY = 'f5109849-8c38-42b3-8328-6e86fa7a10aa'; //nubank
 
 // ─── Atualizar aqui quando o valor arrecadado mudar ───────────────────────────
 const lastUpdated = {
-  pt: '22 de Julho de 2026',
-  en: 'July 22, 2026',
+  pt: '30 de Julho de 2026',
+  en: 'July 30, 2026',
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
