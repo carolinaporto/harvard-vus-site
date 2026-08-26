@@ -16,10 +16,10 @@ const GOFUNDME_URL = 'https://www.gofundme.com/f/carol-porto-harvard/donate?sour
 
 const ACCOUNT_HOLDER = 'Maria Carolina Porto';
 const US_BANKING = {
-  routingNumber: '071000013',
-  accountNumber: '2910791717',
-  accountType: 'Checking',
-  bank: 'JPMorgan Chase Bank, N.A.',
+  routingNumber: '084009519',
+  accountNumber: '162284390353114',
+  accountType: 'Deposit',
+  bank: 'Wise US Inc, 108 W 13th St, Wilmington, DE 19801, United States',
 };
 
 function CopyField({ label, value }: { label: string; value: string }) {
