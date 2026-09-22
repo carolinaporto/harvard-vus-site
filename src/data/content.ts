@@ -13,8 +13,8 @@ const PIX_KEY = 'f5109849-8c38-42b3-8328-6e86fa7a10aa'; //nubank
 
 // ─── Atualizar aqui quando o valor arrecadado mudar ───────────────────────────
 const lastUpdated = {
-  pt: '5 de Setembro de 2026',
-  en: 'September 5, 2026',
+  pt: '22 de Setembro de 2026',
+  en: 'September 22, 2026',
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
