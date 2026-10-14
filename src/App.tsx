@@ -1,43 +1,52 @@
 import { ThemeProvider } from 'styled-components';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 import { theme } from './styles/theme';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { LanguageProvider } from './context/LanguageContext';
 import { ModalProvider } from './context/ModalContext';
-
 import NavBar from './components/NavBar';
-import HeroSection from './components/HeroSection';
-import StoryTimeline from './components/StoryTimeline';
-import AchievementTicker from './components/AchievementTicker';
-import LogoMarquee from './components/LogoMarquee';
-import FundingGoalSection from './components/FundingGoalSection';
-import DonateSection from './components/DonateSection';
-import UpdatesSection from './components/UpdatesSection';
-import PhotoCollage from './components/PhotoCollage';
-import ImpactSection from './components/ImpactSection';
-import FAQSection from './components/FAQSection';
-import StickyDonate from './components/StickyDonate';
 import Footer from './components/Footer';
+import StickyDonate from './components/StickyDonate';
 import DonationModal from './components/DonationModal';
+import RouteEffects from './components/RouteEffects';
+import HomePage from './pages/HomePage';
+import StoryPage from './pages/StoryPage';
+import HarvardPage from './pages/HarvardPage';
+import SupportPage from './pages/SupportPage';
+import NotFoundPage from './pages/NotFoundPage';
 
+// Keep links shared before the move to separate pages working.
+const legacySections: Record<string, string> = {
+  '#my-story': '/minha-trajetoria#my-story',
+  '#funding': '/como-ajudar#funding',
+  '#donate': '/como-ajudar#donate',
+  '#faq': '/como-ajudar#faq',
+  '#why-help': '/como-ajudar',
+};
+
+function HomeRoute() {
+  const { hash } = useLocation();
+  return legacySections[hash] ? <Navigate to={legacySections[hash]} replace /> : <HomePage />;
+}
 
 function SiteContent() {
+  const { pathname } = useLocation();
   return (
     <>
-      <NavBar />
-      <main>
-        <HeroSection />
-        <StoryTimeline />
-        <AchievementTicker />
-        <LogoMarquee />
-        <FundingGoalSection />
-        <DonateSection />
-        <UpdatesSection />
-        <PhotoCollage />
-        <ImpactSection />
-        <FAQSection />
+      <RouteEffects />
+      <NavBar key={`nav:${pathname}`} />
+      <main id="main-content" tabIndex={-1}>
+        <Routes>
+          <Route path="/" element={<HomeRoute />} />
+          <Route path="/minha-trajetoria" element={<StoryPage />} />
+          <Route path="/em-harvard" element={<HarvardPage />} />
+          <Route path="/como-ajudar" element={<SupportPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
       <Footer />
-      <StickyDonate />
+      <StickyDonate key={`sticky:${pathname}`} />
       <DonationModal />
     </>
   );
@@ -47,11 +56,15 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <LanguageProvider>
-        <ModalProvider>
-          <SiteContent />
-        </ModalProvider>
-      </LanguageProvider>
+      <MotionConfig reducedMotion="user">
+        <LanguageProvider>
+          <ModalProvider>
+            <BrowserRouter>
+              <SiteContent />
+            </BrowserRouter>
+          </ModalProvider>
+        </LanguageProvider>
+      </MotionConfig>
     </ThemeProvider>
   );
 }

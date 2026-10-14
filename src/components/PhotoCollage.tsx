@@ -42,9 +42,9 @@ export default function PhotoCollage() {
         <Grid>
           {t.photos.map((photo, i) => (
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 32, rotate: rotations[i] * 0.5 }}
-              whileInView={{ opacity: 1, y: 0, rotate: rotations[i] }}
+              key={photo.src}
+              initial={{ opacity: 0, y: 32, rotate: rotations[i % rotations.length] * 0.5 }}
+              whileInView={{ opacity: 1, y: 0, rotate: rotations[i % rotations.length] }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
               whileHover={{ scale: 1.04, rotate: 0, zIndex: 10 }}
@@ -55,7 +55,7 @@ export default function PhotoCollage() {
                   <PhotoImage
                     src={photo.src}
                     alt={photo.caption}
-                    emoji={emojis[i]}
+                    emoji={emojis[i % emojis.length]}
                   />
                 </PhotoSlot>
                 <Caption>{photo.caption}</Caption>
@@ -69,8 +69,30 @@ export default function PhotoCollage() {
 }
 
 const Section = styled.section`
-  background: ${({ theme }) => theme.colors.softGray};
+  position: relative;
+  isolation: isolate;
+  background-color: #F2EADD;
+  background-image:
+    radial-gradient(ellipse at 8% 15%, rgba(214, 167, 86, 0.17), transparent 48%),
+    radial-gradient(ellipse at 92% 90%, rgba(165, 28, 48, 0.07), transparent 50%),
+    radial-gradient(rgba(91, 15, 27, 0.12) 0.65px, transparent 0.8px);
+  background-size: auto, auto, 7px 7px;
+  border-block: 1px solid rgba(91, 15, 27, 0.08);
   padding: 80px 0 88px;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    width: 640px;
+    height: 640px;
+    border: 1px solid rgba(165, 28, 48, 0.12);
+    border-radius: 50%;
+    box-shadow: 0 0 0 28px rgba(165, 28, 48, 0.025), 0 0 0 60px rgba(165, 28, 48, 0.025);
+  }
+  &::before { top: -360px; right: -220px; }
+  &::after { bottom: -390px; left: -280px; }
   overflow: hidden;
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
@@ -119,8 +141,8 @@ const Subtitle = styled.p`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 28px;
   align-items: start;
 
   /* stagger row heights */

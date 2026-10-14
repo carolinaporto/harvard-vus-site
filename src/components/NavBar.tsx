@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import { List, X } from '@phosphor-icons/react';
 import { useLanguage } from '../context/LanguageContext';
 import { useModal } from '../context/ModalContext';
 import { content } from '../data/content';
@@ -8,259 +9,93 @@ import { content } from '../data/content';
 export default function NavBar() {
   const { lang, toggle } = useLanguage();
   const { openModal } = useModal();
-  const t = content[lang].nav;
-  const tLang = content[lang].lang;
-
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
+  const links = [
+    { to: '/', label: lang === 'pt' ? 'Início' : 'Home' },
+    { to: '/minha-trajetoria', label: lang === 'pt' ? 'Minha trajetória' : 'My journey' },
+    { to: '/em-harvard', label: lang === 'pt' ? 'Em Harvard' : 'At Harvard' },
+    { to: '/como-ajudar', label: lang === 'pt' ? 'Como ajudar' : 'How to help' },
+  ];
   return (
-    <Nav
-      as={motion.nav}
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      $scrolled={scrolled}
-    >
+    <Nav aria-label={lang === 'pt' ? 'Navegação principal' : 'Main navigation'} onKeyDown={event => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+        document.getElementById('menu-toggle')?.focus();
+      }
+    }}>
+      <SkipLink href="#main-content">{lang === 'pt' ? 'Ir para o conteúdo' : 'Skip to content'}</SkipLink>
       <Inner>
-        <Logo href="#hero" $scrolled={scrolled}>
-          Carol Porto
-        </Logo>
-
-        <Links>
-          {([
-            ['#my-story', t.story],
-            ['#funding', t.harvard],
-            ['#donate', t.donate],
-          ] as [string, string][]).map(([href, label]) => (
-            <NavLink key={href} href={href} $scrolled={scrolled}>
-              {label}
-            </NavLink>
-          ))}
-        </Links>
-
-        <Right>
-          <LangToggle onClick={toggle} $scrolled={scrolled} aria-label="Toggle language">
-            {tLang.toggle}
-          </LangToggle>
-          <DonateBtn as="button" onClick={openModal} $scrolled={scrolled}>
-            {t.donateBtn}
-          </DonateBtn>
-          <Hamburger
-            onClick={() => setMenuOpen(o => !o)}
-            $scrolled={scrolled}
-            aria-label="Open menu"
-          >
-            <span />
-            <span />
-            <span />
-          </Hamburger>
-        </Right>
+        <Logo to="/" aria-label={lang === 'pt' ? 'Carol Porto (início)' : 'Carol Porto (home)'}>Carol Porto<span>HARVARD VUS · 26/27</span></Logo>
+        <DesktopLinks>
+          {links.map(link => <PageLink key={link.to} to={link.to} end>{link.label}</PageLink>)}
+        </DesktopLinks>
+        <Actions>
+          <LanguageButton onClick={toggle} aria-label={lang === 'pt' ? 'Read in English' : 'Ler em português'}>{content[lang].lang.toggle}</LanguageButton>
+          <DonateButton onClick={openModal}>{content[lang].nav.donateBtn}</DonateButton>
+          <MenuButton id="menu-toggle" aria-label={lang === 'pt' ? (menuOpen ? 'Fechar menu' : 'Abrir menu') : (menuOpen ? 'Close menu' : 'Open menu')}
+            aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(open => !open)}>
+            {menuOpen ? <X size={24} /> : <List size={24} />}
+          </MenuButton>
+        </Actions>
       </Inner>
-
-      {menuOpen && (
-        <MobileMenu
-          as={motion.div}
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          {([
-            ['#my-story', t.story],
-            ['#funding', t.harvard],
-            ['#donate', t.donate],
-          ] as [string, string][]).map(([href, label]) => (
-            <MobileLink key={href} href={href} onClick={() => setMenuOpen(false)}>
-              {label}
-            </MobileLink>
-          ))}
-          <MobileDonateBtn as="button" onClick={() => { setMenuOpen(false); openModal(); }}>
-            {t.donateBtn}
-          </MobileDonateBtn>
-        </MobileMenu>
-      )}
+      {menuOpen && <MobileLinks id="mobile-navigation">
+        {links.map(link => <PageLink key={link.to} to={link.to} end onClick={() => setMenuOpen(false)}>{link.label}</PageLink>)}
+      </MobileLinks>}
     </Nav>
   );
 }
-
-const Nav = styled.nav<{ $scrolled: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  transition: background 0.35s ease, box-shadow 0.35s ease;
-
-  ${({ $scrolled, theme }) =>
-    $scrolled
-      ? css`
-          background: ${theme.colors.white};
-          box-shadow: 0 1px 20px rgba(0, 0, 0, 0.08);
-        `
-      : css`
-          background: transparent;
-        `}
-`;
-
-const Inner = styled.div`
-  max-width: ${({ theme }) => theme.maxWidth};
-  margin: 0 auto;
-  padding: 0 40px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 0 20px;
-    height: 60px;
-  }
-`;
-
-const Logo = styled.a<{ $scrolled: boolean }>`
-  font-family: ${({ theme }) => theme.fonts.body};
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.4px;
-  color: ${({ $scrolled, theme }) => ($scrolled ? theme.colors.darkText : theme.colors.white)};
-  transition: color 0.35s ease;
-`;
-
-const Links = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 28px;
-
-  @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    display: none;
-  }
-`;
-
-const NavLink = styled.a<{ $scrolled: boolean }>`
-  font-size: 14px;
-  font-weight: 500;
-  color: ${({ $scrolled, theme }) =>
-    $scrolled ? theme.colors.mutedText : 'rgba(255,255,255,0.82)'};
-  transition: color 0.25s ease;
-
-  &:hover {
-    color: ${({ $scrolled, theme }) => ($scrolled ? theme.colors.darkText : theme.colors.white)};
-  }
-`;
-
-const Right = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
-
-const LangToggle = styled.button<{ $scrolled: boolean }>`
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 6px 12px;
-  border-radius: 4px;
-  color: ${({ $scrolled, theme }) => ($scrolled ? theme.colors.darkText : theme.colors.white)};
-  border: 1.5px solid
-    ${({ $scrolled }) => ($scrolled ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.4)')};
-  transition: all 0.25s ease;
-
-  &:hover {
-    background: ${({ $scrolled }) =>
-      $scrolled ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.12)'};
-  }
-`;
-
-const DonateBtn = styled.a<{ $scrolled: boolean }>`
-  display: none;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 9px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.25s ease;
-
-  ${({ $scrolled, theme }) =>
-    $scrolled
-      ? css`
-          background: ${theme.colors.harvardCrimson};
-          color: ${theme.colors.white};
-          &:hover {
-            background: ${theme.colors.harvardDarkCrimson};
-          }
-        `
-      : css`
-          background: ${theme.colors.white};
-          color: ${theme.colors.harvardCrimson};
-          &:hover {
-            background: rgba(255, 255, 255, 0.9);
-          }
-        `}
-
-  @media (min-width: ${({ theme }) => theme.bp.tablet}) {
-    display: block;
-  }
-`;
-
-const Hamburger = styled.button<{ $scrolled: boolean }>`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 4px;
-
-  span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    border-radius: 2px;
-    background: ${({ $scrolled, theme }) =>
-      $scrolled ? theme.colors.darkText : theme.colors.white};
-    transition: background 0.35s ease;
-  }
-
-  @media (min-width: ${({ theme }) => theme.bp.tablet}) {
-    display: none;
-  }
-`;
-
-const MobileMenu = styled.div`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: ${({ theme }) => theme.colors.white};
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  padding: 16px 20px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
-
-const MobileLink = styled.a`
-  font-size: 16px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.darkText};
-  padding: 12px 8px;
+const Nav = styled.nav`
+  position: fixed; inset: 0 0 auto; z-index: 100;
+  background: rgba(255, 248, 242, 0.97);
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-
-  &:last-of-type {
-    border-bottom: none;
-  }
+  backdrop-filter: blur(16px);
 `;
-
-const MobileDonateBtn = styled.a`
-  margin-top: 12px;
-  padding: 14px;
-  text-align: center;
-  background: ${({ theme }) => theme.colors.harvardCrimson};
-  color: ${({ theme }) => theme.colors.white};
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 8px;
+const Inner = styled.div`
+  max-width: ${({ theme }) => theme.maxWidth}; margin: auto; padding: 0 40px;
+  height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  @media (max-width: 900px) { padding: 0 20px; gap: 12px; }
+  @media (max-width: ${({ theme }) => theme.bp.tablet}) { height: 60px; }
+`;
+const Logo = styled(Link)`
+  color: ${({ theme }) => theme.colors.deepWine}; font-size: 20px; font-weight: 800; line-height: 1.15;
+  letter-spacing: -0.6px; flex-shrink: 0;
+  span { display: block; font-size: 8px; font-weight: 600; letter-spacing: 1.6px; margin-top: 5px; }
+  @media (max-width: 380px) { font-size: 17px; span { font-size: 7px; letter-spacing: 1px; } }
+`;
+const DesktopLinks = styled.div`
+  display: flex; align-items: center; gap: 24px;
+  @media (max-width: 1000px) { gap: 16px; }
+  @media (max-width: 900px) { display: none; }
+`;
+const PageLink = styled(NavLink)`
+  font-size: 13px; font-weight: 600; color: ${({ theme }) => theme.colors.mutedText};
+  padding: 8px 0; border-bottom: 2px solid transparent; white-space: nowrap;
+  &:hover, &[aria-current='page'] { color: ${({ theme }) => theme.colors.harvardCrimson}; }
+  &[aria-current='page'] { border-bottom-color: ${({ theme }) => theme.colors.harvardCrimson}; }
+`;
+const Actions = styled.div`display: flex; align-items: center; gap: 12px; @media (max-width: 380px) { gap: 7px; }`;
+const LanguageButton = styled.button`
+  font-size: 11px; font-weight: 700; min-height: 36px; padding: 6px;
+  color: ${({ theme }) => theme.colors.mutedText};
+`;
+const DonateButton = styled.button`
+  padding: 10px 17px; border-radius: 7px; font-size: 12px; font-weight: 700; white-space: nowrap;
+  background: ${({ theme }) => theme.colors.harvardCrimson}; color: white;
+  &:hover { background: ${({ theme }) => theme.colors.harvardDarkCrimson}; }
+  @media (max-width: 380px) { padding: 9px 11px; font-size: 11px; }
+`;
+const MenuButton = styled.button`
+  display: none; align-items: center; justify-content: center; color: ${({ theme }) => theme.colors.deepWine};
+  min-width: 32px; min-height: 40px;
+  @media (max-width: 900px) { display: flex; }
+`;
+const MobileLinks = styled.div`
+  display: flex; flex-direction: column; padding: 12px 20px 22px; background: ${({ theme }) => theme.colors.warmOffWhite};
+  border-top: 1px solid ${({ theme }) => theme.colors.border}; box-shadow: 0 14px 20px rgba(0,0,0,.07);
+  a { padding: 12px 0; font-size: 16px; }
+  @media (min-width: 901px) { display: none; }
+`;
+const SkipLink = styled.a`
+  position: absolute; left: 20px; top: -100px; background: white; color: #5b0f1b; padding: 10px 18px; z-index: 101;
+  &:focus { top: 8px; }
 `;

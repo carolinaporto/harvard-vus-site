@@ -15,12 +15,14 @@ export default function StickyDonate() {
   useEffect(() => {
     const onScroll = () => {
       const heroEl = document.getElementById('hero');
-      if (!heroEl) return;
-      const heroBottom = heroEl.getBoundingClientRect().bottom;
-      setVisible(heroBottom < 0);
+      setVisible(heroEl ? heroEl.getBoundingClientRect().bottom < 0 : window.scrollY > 240);
     };
+    const frame = requestAnimationFrame(onScroll);
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   const pageUrl = typeof window !== 'undefined' ? window.location.href : '';

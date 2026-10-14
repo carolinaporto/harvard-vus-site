@@ -233,7 +233,7 @@ export default function DonationModal() {
 
                       <PixBox>
                         <PixLabel>
-                          {lang === 'pt' ? 'Chave PIX — Chave aleatória' : 'PIX Key — Random key'}
+                          {lang === 'pt' ? 'Chave PIX (chave aleatória)' : 'PIX key (random key)'}
                         </PixLabel>
                         <PixKeyRow>
                           <PixKeyValue>{t.pixKey}</PixKeyValue>
@@ -337,8 +337,8 @@ export default function DonationModal() {
                         <QRImage src="/qrcode-internacional.png" alt="Wise QR Code" />
                         <QRCaption>
                           {lang === 'pt'
-                            ? 'Escaneie com a câmera do celular — abre o Wise automaticamente'
-                            : 'Scan with your phone camera — opens Wise automatically'}
+                            ? 'Escaneie com a câmera do celular para abrir o Wise automaticamente.'
+                            : 'Scan with your phone camera to open Wise automatically.'}
                         </QRCaption>
                       </QRBox>
 
@@ -378,8 +378,8 @@ export default function DonationModal() {
                       <TipNote>
                         💡{' '}
                         {lang === 'pt'
-                          ? 'A "gorjeta" que o GoFundMe sugere no checkout é opcional — você pode deixar em $0.'
-                          : 'The "tip" GoFundMe suggests at checkout is optional — you can set it to $0.'}
+                          ? 'A "gorjeta" que o GoFundMe sugere no checkout é opcional. Você pode deixar em $0.'
+                          : 'The "tip" GoFundMe suggests at checkout is optional. You can set it to $0.'}
                       </TipNote>
                       <RedirectBtn href={GOFUNDME_URL} target="_blank" rel="noopener noreferrer">
                         Donate via GoFundMe
@@ -553,6 +553,7 @@ const CurrencyTag = styled.span`
 
 const AmountInput = styled.input`
   flex: 1;
+  min-width: 0;
   padding: 10px 14px;
   border: 1.5px solid ${({ theme }) => theme.colors.border};
   border-radius: 10px;
@@ -650,6 +651,7 @@ const PixKeyValue = styled.span`
   color: ${({ theme }) => theme.colors.darkText};
   word-break: break-all;
   flex: 1;
+  @media (max-width: 380px) { flex-basis: 100%; }
 `;
 
 const PixIconCopyBtn = styled.button<{ $copied: boolean }>`

@@ -2,7 +2,7 @@ import type { Lang } from '../context/LanguageContext';
 
 
 // ─── Atualizar contagem total de doações ──────────────────────────────────────
-export const donationCount = 69;
+export const donationCount = 90;
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ─── Chave PIX ───────────────────────────────────────────────────────────────
@@ -45,7 +45,7 @@ export const content = {
       tag: 'Transparência',
       title: 'Por que estou pedindo ajuda',
       p1: 'A aprovação é real. A carta está assinada. Mas o programa VUS de Harvard não oferece bolsa ou auxílio financeiro, então todos os custos ficam por conta do estudante.',
-      p2: 'Sou bolsista no Insper e cheguei até aqui construindo coisas — projetos, comunidades, oportunidades que não existiam antes. Por isso estou aqui: pedindo ajuda com transparência, humildade e profunda gratidão.',
+      p2: 'Sou bolsista no Insper e cheguei até aqui construindo coisas: projetos, comunidades, oportunidades que não existiam antes. Por isso estou aqui: pedindo ajuda com transparência, humildade e profunda gratidão.',
       quote: '"Cada ajuda, de qualquer tamanho, me aproxima um pouco mais desse sonho."',
     },
 
@@ -87,26 +87,26 @@ export const content = {
           year: '2023',
           title: 'Insper: Engenharia da Computação',
           description:
-            'Foi no Insper que descobri que gosto de construir coisas, ensinar e criar comunidades. Tenho média 9,48/10 e recebi o Prêmio de Excelência Acadêmica na Engenharia da Computação.',
+            'No Insper, descobri meu gosto por construir, ensinar e criar comunidades. Tenho média 9,48/10 e recebi duas vezes o prêmio de excelência acadêmica em Engenharia da Computação, em 2025 e 2026.',
           link: { text: 'Ver histórico acadêmico (PDF)', href: '/EN-Transcript_MAR26_InsperSigned.pdf' },
           phase: 'insper' as const,
         },
         {
-          year: '2024–2026',
+          year: '2024 a 2026',
           title: 'Monitora em 5 disciplinas',
           description:
-            'Fui monitora em cinco disciplinas. Ensinar se tornou uma das partes mais importantes da minha graduação.',
+            'Ética, Cálculo, Dados, Sistemas Hardware-Software e Tecnologias Web. Ensinar se tornou uma das partes mais importantes da minha graduação: conhecer pessoas diferentes e ajudá-las a superar dificuldades que eu também já enfrentei.',
           phase: 'insper' as const,
         },
         {
           year: '2025',
           title: 'Cofundadora da Insper AI',
           description:
-            'Cofundadora da Insper AI, a primeira entidade estudantil de inteligência artificial do Brasil. Depois da Insper Jr., percebi que faltava um espaço dedicado à IA no Insper, e essa foi a resposta.',
+            'Depois da Insper Jr., percebi que faltava um espaço dedicado à IA no Insper. Cofundei a Insper AI, a primeira entidade estudantil de inteligência artificial do Brasil.',
           phase: 'insper' as const,
         },
         {
-          year: '2025–2026',
+          year: '2025 a 2026',
           title: 'Estágios de férias: Segura.ai & BTG Pactual',
           description:
             'Passei pela Segura.ai, uma startup de tecnologia em seguros, e pelo BTG Pactual, aplicando IA em problemas reais do mercado financeiro.',
@@ -116,21 +116,21 @@ export const content = {
           year: '2026',
           title: 'Brasil Project @ Harvard & MIT',
           description:
-            'Fui selecionada pelo Insper para participar presencialmente do Brasil Project em Boston, com atividades em Harvard e MIT. Foi a primeira vez que esse ecossistema deixou de parecer distante e começou a parecer possível.',
+            'A seleção do Insper me levou a Boston para o Brasil Project, com atividades em Harvard e MIT. Ali, esse ecossistema deixou de parecer distante e começou a parecer possível.',
           phase: 'harvard' as const,
         },
         {
           year: 'Verão 2026',
           title: 'UChicago SISRM: Bolsa Integral',
           description:
-            'Fui selecionada pelo Insper para passar 10 semanas na University of Chicago, no SISRM. Durante o programa, atuo como assistente de pesquisa da professora Jean Clipperton.',
+            'Com a seleção do Insper e uma bolsa integral, passei dez semanas na University of Chicago, no SISRM, como assistente de pesquisa da professora Jean Clipperton.',
           phase: 'harvard' as const,
         },
         {
           year: '2026/2027',
           title: 'Aceita: Harvard College VUS',
           description:
-            'Fui aceita para o Visiting Undergraduate Students Program do Harvard College para 2026/2027. Agora preciso de ajuda para tornar isso real.',
+            'A aprovação no Visiting Undergraduate Students Program do Harvard College abriu o capítulo de 2026/2027. Hoje, já estudo aqui e sigo contando com apoio para cobrir os custos desse ano.',
           phase: 'harvard' as const,
           isHighlight: true,
         },
@@ -141,7 +141,7 @@ export const content = {
       tag: 'Como você pode ajudar',
       title: 'Junte-se a essa história',
       subtitle:
-        'Existem várias formas de me aproximar de Harvard. Escolha a que faz mais sentido para você.',
+        'Existem várias formas de apoiar meu ano em Harvard. Escolha a que faz mais sentido para você.',
       impactEquivalences: [
         { amount: 'R$ 90', label: '1 dia de alimentação' },
         { amount: 'R$ 650', label: '1 semana de alimentação' },
@@ -172,9 +172,9 @@ export const content = {
       shareCopied: 'Link copiado!',
       instagramCopied: 'Texto copiado para compartilhar no Instagram',
       whatsappMessage:
-        'Uma estudante brasileira foi aceita no Harvard College VUS e está arrecadando fundos para tornar isso possível. Vale conhecer a história:',
+        'Uma estudante brasileira está cursando o Harvard College VUS e continua arrecadando fundos para cobrir os custos desse ano. Vale conhecer e apoiar essa história:',
       instagramMessage:
-        'Uma estudante brasileira foi aceita no Harvard College VUS e está arrecadando fundos para tornar isso possível. Vale conhecer a história:',
+        'Uma estudante brasileira está cursando o Harvard College VUS e continua arrecadando fundos para cobrir os custos desse ano. Vale conhecer e apoiar essa história:',
     },
 
     faq: {
@@ -189,7 +189,7 @@ export const content = {
         {
           question: 'E se a meta não for atingida?',
           answer:
-            'Ainda pretendo ir para Harvard. O caminho agora depende de apoio externo — cada contribuição reduz a distância entre a aprovação e a possibilidade real de estudar lá.',
+            'Já comecei meu ano em Harvard, e a campanha continua para ajudar a cobrir os custos dessa experiência. Cada contribuição reduz o valor que ainda preciso arrecadar.',
         },
         {
           question: 'Posso ver documentos de comprovação?',
@@ -248,6 +248,8 @@ export const content = {
         { src: '/photos/brasil-project.jpg', caption: 'Brasil Project: quando Harvard deixou de parecer inalcançável' },
         { src: '/photos/infancia.jpg', caption: 'De farda, filha de militar' },
         { src: '/photos/harvard.jpg', caption: 'Março 2026: A aprovação chegou' },
+        { src: '/photos/vus-orientation.jpg', caption: 'Orientação do VUS: o começo de novas amizades' },
+        { src: '/photos/harvard-stadium-friends.jpg', caption: 'Com amigos no estádio de Harvard' },
       ],
     },
 
@@ -286,7 +288,7 @@ export const content = {
       tag: 'Transparency',
       title: 'Why I am asking for help',
       p1: 'The acceptance is real. The letter is signed. But Harvard\'s VUS program does not offer scholarships or financial aid, so all costs are the student\'s responsibility.',
-      p2: 'I am a scholarship student at Insper, and I got here by building things — projects, communities, opportunities that did not exist before. That is why I am here: asking for help with transparency, humility, and deep gratitude.',
+      p2: 'I am a scholarship student at Insper, and I got here by building things: projects, communities, opportunities that did not exist before. That is why I am here: asking for help with transparency, humility, and deep gratitude.',
       quote: '"Every donation, connection, and share brings me closer to Harvard."',
     },
 
@@ -327,26 +329,26 @@ export const content = {
           year: '2023',
           title: 'Insper: Computer Engineering',
           description:
-            'At Insper, I discovered that I love building things, teaching, and creating communities. I hold a 9.48/10 GPA and received the Academic Excellence Award in Computer Engineering.',
+            'At Insper, I discovered that I love building things, teaching, and creating communities. I hold a 9.48/10 GPA and have been recognized twice for academic excellence in Computer Engineering, in 2025 and 2026.',
           link: { text: 'View academic transcript (PDF)', href: '/EN-Transcript_MAR26_InsperSigned.pdf' },
           phase: 'insper' as const,
         },
         {
-          year: '2024–2026',
+          year: '2024 to 2026',
           title: 'Teaching Assistant: 5 Subjects',
           description:
-            'I served as a teaching assistant in five courses. Teaching became one of the most important parts of my undergraduate experience.',
+            'Ethics, Calculus, Data, Hardware-Software Systems, and Web Technologies. Teaching became one of the most meaningful parts of my degree: meeting people from different backgrounds and helping them work through challenges I had faced myself.',
           phase: 'insper' as const,
         },
         {
           year: '2025',
           title: 'Co-founder of Insper AI',
           description:
-            'Co-founder of Insper AI, Brazil\'s first student-led artificial intelligence organization. After going through Insper Jr., I realized there was no dedicated space for AI work at Insper, so we built one.',
+            'After Insper Jr., I realized there was no dedicated space for AI at Insper. I co-founded Insper AI, Brazil\'s first student-led artificial intelligence organization.',
           phase: 'insper' as const,
         },
         {
-          year: '2025–2026',
+          year: '2025 to 2026',
           title: 'Summer internships: Segura.ai & BTG Pactual',
           description:
             'I worked at Segura.ai, a tech startup in insurance, and at BTG Pactual, building AI applications for financial markets.',
@@ -356,21 +358,21 @@ export const content = {
           year: '2026',
           title: 'Brasil Project @ Harvard & MIT',
           description:
-            'Selected by Insper to attend the Brasil Project in Boston, with sessions at Harvard and MIT. It was the first time that ecosystem stopped feeling distant and started feeling possible.',
+            'Insper\'s selection took me to Boston for Brasil Project, with sessions at Harvard and MIT. There, that ecosystem stopped feeling distant and started feeling possible.',
           phase: 'harvard' as const,
         },
         {
           year: 'Summer 2026',
           title: 'UChicago SISRM: Full Scholarship',
           description:
-            'Selected by Insper to spend 10 weeks at the University of Chicago in the SISRM program. I serve as a research assistant to Professor Jean Clipperton.',
+            'With a full scholarship and selection by Insper, I spent ten weeks at the University of Chicago in the SISRM program, working as a research assistant to Professor Jean Clipperton.',
           phase: 'harvard' as const,
         },
         {
           year: '2026/2027',
           title: 'Accepted: Harvard College VUS',
           description:
-            'Accepted to the Visiting Undergraduate Students Program at Harvard College for 2026/2027. Now I need help making it real.',
+            'Admission to Harvard College\'s Visiting Undergraduate Students Program opened my 2026/2027 chapter. I am now studying here and continue to rely on support to cover the costs of this year.',
           phase: 'harvard' as const,
           isHighlight: true,
         },
@@ -381,7 +383,7 @@ export const content = {
       tag: 'How you can help',
       title: 'Join this story',
       subtitle:
-        'There are several ways to bring me closer to Harvard. Choose what makes the most sense for you.',
+        'There are several ways to support my year at Harvard. Choose what makes the most sense for you.',
       impactEquivalences: [
         { amount: 'R$ 90', label: '1 day of food' },
         { amount: 'R$ 650', label: '1 week of food' },
@@ -412,9 +414,9 @@ export const content = {
       shareCopied: 'Copied!',
       instagramCopied: 'Text copied to share on Instagram',
       whatsappMessage:
-        'A Brazilian student was accepted to the Harvard College VUS program and is raising funds to make it possible. Her story is worth reading:',
+        'A Brazilian student is attending the Harvard College VUS program and continues to raise funds to cover the costs of the year. Get to know and support her story:',
       instagramMessage:
-        'A Brazilian student was accepted to the Harvard College VUS program and is raising funds to make it possible. Her story is worth reading:',
+        'A Brazilian student is attending the Harvard College VUS program and continues to raise funds to cover the costs of the year. Get to know and support her story:',
     },
 
     faq: {
@@ -429,7 +431,7 @@ export const content = {
         {
           question: 'What if the goal is not fully reached?',
           answer:
-            'I still intend to attend Harvard. The path forward depends on external support — every contribution helps close the gap between acceptance and attendance.',
+            'I have already started my year at Harvard, and the campaign continues to help cover the costs of this experience. Every contribution reduces the amount I still need to raise.',
         },
         {
           question: 'Can I see supporting documents?',
@@ -488,6 +490,8 @@ export const content = {
         { src: '/photos/brasil-project.jpg', caption: 'Brasil Project: when Harvard stopped feeling unreachable' },
         { src: '/photos/infancia.jpg', caption: 'In uniform, military kid' },
         { src: '/photos/harvard.jpg', caption: 'March 2026: Received the Acceptance Letter' },
+        { src: '/photos/vus-orientation.jpg', caption: 'VUS orientation: the beginning of new friendships' },
+        { src: '/photos/harvard-stadium-friends.jpg', caption: 'With friends at Harvard Stadium' },
       ],
     },
 

@@ -57,7 +57,7 @@ const FooterEl = styled.footer`
   padding: 56px 40px 32px;
 
   @media (max-width: ${({ theme }) => theme.bp.tablet}) {
-    padding: 48px 20px 24px;
+    padding: 48px 20px calc(106px + env(safe-area-inset-bottom, 0px));
   }
 `;
 

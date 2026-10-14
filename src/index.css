@@ -1,4 +1,4 @@
-/* Minimal reset — styled-components handles everything else */
+/* Minimal reset: styled-components handles everything else */
 *, *::before, *::after {
   box-sizing: border-box;
 }

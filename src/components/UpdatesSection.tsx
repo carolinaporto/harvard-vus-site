@@ -119,6 +119,7 @@ const Description = styled.p`
 `;
 
 const CtaSide = styled.div`
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -140,7 +141,9 @@ const CtaBtn = styled.a`
   font-size: 14px;
   font-weight: 700;
   border-radius: 10px;
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 100%;
+  svg { flex-shrink: 0; }
   transition: background 0.2s ease, transform 0.2s ease;
 
   &:hover {
