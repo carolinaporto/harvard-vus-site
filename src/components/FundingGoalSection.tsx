@@ -27,9 +27,9 @@ export default function FundingGoalSection() {
   const t = content[lang].funding;
   const progress = useProgress();
 
-  const raisedValue = progress.loading ? t.raisedValue : progress.raisedFormatted;
-  const goalValue = progress.loading ? t.goalValue : progress.goalFormatted;
-  const progressPercent = progress.loading ? t.progressPercent : progress.percent;
+  const raisedValue = progress.raisedFormatted;
+  const goalValue = progress.goalFormatted;
+  const progressPercent = progress.percent;
 
   return (
     <Section id="funding">

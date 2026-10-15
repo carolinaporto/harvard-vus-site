@@ -1,3 +1,4 @@
+import { FUNDRAISING_SNAPSHOT } from '../lib/fundraising';
 import type { Lang } from '../context/LanguageContext';
 
 
@@ -13,8 +14,8 @@ const PIX_KEY = 'f5109849-8c38-42b3-8328-6e86fa7a10aa'; //nubank
 
 // ─── Atualizar aqui quando o valor arrecadado mudar ───────────────────────────
 const lastUpdated = {
-  pt: '22 de Setembro de 2026',
-  en: 'September 22, 2026',
+  pt: '14 de outubro de 2026',
+  en: 'October 14, 2026',
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -59,8 +60,8 @@ export const content = {
       goalLabel: 'Meta: 2 semestres',
       goalValue: 'US$ 83.514',
       raisedLabel: 'Arrecadado até agora',
-      raisedValue: 'US$ 0',
-      progressPercent: 0,
+      raisedValue: 'US$ ' + FUNDRAISING_SNAPSHOT.raised.toLocaleString('en-US'),
+      progressPercent: FUNDRAISING_SNAPSHOT.raised / FUNDRAISING_SNAPSHOT.goal * 100,
       progressNote: `Última atualização: ${lastUpdated.pt}`,
       categories: [
         { label: 'Tuition e Taxas', note: 'US$ 51.675, inclui tuition (3 disciplinas), taxas acadêmicas e materiais', iconKey: 'book' },
@@ -302,8 +303,8 @@ export const content = {
       goalLabel: 'Goal: 2 semesters',
       goalValue: 'US$ 83,514',
       raisedLabel: 'Raised so far',
-      raisedValue: 'US$ 0',
-      progressPercent: 0,
+      raisedValue: 'US$ ' + FUNDRAISING_SNAPSHOT.raised.toLocaleString('en-US'),
+      progressPercent: FUNDRAISING_SNAPSHOT.raised / FUNDRAISING_SNAPSHOT.goal * 100,
       progressNote: `Last updated: ${lastUpdated.en}`,
       categories: [
         { label: 'Tuition and Fees', note: '$51,675, includes tuition (3 courses), academic fees, and materials', iconKey: 'book' },

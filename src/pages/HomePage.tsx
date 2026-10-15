@@ -60,9 +60,9 @@ export default function HomePage() {
   const progress = useProgress();
   const t = copy[lang];
   const funding = content[lang].funding;
-  const raisedValue = progress.loading ? funding.raisedValue : progress.raisedFormatted;
-  const goalValue = progress.loading ? funding.goalValue : progress.goalFormatted;
-  const progressPercent = progress.loading ? funding.progressPercent : progress.percent;
+  const raisedValue = progress.raisedFormatted;
+  const goalValue = progress.goalFormatted;
+  const progressPercent = progress.percent;
 
   return (
     <Page>
